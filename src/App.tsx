@@ -1,10 +1,17 @@
-import MyButton from "./components/MyButton";
+import { PageLayout } from "./components/PageLayout";
+import CalendarExample from "./examples/Calendar";
+import { DataTableExample } from "./examples/DataTable";
 
 function App() {
 
   return (
     <>
-      <MyButton />
+      <PageLayout
+        title="Cambios"
+        buttonBack
+      >
+        <DataTableExample />
+      </PageLayout>
     </>
   );
 }
