@@ -9,6 +9,8 @@ export default defineConfig({
     dts({
       outDir: "dist",
       insertTypesEntry: true, // Esto inserta una entrada de types en package.json automáticamente
+      rollupTypes: true,
+      include: ["src/**/*"]
     }),
     tailwindcss(),
   ],

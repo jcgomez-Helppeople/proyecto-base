@@ -77,6 +77,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
           label="Filtrar"
           icon="pi pi-filter"
           onClick={onFilter}
+          severity="danger"
           className="p-button-outlined"
         />
       )}
