@@ -1,11 +1,17 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "noEmit": false,
-      "declaration": true,
-      "emitDeclarationOnly": true,
-      "outDir": "dist"
-    },
-    "include": ["src/**/*"]
-  }
-  
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "types": ["react"]
+  },
+  "include": ["src/**/*"]
+}

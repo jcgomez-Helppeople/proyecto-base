@@ -1,7 +1,7 @@
 import React from "react";
 import "primeicons/primeicons.css";
 
-export const BackButton: React.FC = () => {
+const BackButton: React.FC = () => {
 
     return (
         <button
@@ -12,3 +12,5 @@ export const BackButton: React.FC = () => {
         </button>
     );
 };
+
+export default BackButton

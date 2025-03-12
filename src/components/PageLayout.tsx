@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackButton } from './BackButton';
+import BackButton  from './BackButton';
 import '../styles/PageLayout.css';
 
 interface Props {
