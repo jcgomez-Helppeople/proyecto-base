@@ -1,5 +1,4 @@
 import { PageLayout } from "./components/PageLayout";
-import CalendarExample from "./examples/Calendar";
 import { DataTableExample } from "./examples/DataTable";
 
 function App() {
