@@ -1,13 +1,17 @@
-import { useState } from "react";
-import "./App.css";
-import MyButton from "./components/MyButton";
+import { PageLayout } from "./components/PageLayout";
+import CalendarExample from "./examples/Calendar";
+import { DataTableExample } from "./examples/DataTable";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
-      <MyButton />
+      <PageLayout
+        title="Cambios"
+        buttonBack
+      >
+        <DataTableExample />
+      </PageLayout>
     </>
   );
 }
