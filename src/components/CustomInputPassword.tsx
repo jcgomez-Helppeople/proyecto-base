@@ -11,14 +11,24 @@ export interface CustomPasswordProps extends PasswordProps {
    * Mensaje de error para mostrar debajo del input.
    */
   error?: string;
+  label?: string;
 }
 
-const CustomPassword: React.FC<CustomPasswordProps> = ({ loading, error, ...rest }) => {
+const CustomPassword: React.FC<CustomPasswordProps> = ({ loading, error, label, ...rest }) => {
   return (
-    <div className="custom-password">
-      <Password 
+    <div className="w-full custom-password">
+      {
+        label && (
+          <label className="block text-gray-700 font-semibold mb-1 text-base">
+            {label}
+          </label>
+        )
+      }
+      <Password
         {...rest}
         disabled={rest.disabled || loading}
+        className='w-full  shadow-md'
+        inputClassName="w-full"
       />
       {error && <small className="p-error">{error}</small>}
     </div>

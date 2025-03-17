@@ -34,8 +34,8 @@ const CustomFiltersSidebar: React.FC<CustomFiltersSidebarProps> = ({
       header={header}
       style={{ width: "300px" }}
     >
-      <div className="mb-3">{children}</div>
-      <div className="p-d-flex p-jc-end p-mt-3">
+      <div className="mt-1 mb-3">{children}</div>
+      <div className="p-d-flex p-jc-end p-mt-3 mt-6">
         {onClearFilters && (
           <Button
             label="Limpiar"

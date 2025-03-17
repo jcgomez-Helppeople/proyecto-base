@@ -26,7 +26,7 @@ const CustomRadioButton: React.FC<CustomRadioButtonProps> = ({
   return (
     <div className="custom-radio-button p-d-flex p-ai-center">
       {label && (
-        <label htmlFor={rest.inputId} className="p-mr-2">
+        <label htmlFor={rest.inputId} className="p-mr-2 mr-2">
           {label}
         </label>
       )}

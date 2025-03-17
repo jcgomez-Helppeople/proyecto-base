@@ -6,7 +6,7 @@ const ChipsExample = () => {
 
     return (
         <Chips
-            values={tags}
+            value={tags}
             onChange={setTags}
         />
     );

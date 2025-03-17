@@ -14,7 +14,7 @@ export const PageLayout = ({ children, title, buttonBack = false }: Props) => {
             <div className="page-layout-container">
                 <div className="page-layout-elements">
                     <div className="space-content-page">
-                        <div className="title-page flex items-center">
+                        <div className="title-page flex items-center mb-3">
                             {buttonBack && (<BackButton />)} {title}
                         </div>
                         {children}

@@ -17,7 +17,8 @@ const Dialog: FC<Props> = ({ title, content }) => {
                 header={title}
                 visible={visible}
                 onHide={() => setVisible(false)}
-                className="w-96">
+                style={{ width: '60vw' }}
+            >
                 <p className="text-gray-700">{content}</p>
             </DialogPrime>
         </div>

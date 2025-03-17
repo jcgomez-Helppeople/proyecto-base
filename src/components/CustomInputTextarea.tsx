@@ -19,9 +19,13 @@ export interface CustomInputTextareaProps extends InputTextareaProps {
 
 const CustomInputTextarea: React.FC<CustomInputTextareaProps> = ({ loading, error, label, ...rest }) => {
   return (
-    <div className="custom-input-textarea">
-      {label && <label>{label}</label>}
-      <InputTextarea {...rest} disabled={rest.disabled || loading} />
+    <div className="custom-input-textarea w-full">
+      {label && <label className='block text-gray-700 font-semibold mb-1 text-base'>{label}</label>}
+      <InputTextarea 
+        {...rest} 
+        disabled={rest.disabled || loading}
+        className='w-full shadow-md'
+      />
       {error && <small className="p-error">{error}</small>}
     </div>
   );

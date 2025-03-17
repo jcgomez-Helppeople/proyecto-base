@@ -1,6 +1,6 @@
 // src/components/CustomTabView.tsx
 import React from 'react';
-import { TabView, TabViewProps } from 'primereact/tabview';
+import { TabPanel, TabView, TabViewProps } from 'primereact/tabview';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 export interface CustomTabViewProps extends TabViewProps {
@@ -16,6 +16,7 @@ export interface CustomTabViewProps extends TabViewProps {
    * Estado de carga. Si es true, se mostrará un overlay de carga sobre el TabView.
    */
   loading?: boolean;
+  header?: string;
 }
 
 const CustomTabView: React.FC<CustomTabViewProps> = ({
@@ -23,13 +24,16 @@ const CustomTabView: React.FC<CustomTabViewProps> = ({
   error,
   loading,
   children,
+  header,
   ...rest
 }) => {
   return (
     <div className="custom-tabview" style={{ position: 'relative' }}>
       {label && <label className="custom-tabview-label">{label}</label>}
       <TabView {...rest}>
-        {children}
+        <TabPanel header={header}>
+          {children}
+        </TabPanel>
       </TabView>
       {error && <small className="p-error">{error}</small>}
       {loading && (

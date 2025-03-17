@@ -19,8 +19,8 @@ export interface CustomInputSwitchProps extends InputSwitchProps {
 
 const CustomInputSwitch: React.FC<CustomInputSwitchProps> = ({ loading, error, label, ...rest }) => {
   return (
-    <div className="custom-input-switch">
-      {label && <label>{label}</label>}
+    <div className="flex justify-center items-center custom-input-switch">
+      {label && <label className='mr-2'>{label}</label>}
       <InputSwitch {...rest} disabled={rest.disabled || loading} />
       {error && <small className="p-error">{error}</small>}
     </div>

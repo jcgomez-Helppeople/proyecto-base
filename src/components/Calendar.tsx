@@ -15,18 +15,26 @@ addLocale("es", {
 interface Props {
     value: Date | null;
     onChange: (date: Date | null) => void;
+    label?: string;
 }
 
-const Calendar = ({ value, onChange }: Props) => {
+const Calendar = ({ value, onChange, label }: Props) => {
     return (
         <>
-            <div className="flex justify-center items-center">
+            <div className="w-full">
+                {
+                    label && (
+                        <label className="block text-gray-700 font-semibold mb-1 text-base" htmlFor="priority-select">
+                            {label}
+                        </label>
+                    )
+                }
                 <CalendarPrime
                     value={value}
                     onChange={(e) => onChange(e.value as Date | null)}
                     locale="es"
                     showIcon
-                    className="w-full"
+                    className="w-full shadow-md"
                 />
             </div>
         </>

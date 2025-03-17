@@ -2,19 +2,28 @@ import { FC } from "react";
 import { Chips as ChipsPrime } from "primereact/chips";
 
 type Props = {
-    values: string[];
+    value: string[];
     onChange: (values: string[]) => void;
     placeholder?: string;
+    label?: string;
 };
 
-const Chips: FC<Props> = ({ values, onChange, placeholder = 'Agregue etiquetas...' }) => {
+const Chips: FC<Props> = ({ value, onChange, placeholder = 'Agregue etiquetas...', label }) => {
     return (
-        <div className="flex justify-center items-center w-full">
+        <div className="w-full">
+            {
+                label && (
+                    <label className="block text-gray-700 font-semibold mb-1 text-base">
+                        {label}
+                    </label>
+                )
+            }
             <ChipsPrime
-                value={values}
+                value={value}
                 onChange={(e) => onChange(e.value || [])}
                 placeholder={placeholder}
                 className="w-full"
+                style={{ width: "100%" }}
             />
         </div>
     );

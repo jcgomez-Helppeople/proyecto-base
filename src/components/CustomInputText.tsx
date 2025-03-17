@@ -19,9 +19,13 @@ export interface CustomInputTextProps extends InputTextProps {
 
 const CustomInputText: React.FC<CustomInputTextProps> = ({ loading, error, label, ...rest }) => {
   return (
-    <div className="custom-input-text">
-      {label && <label>{label}</label>}
-      <InputText {...rest} disabled={rest.disabled || loading} />
+    <div className="custom-input-text w-full">
+      {label && <label className='block text-gray-700 font-semibold mb-1 text-base'>{label}</label>}
+      <InputText
+        {...rest}
+        disabled={rest.disabled || loading}
+        className="text-base px-3 py-1 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-md"
+      />
       {error && <small className="p-error">{error}</small>}
     </div>
   );

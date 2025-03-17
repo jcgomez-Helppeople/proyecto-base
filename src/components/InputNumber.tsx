@@ -9,11 +9,19 @@ type Props = {
     placeholder?: string;
     disabled?: boolean;
     invalid?: boolean;
+    label?: string;
 };
 
-const InputNumber: FC<Props> = ({ value, onChange, min, max, placeholder = "Ingrese un valor", disabled = false, invalid = false }) => {
+const InputNumber: FC<Props> = ({ value, onChange, min, max, placeholder = "Ingrese un valor", disabled = false, invalid = false, label }) => {
     return (
-        <div className="flex justify-center items-center">
+        <div className="w-full">
+            {
+                label && (
+                    <label className="block text-gray-700 font-semibold mb-1 text-base" htmlFor="priority-select">
+                        {label}
+                    </label>
+                )
+            }
             <InputNumberPrime
                 value={value}
                 onValueChange={(e) => onChange(e.value ?? null)}

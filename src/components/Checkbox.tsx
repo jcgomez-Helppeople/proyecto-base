@@ -9,7 +9,7 @@ type Props = {
 
 const Checkbox: FC<Props> = ({ checked, onChange, label }) => {
     return (
-        <div className="flex justify-center items-center">
+        <div className="">
             <div className="flex items-center gap-2">
                 <CheckboxPrime
                     inputId="customCheckbox"

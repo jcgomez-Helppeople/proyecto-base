@@ -1,16 +1,10 @@
-import { PageLayout } from "./components/PageLayout";
-import { DataTableExample } from "./examples/DataTable";
+import { TablePage } from "./examples/TablePage";
 
 function App() {
 
   return (
     <>
-      <PageLayout
-        title="Cambios"
-        buttonBack
-      >
-        <DataTableExample />
-      </PageLayout>
+      <TablePage />
     </>
   );
 }

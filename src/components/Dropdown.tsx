@@ -11,11 +11,20 @@ type Props = {
     invalid?: boolean;
     disabled?: boolean;
     placeholder?: string;
+    label?: string;
 };
 
-const Dropdown: FC<Props> = ({ value, onChange, options, filter = false, showClear = false, loading = false, invalid = false, disabled = false, placeholder = "Seleccione una opción" }) => {
+const Dropdown: FC<Props> = ({ value, onChange, options, filter = false, showClear = false, loading = false, invalid = false, disabled = false, placeholder = "Seleccione una opción", label }) => {
     return (
-        <div className="flex justify-center items-center bg-gray-100">
+        <div className="w-full">
+            {
+                label && (
+                    <label className="block text-gray-700 font-semibold mb-1 text-base" htmlFor="priority-select">
+                        {label}
+                    </label>
+                )
+            }
+
             <DropdownPrime
                 value={value}
                 options={options}
