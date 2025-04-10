@@ -14,7 +14,7 @@ import InputNumber from "../components/InputNumber"
 import InputOtp from "../components/InputOtp"
 import Toast from "../components/Toast"
 import { useState } from "react"
-import CustomButton from "../components/CustomButton"
+import CustomButton from "../components/CustomButton/CustomButton"
 
 export const CrearPage = () => {
     const [tags, setTags] = useState<string[]>([]);

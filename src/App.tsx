@@ -1,12 +1,13 @@
-import { TablePage } from "./examples/TablePage";
+import Layout from "./examples/Layout";
+import PoliciesScreen from "./examples/PoliciesScreen";
 
-function App() {
-
+const App = () => {
   return (
-    <>
-      <TablePage />
-    </>
+    <Layout>
+      {/* <div style={{ backgroundColor: "#ffffff", padding: "1rem", borderRadius: "8px" }}> */}
+        <PoliciesScreen />
+    </Layout>
   );
-}
+};
 
 export default App;

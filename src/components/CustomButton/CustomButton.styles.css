@@ -1,0 +1,110 @@
+.custom-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+  height: auto;
+  padding: 6px 15px;
+  font-size: 14px;
+  line-height: 1.5715;
+}
+
+.custom-button--primary {
+  background-color: #3948ff;
+  border: 1px solid #3948ff;
+  color: white;
+}
+
+.custom-button--primary:hover {
+  background-color: #5060ff;
+  border-color: #5060ff;
+  color: white;
+}
+
+.custom-button--primary:active {
+  background-color: #2837ee;
+  border-color: #2837ee;
+}
+
+.custom-button--secondary {
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.custom-button--secondary:hover {
+  color: #3948ff;
+  border-color: #3948ff;
+}
+
+.custom-button--secondary:active {
+  color: #2837ee;
+  border-color: #2837ee;
+}
+
+/* Tamaños */
+.custom-button--small {
+  padding: 4px 12px;
+  font-size: 12px;
+}
+
+.custom-button--medium {
+  padding: 6px 15px;
+  font-size: 14px;
+}
+
+.custom-button--large {
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+/* Estados */
+.custom-button:disabled {
+  cursor: not-allowed;
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.custom-button--loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.custom-button--full-width {
+  width: 100%;
+}
+
+.custom-button--outlined {
+  background-color: transparent;
+}
+
+.custom-button--outlined-primary {
+  border: 1px solid #3948ff;
+  color: #3948ff;
+}
+
+.custom-button--outlined-primary:hover {
+  background-color: rgba(57, 72, 255, 0.04);
+}
+
+.custom-button--outlined-secondary {
+  border: 1px solid #6c757d;
+  color: #6c757d;
+}
+
+.custom-button--outlined-secondary:hover {
+  background-color: rgba(108, 117, 125, 0.04);
+}
+
+.custom-button--outlined-danger {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.custom-button--outlined-danger:hover {
+  background-color: rgba(220, 53, 69, 0.04);
+}

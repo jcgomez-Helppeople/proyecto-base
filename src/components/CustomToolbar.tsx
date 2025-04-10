@@ -1,8 +1,8 @@
 // src/components/CustomToolbar.tsx
-import React from 'react';
-import { Toolbar } from 'primereact/toolbar';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+import React from "react";
+import { Toolbar } from "primereact/toolbar";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 
 export interface CustomToolbarProps {
   /**
@@ -39,6 +39,10 @@ export interface CustomToolbarProps {
    * Si se proporciona, se ignoran las opciones por defecto.
    */
   endTemplate?: React.ReactNode;
+  /**
+   * Función a ejecutar cuando se presiona el botón "Exportar".
+   */
+  onExport?: () => void;
 }
 
 const CustomToolbar: React.FC<CustomToolbarProps> = ({
@@ -50,37 +54,48 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
   onBack,
   startTemplate,
   endTemplate,
+  onExport,
 }) => {
   // Template por defecto para el lado "start" del Toolbar.
   const defaultStart = (
-    <>
+    <div className="custom-toolbar-container">
       {showSearch && (
-        <span className="p-input-icon-left" style={{ marginRight: '1rem' }}>
+        <span className="p-input-icon-left">
           <InputText
             value={searchValue}
             onChange={onSearchChange}
             placeholder="Buscar..."
+            className="custom-toolbar-search"
           />
         </span>
       )}
-      {onCreate && (
-        <Button
-          label="Crear"
-          icon="pi pi-plus"
-          onClick={onCreate}
-          className="p-button-success"
-          style={{ marginRight: onFilter ? '0.5rem' : undefined }}
-        />
-      )}
-      {onFilter && (
-        <Button
-          label="Filtrar"
-          icon="pi pi-filter"
-          onClick={onFilter}
-          className="p-button-outlined"
-        />
-      )}
-    </>
+      <div className="custom-toolbar-buttons">
+        {onCreate && (
+          <Button
+            label="Nuevo"
+            icon="pi pi-plus"
+            onClick={onCreate}
+            className="btn-custom"
+          />
+        )}
+        {onFilter && (
+          <Button
+            label="Filtrar"
+            icon="pi pi-filter"
+            onClick={onFilter}
+            className="p-button-outlined"
+          />
+        )}
+        {onExport && (
+          <Button
+            label="Exportar"
+            icon="pi pi-download"
+            onClick={onExport}
+            className="p-button-outlined"
+          />
+        )}
+      </div>
+    </div>
   );
 
   // Template por defecto para el lado "end" del Toolbar.
@@ -98,7 +113,10 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
   );
 
   return (
-    <Toolbar start={startTemplate ? startTemplate : defaultStart} end={endTemplate ? endTemplate : defaultEnd} />
+    <Toolbar
+      start={startTemplate ? startTemplate : defaultStart}
+      end={endTemplate ? endTemplate : defaultEnd}
+    />
   );
 };
 

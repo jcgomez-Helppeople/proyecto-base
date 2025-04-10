@@ -1,28 +1,187 @@
+/* Contenedor principal para simular navbar y sidebar */
 .page-layout-container {
-    /* border: 1px solid #f00; */
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem; /* Espaciado alrededor del contenido */
+  background-color: #f5f5f5; /* Fondo para simular el espacio del layout */
+  min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  box-sizing: border-box;
+}
+
+/* Contenedor del contenido principal */
+.page-layout-content {
+  width: 100%;
+  max-width: 1200px; /* Limita el ancho del contenido */
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el título de la página */
+.page-layout-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 1.5rem;
 }
 
 .page-layout-elements {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 7px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7px;
 }
 
 .space-content-page {
-    width: 97%;
-    background-color: #fff;
-    border-radius: 6px;
-    padding: 15px;
+  width: 97%;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 15px;
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
-        0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .title-page {
-    font-size: 27px;
-    font-weight: 600;
-    color: #645c5c;
+  font-size: 27px;
+  font-weight: 600;
+  color: #645c5c;
 }
+
+.btn-custom {
+  background-color: #3948ff;
+  border-color: #3948ff;
+  /* Agrega otros estilos si es necesario */
+}
+
+.custom-toolbar-search {
+  width: 300px;
+}
+
+@media screen and (max-width: 960px) {
+  .custom-toolbar-search {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .custom-toolbar-search {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .custom-toolbar-container {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .custom-toolbar-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+}
+
+
+.custom-toolbar-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  .custom-toolbar-search {
+    width: 300px;
+  }
+  
+  .custom-toolbar-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .custom-toolbar-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .custom-toolbar-search {
+      width: 100%;
+    }
+  
+    .custom-toolbar-buttons {
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+
+
+  :root {
+    /* Design tokens */
+    --primary-color: #3948ff;
+    --primary-color-hover: #2837ee; /* Version más oscura para hover */
+    --primary-color-active: #1726dd; /* Version más oscura para active */
+    --secondary-color: #6c757d;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+    
+    /* Spacing */
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    
+    /* Typography */
+    --font-family: 'Arial', sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+  }
+
+  .policies-screen {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+/* Contenedor principal del layout */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  overflow: hidden; /* Evita scroll innecesario */
+  box-sizing: border-box;
+}
+
+/* Contenedor del cuerpo (sidebar + contenido) */
+.layout__body {
+  display: flex;
+  flex: 1; /* Ocupa el espacio restante debajo del header */
+  overflow: hidden; /* Evita scroll innecesario */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1a1a40;
+  color: #ffffff;
+  height: 100%; /* Ocupa toda la altura del contenedor */
+  flex-shrink: 0; /* Evita que el sidebar se reduzca */
+  overflow-y: auto; /* Permite scroll si el contenido del sidebar es muy largo */
+}
+
+/* Contenido principal */
+.layout__content {
+  flex: 1; /* Ocupa el espacio restante al lado del sidebar */
+  padding: 2rem;
+  background-color: #f5f5f5;
+  overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+  box-sizing: border-box;
+}
+

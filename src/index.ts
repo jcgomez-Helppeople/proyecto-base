@@ -15,7 +15,7 @@ export { default as Card } from "./components/Card";
 export { default as Dialog } from "./components/Dialog";
 export { default as Toast } from "./components/Toast";
 export { default as ProgressSpinner } from "./components/ProgressSpinner";
-export { default as Button } from "./components/CustomButton";
+export { default as Button } from "./components/CustomButton/CustomButton";
 export { default as Accordion } from "./components/CustomAccordion";
 export { default as ConfirmDialog } from "./components/CustomConfirmDialog";
 export { default as FileUpload } from "./components/CustomFileUpload";

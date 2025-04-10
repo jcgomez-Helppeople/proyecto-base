@@ -32,17 +32,18 @@ const CustomFiltersSidebar: React.FC<CustomFiltersSidebarProps> = ({
       onHide={onHide}
       position="right"
       header={header}
-      style={{ width: "300px" }}
+      style={{ width: "600px" }}
     >
-      <div className="mt-1 mb-3">{children}</div>
+      <div className="filters-grid">{children}</div>
       <div className="p-d-flex p-jc-end p-mt-3 mt-6">
         {onClearFilters && (
           <Button
             label="Limpiar"
             icon="pi pi-times"
             onClick={onClearFilters}
-            className="p-button-secondary"
-            style={{ marginRight: "1rem" }} // Se agrega margen a la derecha
+            className="p-button-primary"
+            outlined
+            style={{ marginRight: "1rem" }}
           />
         )}
         {onApplyFilters && (
@@ -51,6 +52,7 @@ const CustomFiltersSidebar: React.FC<CustomFiltersSidebarProps> = ({
             icon="pi pi-check"
             onClick={onApplyFilters}
             className="p-button-primary"
+            outlined
           />
         )}
       </div>

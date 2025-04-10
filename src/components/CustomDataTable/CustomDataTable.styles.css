@@ -1,0 +1,33 @@
+.custom-datatable {
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.custom-datatable__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: #fafafa;
+  color: #333333;
+  font-weight: 500;
+  padding: 0.5rem;
+  font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  border: none;
+  padding: 0.5rem; /* Reducir el padding interno */
+}
+
+/* Reducir el espaciado entre filas */
+.p-datatable .p-datatable-tbody > tr {
+  height: 36px; /* Altura más compacta para las filas */
+}
+
+.p-paginator {
+  border-top: 1px solid #f0f0f0;
+  padding: 0.5rem;
+}
