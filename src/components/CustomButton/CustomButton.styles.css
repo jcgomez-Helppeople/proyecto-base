@@ -1,4 +1,5 @@
 .custom-button {
+  font-family: "Open Sans", "Poppins", sans-serif; /* Prioridad: Open Sans, luego Poppins */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +9,7 @@
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
   height: auto;
   padding: 6px 15px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5715;
 }
 
@@ -43,6 +44,30 @@
 .custom-button--secondary:active {
   color: #2837ee;
   border-color: #2837ee;
+}
+
+.custom-button--danger {
+  background-color: #dc3545; /* Fondo rojo */
+  border: 1px solid #dc3545; /* Borde rojo */
+  color: #fff;
+}
+
+.custom-button--danger:hover {
+  background-color: #e63946; /* Rojo más claro para hover */
+  border-color: #e63946; /* Borde rojo más claro */
+  color: #fff;
+}
+
+.custom-button--success {
+  background-color: #28a745; /* Fondo verde */
+  border: 1px solid #28a745; /* Borde verde */
+  color: #fff;
+}
+
+.custom-button--success:hover {
+  background-color: #2ecc71; /* Verde más claro para hover */
+  border-color: #2ecc71; /* Borde verde más claro */
+  color: #fff;
 }
 
 /* Tamaños */

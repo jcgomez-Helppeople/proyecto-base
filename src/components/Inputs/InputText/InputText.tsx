@@ -30,7 +30,7 @@ export interface CustomInputTextProps extends Omit<InputTextProps, 'size'> {
   fullWidth?: boolean;
 }
 
-const CustomInputText = forwardRef<PrimeInputText, CustomInputTextProps>(({
+const CustomInputText = forwardRef<HTMLInputElement, CustomInputTextProps>(({
   size = 'medium',
   error,
   errorMessage,
@@ -53,7 +53,7 @@ const CustomInputText = forwardRef<PrimeInputText, CustomInputTextProps>(({
     <div className="custom-input-wrapper">
       <PrimeInputText
         {...rest}
-        ref={ref}
+        ref={ref} // Ahora el ref es del tipo HTMLInputElement
         className={inputClassName}
       />
       {(error && errorMessage) && (

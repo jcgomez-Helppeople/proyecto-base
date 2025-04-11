@@ -12,7 +12,8 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "declaration": true, // Habilita la generación de archivos .d.ts
+    "emitDeclarationOnly": true, // Solo genera archivos .d.ts
     "jsx": "react-jsx",
 
     /* Linting */

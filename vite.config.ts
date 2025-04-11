@@ -7,7 +7,10 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 export default defineConfig({
   plugins: [
     react(),
-    dts(),
+    dts({
+      insertTypesEntry: true, // Asegura que se genere un archivo de entrada para los tipos
+      outDir: "dist", // Genera los tipos en la carpeta dist
+    }),
     tailwindcss(),
     cssInjectedByJsPlugin()
   ],

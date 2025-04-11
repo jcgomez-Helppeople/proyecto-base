@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CustomInputText } from "../components/Inputs/InputText";
 import { CustomButton } from "../components/CustomButton";
-import { CustomInputNumber } from "../components/Inputs/InputNumber";
 import "./FormExample.styles.css";
 
 interface FormData {

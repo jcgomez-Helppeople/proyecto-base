@@ -4,7 +4,7 @@ import CustomToolbar from "../components/CustomToolbar";
 import { PageLayout } from "../components/PageLayout";
 import { DataTableExample } from "./DataTable";
 import CustomInputText from "../components/CustomInputText";
-import { DropDown, InputNumber } from "..";
+import { DropDown } from "..";
 
 export const TablePage = () => {
   const [visibleFilters, setVisibleFilters] = useState(false);

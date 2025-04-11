@@ -5,7 +5,7 @@ import CustomFiltersToolbar from "../components/CustomFiltersToolbar/CustomFilte
 // import "../styles/PageLayout.css";
 
 const PoliciesScreen = () => {
-  const [data, setData] = useState([
+  const data= [
     { id: 1, name: "Política general", instructions: "Se usa por defecto", enabled: "Si" },
     { id: 2, name: "Política general de Emergencia", instructions: "Politica general", enabled: "Si" },  
     { id: 2, name: "Política general de Emergencia", instructions: "Politica general", enabled: "Si" },
@@ -21,7 +21,7 @@ const PoliciesScreen = () => {
     { id: 12, name: "Política Tecnología General", instructions: "Politica general de tecnoliga I+D", enabled  : "Si" },
     { id: 13, name: "Aprobación Backups", instructions: "Politica para aprobaciones", enabled: "Si" },
     { id: 14, name: "Aprobación Compra", instructions: "Compra de insumos", enabled: "Si" },
-  ]);
+  ];
 
   const [filters, setFilters] = useState({
     codeOrName: "",

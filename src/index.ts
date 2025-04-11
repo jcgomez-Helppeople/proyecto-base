@@ -1,10 +1,15 @@
+// Importa los estilos globales necesarios
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import "./styles/index.css";
+
+// Exporta los componentes principales
 export { default as MyDataTable } from './components/MyDataTable';
 export { default as MyButton } from "./components/MyButton";
 export { PageLayout } from "./components/PageLayout";
+
+// Exporta otros componentes personalizados
 export { default as DataTable } from "./components/DataTable";
 export { default as Calendar } from "./components/Calendar";
 export { default as DropDown } from "./components/Dropdown";
@@ -18,6 +23,8 @@ export { default as Card } from "./components/Card";
 export { default as Dialog } from "./components/Dialog";
 export { default as Toast } from "./components/Toast";
 export { default as ProgressSpinner } from "./components/ProgressSpinner";
+
+// Exporta componentes personalizados adicionales
 export { default as Button } from "./components/CustomButton/CustomButton";
 export { default as Accordion } from "./components/CustomAccordion";
 export { default as ConfirmDialog } from "./components/CustomConfirmDialog";

@@ -70,6 +70,7 @@ const CustomButton = forwardRef<Button, CustomButtonProps>(
         disabled={disabled || loading}
         className={buttonClassName}
         aria-label={ariaLabel || rest.label}
+        aria-disabled={disabled || loading} // Mejora de accesibilidad
       />
     );
   }

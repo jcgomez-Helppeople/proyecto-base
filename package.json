@@ -1,12 +1,14 @@
 {
   "name": "@jcgomez96/prueba1",
-  "version": "1.0.24",
+  "version": "1.0.29",
+  "description": "Librería de componentes frontend para estilos y diseños estándar.",
   "main": "dist/my-library.cjs.js",
   "module": "dist/my-library.es.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "exports": {
     "import": "./dist/my-library.es.js",
@@ -45,5 +47,8 @@
     "vite": "^6.2.0",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "dependencies": {
+    "antd": "^5.24.6"
   }
 }

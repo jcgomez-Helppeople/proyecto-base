@@ -14,11 +14,19 @@ const CustomFiltersToolbar = ({ onFilterChange }: CustomFiltersToolbarProps) => 
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-    onFilterChange({ [field]: e.target.value });
+    onFilterChange({
+      codeOrName: field === "codeOrName" ? e.target.value : "",
+      instructions: field === "instructions" ? e.target.value : "",
+      enabled: field === "enabled" ? "" : "",
+    });
   };
 
   const handleDropdownChange = (e: { value: string }, field: string) => {
-    onFilterChange({ [field]: e.value });
+    onFilterChange({
+      codeOrName: field === "codeOrName" ? "" : "",
+      instructions: field === "instructions" ? "" : "",
+      enabled: field === "enabled" ? e.value : "",
+    });
   };
 
   return (

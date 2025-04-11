@@ -17,7 +17,7 @@ const CustomToolbar = ({ title, onNewClick, onBackClick }: CustomToolbarProps) =
     <div className="custom-toolbar__actions">
       <CustomButton
         label="Volver"
-        variant="secondary"
+        variant="success"
         icon="pi pi-refresh"
         onClick={onBackClick}
       />
