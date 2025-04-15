@@ -1,33 +1,23 @@
-import { useState } from "react";
-import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
-import CustomDataTable from "../components/CustomDataTable/CustomDataTable";
-import CustomFiltersToolbar from "../components/CustomFiltersToolbar/CustomFiltersToolbar";
-// import "../styles/PageLayout.css";
+import React, { useState } from "react";
+import CustomTable from "../components/CustomTable/CustomTable";
+import CustomButton from "../components/CustomButton/CustomButton";
+import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
+import { Space } from "antd";
 
 const PoliciesScreen = () => {
-  const data= [
-    { id: 1, name: "Política general", instructions: "Se usa por defecto", enabled: "Si" },
-    { id: 2, name: "Política general de Emergencia", instructions: "Politica general", enabled: "Si" },  
-    { id: 2, name: "Política general de Emergencia", instructions: "Politica general", enabled: "Si" },
-    { id: 3, name: "Política Tecnología General", instructions: "Politica general de tecnoliga I+D", enabled: "Si" },
-    { id: 4, name: "Aprobación Backups", instructions: "Politica para aprobaciones", enabled: "Si" },
-    { id: 5, name: "Aprobación Backups", instructions: "Politica para aprobaciones", enabled: "Si" },
-    { id: 6, name: "Aprobación Compra", instructions: "Compra de insumos", enabled: "Si" }, 
-    { id: 7, name: "Aprobación Compra", instructions: "Compra de insumos", enabled: "Si" },
-    { id: 8, name: "Política general", instructions: "Se usa por defecto", enabled: "Si" },
-    { id: 9, name: "Política general", instructions: "Se usa por defecto", enabled: "Si" },
-    { id: 10, name: "Política general de Emergencia", instructions: "Politica general", enabled: "Si" },
-    { id: 11, name: "Política general de Emergencia", instructions: "Politica general", enabled: "Si" },
-    { id: 12, name: "Política Tecnología General", instructions: "Politica general de tecnoliga I+D", enabled  : "Si" },
-    { id: 13, name: "Aprobación Backups", instructions: "Politica para aprobaciones", enabled: "Si" },
-    { id: 14, name: "Aprobación Compra", instructions: "Compra de insumos", enabled: "Si" },
-  ];
-
   const [filters, setFilters] = useState({
     codeOrName: "",
     instructions: "",
     enabled: "",
   });
+
+  const data = [
+    { id: 1, name: "Política general", instructions: "Se usa por defecto", enabled: "Sí" },
+    { id: 2, name: "Política general de Emergencia", instructions: "Política general", enabled: "Sí" },
+    { id: 3, name: "Política Tecnología General", instructions: "Política general de tecnología I+D", enabled: "Sí" },
+    { id: 4, name: "Aprobación Backups", instructions: "Política para aprobaciones", enabled: "Sí" },
+    { id: 5, name: "Aprobación Compra", instructions: "Compra de insumos", enabled: "Sí" },
+  ];
 
   const handleNewClick = () => {
     console.log("Nueva política");
@@ -45,27 +35,72 @@ const PoliciesScreen = () => {
     console.log("Eliminar:", rowData);
   };
 
-  const handleFilterChange = (newFilters: any) => {
-    setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
-    console.log("Filtros actualizados:", { ...filters, ...newFilters });
-  };
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Nombre de la política",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Instrucciones",
+      dataIndex: "instructions",
+      key: "instructions",
+    },
+    {
+      title: "Habilitado",
+      dataIndex: "enabled",
+      key: "enabled",
+    },
+    {
+      title: "Acciones",
+      key: "actions",
+      render: (_: any, record: any) => (
+        <Space>
+          <CustomTooltip content="Editar">
+            <CustomButton
+              type="link"
+              icon={<i className="fas fa-edit" />}
+              onClick={() => handleEdit(record)}
+            />
+          </CustomTooltip>
+          <CustomTooltip content="Eliminar">
+            <CustomButton
+              type="link"
+              danger
+              icon={<i className="fas fa-trash" />}
+              onClick={() => handleDelete(record)}
+            />
+          </CustomTooltip>
+        </Space>
+      ),
+    },
+  ];
 
   return (
-    // <div className="policies-screen">
-    <div>
-      <CustomToolbar
-        title="Administración Políticas RFC"
-        onNewClick={handleNewClick}
-        onBackClick={handleBackClick}
-      />
-      <CustomFiltersToolbar onFilterChange={handleFilterChange} />
-      <CustomDataTable
-        data={data}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
+    <div style={{ padding: "2rem" }}>
+      <h1 style={{ marginBottom: "1rem" }}>Administración de Políticas RFC</h1>
+
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
+        <CustomButton type="default" onClick={handleBackClick} icon={<i className="fas fa-arrow-left" />}>
+          Volver
+        </CustomButton>
+        <CustomButton type="primary" onClick={handleNewClick} icon={<i className="fas fa-plus" />}>
+          Nueva
+        </CustomButton>
       </div>
-    // </div>
+
+      <CustomTable
+        customTitle="Lista de Políticas"
+        columns={columns}
+        dataSource={data}
+        pagination={{ pageSize: 5 }}
+      />
+    </div>
   );
 };
 

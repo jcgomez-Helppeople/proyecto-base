@@ -1,7 +1,4 @@
 // Importa los estilos globales necesarios
-import 'primereact/resources/themes/lara-light-blue/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
 import "./styles/index.css";
 
 // Exporta los componentes principales

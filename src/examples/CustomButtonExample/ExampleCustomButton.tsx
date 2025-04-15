@@ -1,72 +1,91 @@
-import { CustomButton } from "../../components/CustomButton";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 
-const ForExampleCustomButton = () => {
-  // Función para manejar el clic en el botón
-  const handleClick = (message: string) => {
-    alert(`Botón presionado: ${message}`);
-  };
-
+const ExampleCustomButton = () => {
   return (
-    <>
-      <h1>Pruebas de CustomButton</h1>
+    <div style={{ padding: "2rem" }}>
+      <h1>Prueba de CustomButton</h1>
 
-      <h2>Variantes</h2>
-      <CustomButton
-        variant="primary"
-        label="Primary"
-        onClick={() => handleClick("Primary")}
-      />
-      <CustomButton
-        variant="secondary"
-        label="Secondary"
-        onClick={() => handleClick("Secondary")}
-      />
-      <CustomButton
-        variant="danger"
-        label="Danger"
-        onClick={() => handleClick("Danger")}
-      />
-      <CustomButton
-        variant="success"
-        label="Success"
-        onClick={() => handleClick("Success")}
-      />
+      <h2>Tipos</h2>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <CustomButton type="primary">Primary</CustomButton>
+        <CustomButton type="default">Default</CustomButton>
+        <CustomButton type="dashed">Dashed</CustomButton>
+        <CustomButton type="text">Text</CustomButton>
+        <CustomButton type="link">Link</CustomButton>
+      </div>
 
       <h2>Tamaños</h2>
-      <CustomButton size="small" label="Small" />
-      <CustomButton size="medium" label="Medium" />
-      <CustomButton size="large" label="Large" />
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <CustomButton size="small">Small</CustomButton>
+        <CustomButton size="medium">Medium</CustomButton>
+        <CustomButton size="large">Large</CustomButton>
+      </div>
 
-      <h2>Estado de Carga</h2>
-      <CustomButton
-        loading
-        label="Cargando..."
-        onClick={() => handleClick("Cargando")}
-      />
+      <h2>Tipos con Íconos</h2>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <CustomButton type="primary" icon={<SearchOutlined />}>
+          Search
+        </CustomButton>
+        <CustomButton type="default" icon={<UserOutlined />}>
+          User
+        </CustomButton>
+        <CustomButton type="dashed" icon={<SearchOutlined />}>
+          Dashed
+        </CustomButton>
+        <CustomButton type="text" icon={<SearchOutlined />}>
+          Text
+        </CustomButton>
+        <CustomButton type="link" icon={<SearchOutlined />}>
+          Link
+        </CustomButton>
+      </div>
 
-      <h2>Estado Deshabilitado</h2>
-      <CustomButton
-        disabled
-        label="Deshabilitado"
-        onClick={() => handleClick("Deshabilitado")}
-      />
+      <h2>Solo Íconos</h2>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <CustomButton type="primary" icon={<SearchOutlined />} ariaLabel="Search" />
+        <CustomButton type="default" icon={<UserOutlined />} ariaLabel="User" />
+        <CustomButton type="dashed" icon={<SearchOutlined />} ariaLabel="Dashed" />
+        <CustomButton type="text" icon={<SearchOutlined />} ariaLabel="Text" />
+        <CustomButton type="link" icon={<SearchOutlined />} ariaLabel="Link" />
+      </div>
 
-      <h2>Prop FullWidth</h2>
-      <CustomButton
-        fullWidth
-        label="Full Width"
-        onClick={() => handleClick("Full Width")}
-      />
+      <h2>Botones con Loading</h2>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <CustomButton type="primary" loading>
+          Loading (Left)
+        </CustomButton>
+        <CustomButton type="primary" loading loadingPosition="right">
+          Loading (Right)
+        </CustomButton>
+        <CustomButton type="default" loading>
+          Default Loading
+        </CustomButton>
+        <CustomButton type="dashed" loading loadingPosition="right">
+          Dashed Loading
+        </CustomButton>
+      </div>
 
-      <h2>Prop Outlined</h2>
-      <CustomButton
-        outlined
-        variant="primary"
-        label="Outlined Primary"
-        onClick={() => handleClick("Outlined Primary")}
-      />
-    </>
+      <h2>Botones de Bloque</h2>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <CustomButton type="primary" block>
+          Primary Block
+        </CustomButton>
+        <CustomButton type="default" block>
+          Default Block
+        </CustomButton>
+        <CustomButton type="dashed" block>
+          Dashed Block
+        </CustomButton>
+        <CustomButton type="text" block>
+          Text Block
+        </CustomButton>
+        <CustomButton type="link" block>
+          Link Block
+        </CustomButton>
+      </div>
+    </div>
   );
 };
 
-export default ForExampleCustomButton;
+export default ExampleCustomButton;

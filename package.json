@@ -22,8 +22,6 @@
   },
   "peerDependencies": {
     "@tailwindcss/vite": "^4.0.12",
-    "primeicons": "^7.0.0",
-    "primereact": "^10.9.3",
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0",
     "react-router-dom": ">=6.0.0",

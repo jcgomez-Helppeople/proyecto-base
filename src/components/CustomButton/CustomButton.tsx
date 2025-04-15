@@ -1,28 +1,12 @@
 import { forwardRef } from "react";
-import { Button, ButtonProps } from "primereact/button";
-import { classNames } from "primereact/utils";
-import "./CustomButton.styles.css";
+import { Button as AntButton, ButtonProps as AntButtonProps } from "antd";
+import { ReactNode } from "react";
 
-export interface CustomButtonProps extends Omit<ButtonProps, "size"> {
-  /**
-   * Estado de carga del botón
-   */
-  loading?: boolean;
-
-  /**
-   * Variante del botón
-   */
-  variant?: "primary" | "secondary" | "tertiary" | "danger" | "success";
-
+export interface CustomButtonProps extends Omit<AntButtonProps, "size"> {
   /**
    * Tamaño del botón
    */
   size?: "small" | "medium" | "large";
-
-  /**
-   * Indica si el botón ocupa todo el ancho disponible
-   */
-  fullWidth?: boolean;
 
   /**
    * Texto alternativo para accesibilidad
@@ -30,48 +14,59 @@ export interface CustomButtonProps extends Omit<ButtonProps, "size"> {
   ariaLabel?: string;
 
   /**
-   * Si el botón debe mostrar solo el contorno
+   * Ícono a mostrar en el botón
    */
-  outlined?: boolean;
+  icon?: ReactNode;
+
+  /**
+   * Indica si el botón está en estado de carga
+   */
+  loading?: boolean;
+
+  /**
+   * Posición del ícono de carga (izquierda o derecha)
+   */
+  loadingPosition?: "left" | "right";
 }
 
-const CustomButton = forwardRef<Button, CustomButtonProps>(
+const CustomButton = forwardRef<HTMLButtonElement, CustomButtonProps>(
   (
-    {
-      loading,
-      variant = "primary",
-      size = "small",
-      fullWidth,
-      outlined,
-      className,
-      ariaLabel,
-      disabled,
-      ...rest
-    },
+    { size = "medium", ariaLabel, icon, loading, loadingPosition = "left", children, ...rest },
     ref
   ) => {
-    const buttonClassName = classNames(
-      "custom-button",
-      `custom-button--${variant}`,
-      `custom-button--${size}`,
-      {
-        "custom-button--full-width": fullWidth,
-        "custom-button--outlined": outlined,
-        [`custom-button--outlined-${variant}`]: outlined,
-      },
-      className
-    );
+    // Mapear tamaños personalizados a los tamaños de Ant Design
+    const antSize = size === "medium" ? "middle" : size;
 
     return (
-      <Button
+      <AntButton
         {...rest}
         ref={ref}
-        loading={loading}
-        disabled={disabled || loading}
-        className={buttonClassName}
-        aria-label={ariaLabel || rest.label}
-        aria-disabled={disabled || loading} // Mejora de accesibilidad
-      />
+        size={antSize}
+        aria-label={ariaLabel}
+        icon={loading && loadingPosition === "left" ? undefined : icon}
+        style={{ fontSize: "12px" }}
+      >
+        {loading && loadingPosition === "right" ? (
+          <>
+            {children}
+            <span style={{ marginLeft: "0.5rem" }} className="anticon anticon-loading">
+              <svg
+                viewBox="0 0 1024 1024"
+                focusable="false"
+                data-icon="loading"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M988 548H872c-4.4 0-8-3.6-8-8 0-229.8-186.2-416-416-416S32 310.2 32 540c0 229.8 186.2 416 416 416 4.4 0 8 3.6 8 8v116c0 4.4-3.6 8-8 8C229.2 1088 0 858.8 0 540S229.2-8 540-8s540 229.2 540 540c0 4.4-3.6 8-8 8z"></path>
+              </svg>
+            </span>
+          </>
+        ) : (
+          children
+        )}
+      </AntButton>
     );
   }
 );
