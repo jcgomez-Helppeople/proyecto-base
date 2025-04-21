@@ -1,38 +1,60 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomTable from "../components/CustomTable/CustomTable";
-import CustomButton from "../components/CustomButton/CustomButton";
-import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
-import { Space } from "antd";
+import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
+import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Tag } from "antd";
+import { useNavigate } from "react-router-dom";
+
+type Policy = {
+  id: number;
+  name: string;
+  instructions: string;
+  enabled: string;
+};
 
 const PoliciesScreen = () => {
-  const [filters, setFilters] = useState({
-    codeOrName: "",
-    instructions: "",
-    enabled: "",
-  });
+  const navigate = useNavigate();
 
-  const data = [
-    { id: 1, name: "Política general", instructions: "Se usa por defecto", enabled: "Sí" },
-    { id: 2, name: "Política general de Emergencia", instructions: "Política general", enabled: "Sí" },
-    { id: 3, name: "Política Tecnología General", instructions: "Política general de tecnología I+D", enabled: "Sí" },
-    { id: 4, name: "Aprobación Backups", instructions: "Política para aprobaciones", enabled: "Sí" },
-    { id: 5, name: "Aprobación Compra", instructions: "Compra de insumos", enabled: "Sí" },
-  ];
+  const data: Policy[] = Array.from({ length: 50 }, (_, index) => ({
+    id: index + 1,
+    name: `Política ${index + 1}`,
+    instructions: `Instrucciones para la política ${index + 1}`,
+    enabled: index % 2 === 0 ? "Sí" : "No",
+  }));
+
+  const [filteredData, setFilteredData] = useState(data);
 
   const handleNewClick = () => {
-    console.log("Nueva política");
+    navigate("/create-policy");
   };
 
   const handleBackClick = () => {
     console.log("Volver");
   };
 
-  const handleEdit = (rowData: any) => {
+  const handleEdit = (rowData: Policy) => {
     console.log("Editar:", rowData);
   };
 
-  const handleDelete = (rowData: any) => {
+  const handleDelete = (rowData: Policy) => {
     console.log("Eliminar:", rowData);
+  };
+
+  const handleFilter = (filters: Partial<Record<keyof Policy, string>>) => {
+    const filtered = data.filter((item) =>
+      Object.entries(filters).every(([key, value]) =>
+        item[key as keyof Policy]
+          ?.toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      )
+    );
+    setFilteredData(filtered);
+  };
+
+  const handleClearFilters = () => {
+    setFilteredData(data);
   };
 
   const columns = [
@@ -55,50 +77,96 @@ const PoliciesScreen = () => {
       title: "Habilitado",
       dataIndex: "enabled",
       key: "enabled",
+      render: (enabled: string) => (
+        <Tag
+        color={enabled === "Sí" ? "green" : "red"}
+        style={{
+          fontSize: "12px", // Tamaño de fuente 12px
+          fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
+          width: "30px", // Ancho fijo para ambos valores
+          textAlign: "center", // Centrar el texto
+        }}
+      >
+        {enabled}
+      </Tag>
+      ),
     },
     {
       title: "Acciones",
       key: "actions",
-      render: (_: any, record: any) => (
-        <Space>
-          <CustomTooltip content="Editar">
-            <CustomButton
-              type="link"
-              icon={<i className="fas fa-edit" />}
-              onClick={() => handleEdit(record)}
-            />
-          </CustomTooltip>
-          <CustomTooltip content="Eliminar">
-            <CustomButton
-              type="link"
-              danger
-              icon={<i className="fas fa-trash" />}
-              onClick={() => handleDelete(record)}
-            />
-          </CustomTooltip>
-        </Space>
+      render: (_: any, record: Policy) => (
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <button
+            onClick={() => handleEdit(record)}
+            style={{
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+              color: "#1890ff",
+            }}
+          >
+            <EditOutlined />
+          </button>
+          <button
+            onClick={() => handleDelete(record)}
+            style={{
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+              color: "#ff4d4f",
+            }}
+          >
+            <DeleteOutlined />
+          </button>
+        </div>
       ),
     },
   ];
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1 style={{ marginBottom: "1rem" }}>Administración de Políticas RFC</h1>
+    <div
+      style={{
+        padding: "1rem", // Reducir el padding general
+        marginTop: "0", // Eliminar cualquier margen superior
+        height: "100vh", // Asegurar que ocupe toda la altura de la pantalla
+        overflow: "hidden", // Evitar scroll innecesario
+      }}
+    >
+      <CustomToolbar
+        title="Administración de Políticas RFC"
+        onBack={handleBackClick}
+        onNew={handleNewClick}
+        newButtonText="Nuevo"
+      />
 
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
-        <CustomButton type="default" onClick={handleBackClick} icon={<i className="fas fa-arrow-left" />}>
-          Volver
-        </CustomButton>
-        <CustomButton type="primary" onClick={handleNewClick} icon={<i className="fas fa-plus" />}>
-          Nueva
-        </CustomButton>
-      </div>
+      <CustomFilterToolbar
+        fields={[
+          { key: "id", placeholder: "Buscar por ID", label: "ID" },
+          { key: "name", placeholder: "Buscar por nombre", label: "Nombre" },
+          {
+            key: "instructions",
+            placeholder: "Buscar por instrucciones",
+            label: "Instrucciones",
+          },
+          {
+            key: "enabled",
+            placeholder: "Buscar por habilitado",
+            label: "Habilitado",
+          },
+        ]}
+        onFilter={handleFilter}
+        onClearFilters={handleClearFilters}
+      />
 
       <CustomTable
-        customTitle="Lista de Políticas"
         columns={columns}
-        dataSource={data}
-        pagination={{ pageSize: 5 }}
+        dataSource={filteredData}
+        size="small"
+        pagination={{
+          pageSize: 10,
+          pageSizeOptions: ["10", "25", "50"],
+          showSizeChanger: true,
+        }}
       />
     </div>
   );

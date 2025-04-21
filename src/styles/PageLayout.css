@@ -164,24 +164,86 @@
   display: flex;
   flex: 1; /* Ocupa el espacio restante debajo del header */
   overflow: hidden; /* Evita scroll innecesario */
+  height: calc(100vh - 60px); /* Ajusta la altura al tamaño de la pantalla menos el header */
+  box-sizing: border-box;
 }
 
 /* Sidebar */
 .sidebar {
-  width: 250px;
-  background-color: #1a1a40;
-  color: #ffffff;
-  height: 100%; /* Ocupa toda la altura del contenedor */
+  width: 60px; /* Ancho reducido */
+  background-color: #001f3f; /* Fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+  height: 100%; /* Ajusta la altura al contenedor principal */
   flex-shrink: 0; /* Evita que el sidebar se reduzca */
-  overflow-y: auto; /* Permite scroll si el contenido del sidebar es muy largo */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espaciado entre el menú y el footer */
+  align-items: center;
+  overflow: hidden; /* Evita scroll innecesario */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra para el sidebar */
+}
+
+/* Menú del sidebar */
+.sidebar__menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ítems del menú */
+.sidebar__item {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar__item:hover {
+  background-color: #003366; /* Fondo más claro al pasar el mouse */
+}
+
+/* Íconos del sidebar */
+.sidebar__icon {
+  font-size: 1.5rem; /* Tamaño de los íconos */
+  color: #ffffff; /* Color claro */
+}
+
+/* Footer del sidebar */
+.sidebar__footer {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid #003366; /* Línea superior para separar el footer */
 }
 
 /* Contenido principal */
 .layout__content {
   flex: 1; /* Ocupa el espacio restante al lado del sidebar */
-  padding: 2rem;
+  padding: 1rem;
   background-color: #f5f5f5;
   overflow-y: auto; /* Permite scroll si el contenido es muy largo */
   box-sizing: border-box;
 }
 
+
+/* Tamaño estándar para inputs */
+.ant-input,
+.ant-select-selector,
+.ant-input-number,
+.ant-textarea {
+  width: 100%; /* Asegura que todos los inputs ocupen el espacio disponible */
+  max-width: 300px; /* Define un ancho máximo para mantener consistencia */
+}
+
+.ant-form-item {
+  flex: 1; /* Asegura que los elementos del formulario se distribuyan uniformemente */
+}

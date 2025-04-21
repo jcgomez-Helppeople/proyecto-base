@@ -1,13 +1,22 @@
 import Layout from "./examples/Layout";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PoliciesScreen from "./examples/PoliciesScreen";
-import ForExampleCustomButton from "./examples/CustomButtonExample/ExampleCustomButton";
+import CreatePolicyScreen from "./examples/CreatePolicyScreen";
+import ConfigurationScreen from "./examples/ConfigurationScreen";
+import RegionConfigurationScreen from "./examples/RegionConfigurationScreen";
 
-
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
   return (
     <Layout>
-      <PoliciesScreen />
+      {/* <RegionConfigurationScreen /> */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<PoliciesScreen />} />
+          <Route path="/create-policy" element={<CreatePolicyScreen />} />
+        </Routes>
+      </Router>
     </Layout>
   );
 };

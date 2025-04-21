@@ -1,11 +1,11 @@
-import React from "react";
-import { Select as AntSelect, SelectProps as AntSelectProps } from "antd";
+import { Select as AntSelect } from "antd";
 
-export interface CustomSelectProps<T = any> extends AntSelectProps<T> {
-  /**
-   * Etiqueta para mostrar como placeholder
-   */
+export interface CustomSelectProps<T> {
+  label?: string; // Agrega la propiedad 'label' como opcional
+  options: { value: T; label: string }[];
   placeholder?: string;
+  value?: T;
+  onChange?: (value: T) => void;
 }
 
 const CustomSelect = <T,>(props: CustomSelectProps<T>) => {
