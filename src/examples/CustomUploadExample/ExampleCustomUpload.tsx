@@ -1,4 +1,3 @@
-import React from "react";
 import CustomUpload from "../../components/CustomUpload/CustomUpload";
 
 const ExampleCustomUpload = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomModal from "../../components/CustomModal/CustomModal";
 import { Button } from "antd";
 

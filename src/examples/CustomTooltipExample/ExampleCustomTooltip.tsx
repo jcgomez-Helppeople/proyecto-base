@@ -1,4 +1,3 @@
-import React from "react";
 import CustomTooltip from "../../components/CustomTooltip/CustomTooltip";
 import { Button } from "antd";
 

@@ -3,7 +3,6 @@ import CustomToolbar from "../components/CustomToolbar/CustomToolbar"; // Toolba
 import CustomTabs from "../components/CustomTabs/CustomTabs"; // Componente de Tabs personalizado
 import CustomInput from "../components/Inputs/CustomInput/Input"; // Input personalizado
 import CustomSwitch from "../components/CustomInputSwitch/CustomSwitch"; // Switch personalizado
-import CustomButton from "../components/CustomButton/CustomButton"; // Botón personalizado
 import CustomSelect from "../components/CustomSelect/CustomSelect"; // Select personalizado
 import { Typography } from "antd";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import CustomTable from "../../components/CustomTable/CustomTable";
 
 interface DataType {
@@ -53,7 +52,6 @@ const ExampleCustomTable = () => {
       <h1>Prueba de CustomTable</h1>
 
       <CustomTable
-        customTitle="Lista de Usuarios"
         columns={columns}
         dataSource={data}
         pagination={{ pageSize: 5 }}

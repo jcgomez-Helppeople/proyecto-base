@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomSwitch from "../../components/CustomInputSwitch/CustomSwitch";
 
 const ExampleCustomSwitch = () => {

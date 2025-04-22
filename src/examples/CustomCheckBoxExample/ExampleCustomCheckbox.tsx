@@ -6,8 +6,6 @@ const ExampleCustomCheckbox = () => {
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
 
-  const options = ["Option 1", "Option 2", "Option 3"];
-
   const handleCheckAllChange = (e: any) => {
     setCheckAll(e.target.checked);
     setIndeterminate(false);

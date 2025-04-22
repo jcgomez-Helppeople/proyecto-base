@@ -1,18 +1,22 @@
 {
   "name": "@jcgomez96/prueba1",
-  "version": "1.0.29",
+  "version": "1.0.31",
   "description": "Librería de componentes frontend para estilos y diseños estándar.",
   "main": "dist/my-library.cjs.js",
   "module": "dist/my-library.es.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist",
     "README.md"
   ],
   "exports": {
     "import": "./dist/my-library.es.js",
-    "require": "./dist/my-library.cjs.js"
+    "require": "./dist/my-library.cjs.js",
+    "types": "./dist/index.d.ts"
   },
   "scripts": {
     "dev": "vite",

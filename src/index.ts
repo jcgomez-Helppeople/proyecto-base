@@ -2,37 +2,36 @@
 import "./styles/index.css";
 
 // Exporta los componentes principales
-export { default as MyDataTable } from './components/MyDataTable';
-export { default as MyButton } from "./components/MyButton";
-export { PageLayout } from "./components/PageLayout";
+
 
 // Exporta otros componentes personalizados
-export { default as DataTable } from "./components/DataTable";
-export { default as Calendar } from "./components/Calendar";
-export { default as DropDown } from "./components/Dropdown";
-export { default as InputNumber } from "./components/InputNumber";
-export { default as Checkbox } from "./components/Checkbox";
-export { default as MultiSelect } from "./components/MultiSelect";
-export { default as Chips } from "./components/Chips";
-export { default as InputOtp } from "./components/InputOtp";
-export { default as Paginator } from "./components/Paginator";
-export { default as Card } from "./components/Card";
-export { default as Dialog } from "./components/Dialog";
-export { default as Toast } from "./components/Toast";
-export { default as ProgressSpinner } from "./components/ProgressSpinner";
+
 
 // Exporta componentes personalizados adicionales
+export { default as Alert } from "./components/CustomAlert/CustomAlert";
 export { default as Button } from "./components/CustomButton/CustomButton";
-export { default as Accordion } from "./components/CustomAccordion";
-export { default as ConfirmDialog } from "./components/CustomConfirmDialog";
-export { default as FileUpload } from "./components/CustomFileUpload";
-export { default as FiltersSidebar } from "./components/CustomFiltersSidebar";
-export { default as InputPassword } from "./components/CustomInputPassword";
-export { default as InputSwitch } from "./components/CustomInputSwitch";
-export { default as InputText } from "./components/CustomInputText";
-export { default as InputTextArea } from "./components/CustomInputTextarea";
-export { default as RadioButton } from "./components/CustomRadioButton";
-export { default as SideBar } from "./components/CustomSidebar";
-export { default as Skeleton } from "./components/CustomSkeleton";
-export { default as TabView } from "./components/CustomTabView";
-export { default as ToolBar } from "./components/CustomToolbar";
+export { default as CheckBox } from "./components/CustomCheckBox/CustomCheckBox";
+export { default as DatePicker } from "./components/CustomDatePicker/CustomDatePicker";
+export { default as Divider } from "./components/CustomDivider/CustomDivider";
+export { default as Drawer } from "./components/CustomDrawer/CustomDrawer";
+export { default as FilterToolbar } from "./components/CustomFilterToolbar/CustomFilterToolbar";
+export { default as FloatButton } from "./components/CustomFloatButton/CustomFloatButton";
+export { default as InputSwitch } from "./components/CustomInputSwitch/CustomSwitch";
+export { default as Modal } from "./components/CustomModal/CustomModal";
+export { default as Notification } from "./components/CustomNotification/CustomNotification";
+export { default as Radio } from "./components/CustomRadio/CustomRadio";
+export { default as Select } from "./components/CustomSelect/CustomSelect";
+export { default as Skeleton } from "./components/CustomSkeleton/CustomSkeleton";
+export { default as Spin } from "./components/CustomSpin/CustomSpin";
+export { default as Table } from "./components/CustomTable/CustomTable";
+export { default as Tabs } from "./components/CustomTabs/CustomTabs";
+export { default as Toolbar } from "./components/CustomToolbar/CustomToolbar";
+export { default as Tooltip } from "./components/CustomTooltip/CustomTooltip";
+export { default as Upload } from "./components/CustomUpload/CustomUpload";
+export { default as Input } from "./components/Inputs/CustomInput/Input";
+export { default as TextArea } from "./components/Inputs/CustomNumericInput/CustomNumericInput";
+export { default as Password } from "./components/Inputs/CustomPasswordInput/PasswordInput";
+export { default as Search } from "./components/Inputs/CustomSearchInput/SearchInput";
+export { default as NumericInput } from "./components/Inputs/CustomNumericInput/CustomNumericInput";
+
+

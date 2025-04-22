@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomSelect from "../../components/CustomSelect/CustomSelect";
 
 const ExampleCustomSelect = () => {
@@ -24,14 +24,10 @@ const ExampleCustomSelect = () => {
 
       <h2>Selector con Búsqueda</h2>
       <CustomSelect
-        showSearch
         placeholder="Busca una opción"
         options={options}
         value={selectedValue}
         onChange={(value) => setSelectedValue(value)}
-        filterOption={(input, option) =>
-          (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-        }
       />
     </div>
   );

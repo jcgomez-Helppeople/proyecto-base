@@ -1,4 +1,3 @@
-import React from "react";
 import CustomAlert from "../../components/CustomAlert/CustomAlert";
 
 const ExampleCustomAlert = () => {

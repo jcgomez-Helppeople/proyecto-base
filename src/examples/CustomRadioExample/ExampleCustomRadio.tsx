@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomRadio, { CustomRadioGroup } from "../../components/CustomRadio/CustomRadio";
 
 const ExampleCustomRadio = () => {

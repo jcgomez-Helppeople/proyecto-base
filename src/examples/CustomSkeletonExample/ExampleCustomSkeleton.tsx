@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CustomSkeleton from "../../components/CustomSkeleton/CustomSkeleton";
 
 const ExampleCustomSkeleton = () => {
