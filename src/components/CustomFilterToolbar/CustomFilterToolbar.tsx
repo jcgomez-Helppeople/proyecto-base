@@ -7,14 +7,15 @@ export type FilterField = {
   key: string;
   label?: string;
   placeholder?: string;
-  type?: "text" | "number" | "date" | "range" | "select"; // Agregado "range" para RangePicker
-  options?: { label: string; value: any }[]; // Sólo para select
+  type?: "text" | "number" | "date" | "range" | "select"; // Tipos soportados
+  options?: { label: string; value: any }[]; // Opciones para select
+  mode?: "multiple" | "tags"; // Agregar soporte para modos de selección múltiple
 };
 
 export type ToolbarAction = {
-  icon: React.ReactNode; // Ícono a mostrar
-  tooltip?: string; // Texto del tooltip
-  onClick: () => void; // Acción al hacer clic
+  icon: React.ReactNode;
+  tooltip?: string;
+  onClick: () => void;
 };
 
 export interface CustomFilterToolbarProps {
@@ -22,8 +23,8 @@ export interface CustomFilterToolbarProps {
   onFilter: (filters: Record<string, any>) => void;
   onClearFilters?: () => void;
   localeCode?: "es" | "en" | "pt";
-  actions?: ToolbarAction[]; // Nuevas acciones personalizadas
-  onAdvancedFilters?: () => void; // Acción para abrir filtros avanzados
+  actions?: ToolbarAction[];
+  onAdvancedFilters?: () => void;
 }
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
@@ -54,7 +55,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         marginBottom: 12,
       }}
     >
-      {/* === IZQUIERDA: inputs + filtros === */}
+      {/* === IZQUIERDA: Inputs y filtros === */}
       <div
         style={{
           display: "flex",
@@ -77,54 +78,53 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                 {f.label}
               </label>
             )}
-            {
-              {
-                text: (
-                  <Input
-                    size="small"
-                    placeholder={f.placeholder}
-                    value={filters[f.key]}
-                    onChange={(e) => handleChange(f.key, e.target.value)}
-                    style={{ width: 150 }}
-                  />
-                ),
-                number: (
-                  <InputNumber
-                    size="small"
-                    placeholder={f.placeholder}
-                    value={filters[f.key]}
-                    onChange={(val) => handleChange(f.key, val)}
-                    style={{ width: 150 }}
-                  />
-                ),
-                date: (
-                  <CustomDatePicker
-                    size="small"
-                    localeCode={localeCode}
-                    onChange={(_, dateString) => handleChange(f.key, dateString)}
-                    style={{ width: 200 }}
-                  />
-                ),
-                range: (
-                  <CustomDatePicker.RangePicker
-                    size="small"
-                    localeCode={localeCode}
-                    onChange={(_, dateStrings) => handleChange(f.key, dateStrings)}
-                    style={{ width: 200 }}
-                  />
-                ),
-                select: (
-                  <Select
-                    size="small"
-                    placeholder={f.placeholder}
-                    options={f.options}
-                    value={filters[f.key]}
-                    onChange={(val) => handleChange(f.key, val)}
-                    style={{ width: 150 }}
-                  />
-                ),
-              }[f.type || "text"]
-            }
+            {{
+              text: (
+                <Input
+                  size="small"
+                  placeholder={f.placeholder}
+                  value={filters[f.key]}
+                  onChange={(e) => handleChange(f.key, e.target.value)}
+                  style={{ width: 150 }}
+                />
+              ),
+              number: (
+                <InputNumber
+                  size="small"
+                  placeholder={f.placeholder}
+                  value={filters[f.key]}
+                  onChange={(val) => handleChange(f.key, val)}
+                  style={{ width: 150 }}
+                />
+              ),
+              date: (
+                <CustomDatePicker
+                  size="small"
+                  localeCode={localeCode}
+                  onChange={(_, dateString) => handleChange(f.key, dateString)}
+                  style={{ width: 200 }}
+                />
+              ),
+              range: (
+                <CustomDatePicker.RangePicker
+                  size="small"
+                  localeCode={localeCode}
+                  onChange={(_, dateStrings) => handleChange(f.key, dateStrings)}
+                  style={{ width: 200 }}
+                />
+              ),
+              select: (
+                <Select
+                  size="small"
+                  placeholder={f.placeholder}
+                  options={f.options}
+                  value={filters[f.key]}
+                  mode={f.mode} // Soporte para selección múltiple
+                  onChange={(val) => handleChange(f.key, val)}
+                  style={{ width: 200 }}
+                />
+              ),
+            }[f.type || "text"]}
           </div>
         ))}
 
@@ -148,7 +148,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         />
       </div>
 
-      {/* === DERECHA: iconos Excel/PDF y botón de filtros avanzados === */}
+      {/* === DERECHA: Acciones y filtros avanzados === */}
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
         {actions.map((action, i) => (
           <Tooltip key={i} title={action.tooltip}>

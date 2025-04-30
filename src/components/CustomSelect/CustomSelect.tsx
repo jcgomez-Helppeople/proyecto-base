@@ -1,11 +1,7 @@
-import { Select as AntSelect } from "antd";
+import { Select as AntSelect, SelectProps } from "antd";
 
-export interface CustomSelectProps<T> {
-  label?: string; // Agrega la propiedad 'label' como opcional
-  options: { value: T; label: string }[];
-  placeholder?: string;
-  value?: T;
-  onChange?: (value: T) => void;
+export interface CustomSelectProps<T> extends SelectProps<T> {
+  label?: string; // Propiedad adicional opcional
 }
 
 const CustomSelect = <T,>(props: CustomSelectProps<T>) => {

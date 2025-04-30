@@ -4,6 +4,7 @@ import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
 import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
 import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
 import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
+import CustomSelect from "../components/CustomSelect/CustomSelect";
 import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +24,12 @@ const PoliciesScreen = () => {
     instructions: `Instrucciones para la política ${index + 1}`,
     enabled: index % 2 === 0 ? "Sí" : "No",
   }));
+
+  const options = [
+    { value: "cat1", label: "Categoría 1" },
+    { value: "cat2", label: "Categoría 2" },
+    { value: "cat3", label: "Categoría 3" },
+  ];
 
   const [filteredData, setFilteredData] = useState(data);
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -195,6 +202,17 @@ const PoliciesScreen = () => {
             type: "range", // Tipo "date" para usar el RangePicker
             placeholder: "Selecciona un rango de fechas",
           },
+          {
+            key: "categories",
+            label: "Categorías",
+            type: "select",
+            mode: "multiple", // Activar selección múltiple
+            options: [
+              { label: "Categoría 1", value: "cat1" },
+              { label: "Categoría 2", value: "cat2" },
+              { label: "Categoría 3", value: "cat3" },
+            ],
+          },
         ]}
         onFilter={handleFilter}
         onClearFilters={handleClearFilters}
@@ -231,6 +249,16 @@ const PoliciesScreen = () => {
           },
         }}
       />
+
+<CustomSelect
+      placeholder="Selecciona una categoría"
+      options={options}
+      mode="multiple" // Selección múltiple
+      allowClear // Permitir limpiar la selección
+      showSearch // Habilitar búsqueda
+      onChange={(value) => console.log("Seleccionado:", value)}
+      style={{ width: 200 }}
+    />
 
       <CustomFilterDrawer
         visible={drawerVisible}
