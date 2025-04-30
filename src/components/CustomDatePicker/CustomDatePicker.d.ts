@@ -1,16 +1,16 @@
 import React from "react";
-import { DatePicker as AntDatePicker, DatePickerProps as AntDatePickerProps } from "antd";
+import { DatePickerProps as AntDatePickerProps } from "antd";
+import type { RangePickerProps } from "antd/es/date-picker";
 export interface CustomDatePickerProps extends AntDatePickerProps {
-    /**
-     * Formato de la fecha
-     */
-    format?: string;
-    /**
-     * Placeholder personalizado
-     */
-    placeholder?: string;
+    localeCode?: "es" | "en" | "pt";
 }
-declare const CustomDatePicker: React.FC<CustomDatePickerProps> & {
-    RangePicker: typeof AntDatePicker.RangePicker;
+export interface CustomRangePickerProps extends RangePickerProps {
+    localeCode?: "es" | "en" | "pt";
+}
+declare const InnerDatePicker: React.ForwardRefExoticComponent<Omit<CustomDatePickerProps, "ref"> & React.RefAttributes<any>>;
+declare const InnerRangePicker: React.ForwardRefExoticComponent<CustomRangePickerProps & React.RefAttributes<any>>;
+type DatePickerType = typeof InnerDatePicker & {
+    RangePicker: typeof InnerRangePicker;
 };
+declare const CustomDatePicker: DatePickerType;
 export default CustomDatePicker;

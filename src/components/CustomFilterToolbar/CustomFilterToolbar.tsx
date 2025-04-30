@@ -1,90 +1,176 @@
 import React, { useState } from "react";
-import { Input, Button, Space } from "antd";
-import { ClearOutlined } from "@ant-design/icons"; // Ícono de escoba
+import { Input, Button, Select, InputNumber, Tooltip } from "antd";
+import { ClearOutlined, FilterOutlined } from "@ant-design/icons";
+import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 
-export interface FilterField {
+export type FilterField = {
   key: string;
-  placeholder: string;
-  label?: string; // Título opcional para el input
-}
+  label?: string;
+  placeholder?: string;
+  type?: "text" | "number" | "date" | "range" | "select"; // Agregado "range" para RangePicker
+  options?: { label: string; value: any }[]; // Sólo para select
+};
+
+export type ToolbarAction = {
+  icon: React.ReactNode; // Ícono a mostrar
+  tooltip?: string; // Texto del tooltip
+  onClick: () => void; // Acción al hacer clic
+};
 
 export interface CustomFilterToolbarProps {
   fields: FilterField[];
-  onFilter: (filters: Record<string, string>) => void;
+  onFilter: (filters: Record<string, any>) => void;
   onClearFilters?: () => void;
+  localeCode?: "es" | "en" | "pt";
+  actions?: ToolbarAction[]; // Nuevas acciones personalizadas
+  onAdvancedFilters?: () => void; // Acción para abrir filtros avanzados
 }
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   fields,
   onFilter,
   onClearFilters,
+  localeCode = "es",
+  actions = [],
+  onAdvancedFilters,
 }) => {
-  const [filters, setFilters] = useState<Record<string, string>>({});
+  const [filters, setFilters] = useState<Record<string, any>>({});
 
-  const handleInputChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleApplyFilters = () => {
-    onFilter(filters);
-  };
-
-  const handleClearFilters = () => {
-    setFilters({});
-    if (onClearFilters) {
-      onClearFilters();
-    }
+  const handleChange = (key: string, val: any) => {
+    setFilters((prev) => ({ ...prev, [key]: val }));
   };
 
   return (
     <div
       style={{
         display: "flex",
-        flexWrap: "wrap",
-        gap: "1rem",
-        marginBottom: "1rem",
-        alignItems: "flex-start", // Alinear elementos al inicio verticalmente
-        padding: "1rem",
-        backgroundColor: "#ffffff", // Fondo blanco
-        border: "1px solid #e0e0e0", // Borde sutil
-        borderRadius: "8px", // Bordes redondeados
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        flexWrap: "nowrap",
+        padding: "8px 12px",
+        background: "#fff",
+        border: "1px solid #e0e0e0",
+        borderRadius: 6,
+        marginBottom: 12,
       }}
     >
-      <Space wrap>
-        {fields.map((field) => (
-          <div key={field.key} style={{ display: "flex", flexDirection: "column" }}>
-            {field.label && (
+      {/* === IZQUIERDA: inputs + filtros === */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+          alignItems: "center",
+        }}
+      >
+        {fields.map((f) => (
+          <div key={f.key} style={{ display: "flex", flexDirection: "column" }}>
+            {f.label && (
               <label
                 style={{
-                  marginBottom: "0.5rem",
-                  fontWeight: "bold",
-                  fontSize: "12px", // Tamaño de fuente 12px
-                  fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
-                  color: "#333", // Color oscuro
+                  marginBottom: 4,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  fontFamily: "'Open Sans', sans-serif",
                 }}
               >
-                {field.label}
+                {f.label}
               </label>
             )}
-            <Input
-              placeholder={field.placeholder}
-              value={filters[field.key] || ""}
-              onChange={(e) => handleInputChange(field.key, e.target.value)}
-              style={{ width: "200px" }}
-            />
+            {
+              {
+                text: (
+                  <Input
+                    size="small"
+                    placeholder={f.placeholder}
+                    value={filters[f.key]}
+                    onChange={(e) => handleChange(f.key, e.target.value)}
+                    style={{ width: 150 }}
+                  />
+                ),
+                number: (
+                  <InputNumber
+                    size="small"
+                    placeholder={f.placeholder}
+                    value={filters[f.key]}
+                    onChange={(val) => handleChange(f.key, val)}
+                    style={{ width: 150 }}
+                  />
+                ),
+                date: (
+                  <CustomDatePicker
+                    size="small"
+                    localeCode={localeCode}
+                    onChange={(_, dateString) => handleChange(f.key, dateString)}
+                    style={{ width: 200 }}
+                  />
+                ),
+                range: (
+                  <CustomDatePicker.RangePicker
+                    size="small"
+                    localeCode={localeCode}
+                    onChange={(_, dateStrings) => handleChange(f.key, dateStrings)}
+                    style={{ width: 200 }}
+                  />
+                ),
+                select: (
+                  <Select
+                    size="small"
+                    placeholder={f.placeholder}
+                    options={f.options}
+                    value={filters[f.key]}
+                    onChange={(val) => handleChange(f.key, val)}
+                    style={{ width: 150 }}
+                  />
+                ),
+              }[f.type || "text"]
+            }
           </div>
         ))}
-      </Space>
-      <Space style={{ marginTop: "1.5rem" }}> {/* Ajuste de margen superior */}
-        <Button type="primary" onClick={handleApplyFilters}>
-          Aplicar Filtros
+
+        {/* Botones de aplicar/limpiar */}
+        <Button
+          type="primary"
+          size="small"
+          onClick={() => onFilter(filters)}
+          style={{ marginTop: "18px" }}
+        >
+          Aplicar filtros
         </Button>
         <Button
-          type="default"
-          onClick={handleClearFilters}
-          icon={<ClearOutlined />} // Ícono de escoba
+          size="small"
+          icon={<ClearOutlined />}
+          onClick={() => {
+            setFilters({});
+            onClearFilters?.();
+          }}
+          style={{ marginTop: "18px" }}
         />
-      </Space>
+      </div>
+
+      {/* === DERECHA: iconos Excel/PDF y botón de filtros avanzados === */}
+      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        {actions.map((action, i) => (
+          <Tooltip key={i} title={action.tooltip}>
+            <Button
+              size="small"
+              icon={action.icon}
+              onClick={action.onClick}
+              style={{ border: "none", background: "none" }}
+            />
+          </Tooltip>
+        ))}
+        {onAdvancedFilters && (
+          <Button
+            size="small"
+            icon={<FilterOutlined />}
+            onClick={onAdvancedFilters}
+            style={{ border: "none", background: "none" }}
+          >
+            Filtros avanzados
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

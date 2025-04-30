@@ -1,12 +1,14 @@
 import React from "react";
-interface Tab {
-    key: string;
-    label: string;
-}
-interface CustomTabsProps {
-    activeKey: string;
-    onChange: (key: string) => void;
-    tabs: Tab[];
+export interface CustomTabsProps {
+    items: {
+        key: string;
+        label: string;
+        content: React.ReactNode;
+    }[];
+    defaultActiveKey?: string;
+    activeKey?: string;
+    onChange?: (key: string) => void;
+    type?: "line" | "card" | "editable-card";
 }
 declare const CustomTabs: React.FC<CustomTabsProps>;
 export default CustomTabs;

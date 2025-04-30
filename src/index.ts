@@ -33,5 +33,9 @@ export { default as TextArea } from "./components/Inputs/CustomNumericInput/Cust
 export { default as Password } from "./components/Inputs/CustomPasswordInput/PasswordInput";
 export { default as Search } from "./components/Inputs/CustomSearchInput/SearchInput";
 export { default as NumericInput } from "./components/Inputs/CustomNumericInput/CustomNumericInput";
+export { default as CustomFilterDrawer } from "./components/CustomFilterDrawer/CustomFilterDrawer";
+
+// Exporta los Iconos personalizados
+export * from "./components/Icons/CustomIcon";
 
 

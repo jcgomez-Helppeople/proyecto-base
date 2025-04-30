@@ -1,6 +1,7 @@
 import React from "react";
 import { Space } from "antd";
 import CustomButton from "../CustomButton/CustomButton";
+import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
 
 export interface CustomToolbarProps {
   /**
@@ -70,7 +71,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
           <CustomButton
             type="default"
             onClick={onBack}
-            icon={<i className="fas fa-arrow-left" />}
+            icon={<ArrowLeftOutlined />}
             style={{ fontSize: "12px" }}
             text={backButtonText} // Usa la propiedad 'text'
           />
@@ -79,7 +80,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
           <CustomButton
             type="primary"
             onClick={onNew}
-            icon={<i className="fas fa-plus" />}
+            icon={<PlusOutlined />}
             style={{ fontSize: "12px" }}
             text={newButtonText} // Usa la propiedad 'text'
           />

@@ -2,7 +2,8 @@ import { useState } from "react";
 import CustomTable from "../components/CustomTable/CustomTable";
 import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
 import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
+import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
 import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +17,7 @@ type Policy = {
 const PoliciesScreen = () => {
   const navigate = useNavigate();
 
-  const data: Policy[] = Array.from({ length: 50 }, (_, index) => ({
+  const data: Policy[] = Array.from({ length: 70 }, (_, index) => ({
     id: index + 1,
     name: `Política ${index + 1}`,
     instructions: `Instrucciones para la política ${index + 1}`,
@@ -24,6 +25,10 @@ const PoliciesScreen = () => {
   }));
 
   const [filteredData, setFilteredData] = useState(data);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [filters, setFilters] = useState<Record<string, any>>({});
+
+  
 
   const handleNewClick = () => {
     navigate("/create-policy");
@@ -55,6 +60,27 @@ const PoliciesScreen = () => {
 
   const handleClearFilters = () => {
     setFilteredData(data);
+    setFilters({});
+  };
+
+  const handleExportExcel = () => {
+    console.log("Exportar a Excel");
+  };
+
+  const handleExportPdf = () => {
+    console.log("Exportar a PDF");
+  };
+
+  const handleOpenDrawer = () => setDrawerVisible(true);
+  const handleCloseDrawer = () => setDrawerVisible(false);
+
+  const handleApplyFilters = () => {
+    console.log("Aplicar filtros:", filters);
+    setDrawerVisible(false);
+  };
+
+  const handleFilterChange = (key: string, value: any) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const columns = [
@@ -79,16 +105,16 @@ const PoliciesScreen = () => {
       key: "enabled",
       render: (enabled: string) => (
         <Tag
-        color={enabled === "Sí" ? "green" : "red"}
-        style={{
-          fontSize: "12px", // Tamaño de fuente 12px
-          fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
-          width: "30px", // Ancho fijo para ambos valores
-          textAlign: "center", // Centrar el texto
-        }}
-      >
-        {enabled}
-      </Tag>
+          color={enabled === "Sí" ? "green" : "red"}
+          style={{
+            fontSize: "12px", // Tamaño de fuente 12px
+            fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
+            width: "30px", // Ancho fijo para ambos valores
+            textAlign: "center", // Centrar el texto
+          }}
+        >
+          {enabled}
+        </Tag>
       ),
     },
     {
@@ -141,24 +167,54 @@ const PoliciesScreen = () => {
 
       <CustomFilterToolbar
         fields={[
-          { key: "id", placeholder: "Buscar por ID", label: "ID" },
-          { key: "name", placeholder: "Buscar por nombre", label: "Nombre" },
           {
-            key: "instructions",
-            placeholder: "Buscar por instrucciones",
-            label: "Instrucciones",
+            key: "id",
+            label: "ID",
+            placeholder: "Buscar por ID",
+            type: "number",
           },
+          { key: "name", label: "Nombre", placeholder: "Buscar por nombre" },
           {
             key: "enabled",
-            placeholder: "Buscar por habilitado",
             label: "Habilitado",
+            type: "select",
+            options: [
+              { label: "Sí", value: "Sí" },
+              { label: "No", value: "No" },
+            ],
+          },
+          {
+            key: "date",
+            label: "Fecha",
+            type: "date", // Tipo "date" para usar el RangePicker
+            placeholder: "Selecciona una fecha",
+          },
+          {
+            key: "dateRange",
+            label: "Rango de Fechas",
+            type: "range", // Tipo "date" para usar el RangePicker
+            placeholder: "Selecciona un rango de fechas",
           },
         ]}
         onFilter={handleFilter}
         onClearFilters={handleClearFilters}
+        actions={[
+          {
+            icon: <FileExcelOutlined />,
+            tooltip: "Exportar a Excel",
+            onClick: handleExportExcel,
+          },
+          {
+            icon: <FilePdfOutlined />,
+            tooltip: "Exportar a PDF",
+            onClick: handleExportPdf,
+          },
+        ]}
+        onAdvancedFilters={handleOpenDrawer}
       />
 
       <CustomTable
+        rowKey="id"
         columns={columns}
         dataSource={filteredData}
         size="small"
@@ -167,6 +223,42 @@ const PoliciesScreen = () => {
           pageSizeOptions: ["10", "25", "50"],
           showSizeChanger: true,
         }}
+        rowSelection={{
+          type: "checkbox", // O "radio" para selección única
+          onChange: (selectedRowKeys, selectedRows) => {
+            console.log("Selected Row Keys:", selectedRowKeys);
+            console.log("Selected Rows:", selectedRows);
+          },
+        }}
+      />
+
+      <CustomFilterDrawer
+        visible={drawerVisible}
+        title="Filtros"
+        fields={[
+          { key: "startDate", label: "Fecha Inicio", type: "text", placeholder: "Fecha Inicio" },
+          { key: "endDate", label: "Fecha Final", type: "text", placeholder: "Fecha Final" },
+          { key: "rfcCode", label: "Código RFC", type: "text", placeholder: "Código RFC" },
+          { key: "order", label: "Orden S.", type: "number", placeholder: "Orden S." },
+          {
+            key: "status",
+            label: "Estado",
+            type: "select",
+            options: [
+              { label: "Por Verificar", value: "verificar" },
+              { label: "Por Aprobar", value: "aprobar" },
+              { label: "En Pruebas", value: "pruebas" },
+              { label: "Realizado", value: "realizado" },
+              { label: "Atrasado", value: "atrasado" },
+              { label: "No Aprobado", value: "no_aprobado" },
+            ],
+          },
+        ]}
+        filters={filters}
+        onClose={handleCloseDrawer}
+        onApplyFilters={handleApplyFilters}
+        onClearFilters={handleClearFilters}
+        onChange={handleFilterChange}
       />
     </div>
   );

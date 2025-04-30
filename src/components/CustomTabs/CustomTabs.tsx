@@ -1,34 +1,60 @@
 import React from "react";
+import { Tabs } from "antd";
 
-interface Tab {
-  key: string;
-  label: string;
+export interface CustomTabsProps {
+  items: { key: string; label: string; content: React.ReactNode }[];
+  defaultActiveKey?: string;
+  activeKey?: string;
+  onChange?: (key: string) => void;
+  type?: "line" | "card" | "editable-card";
 }
 
-interface CustomTabsProps {
-  activeKey: string;
-  onChange: (key: string) => void;
-  tabs: Tab[];
-}
-
-const CustomTabs: React.FC<CustomTabsProps> = ({ activeKey, onChange, tabs }) => {
+const CustomTabs: React.FC<CustomTabsProps> = ({
+  items,
+  defaultActiveKey,
+  activeKey,
+  onChange,
+  type = "line",
+}) => {
   return (
-    <div style={{ display: "flex", borderBottom: "1px solid #e0e0e0", marginBottom: "1rem" }}>
-      {tabs.map((tab) => (
-        <div
-          key={tab.key}
-          onClick={() => onChange(tab.key)}
-          style={{
-            padding: "1rem",
-            cursor: "pointer",
-            borderBottom: activeKey === tab.key ? "2px solid #1890ff" : "none",
-            color: activeKey === tab.key ? "#1890ff" : "#000000",
-            fontWeight: activeKey === tab.key ? "bold" : "normal",
-          }}
-        >
-          {tab.label}
-        </div>
-      ))}
+    <div
+      style={{
+        backgroundColor: "#ffffff", // Fondo blanco
+        border: "1px solid #e0e0e0", // Borde sutil
+        borderRadius: "8px", // Bordes redondeados
+        padding: "1rem", // Espaciado interno
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", // Sombra ligera
+      }}
+    >
+      <Tabs
+        defaultActiveKey={defaultActiveKey}
+        activeKey={activeKey}
+        onChange={onChange}
+        type={type}
+        tabBarStyle={{
+          fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
+          fontSize: "12px", // Tamaño de fuente 12px
+          lineHeight: "1.5", // Asegúrate de ajustar el line-height si es necesario
+        }}
+        items={items.map((item) => ({
+          key: item.key,
+          label: (
+            <span style={{ fontSize: "12px" }}> {/* Aplica el tamaño directamente al label */}
+              {item.label}
+            </span>
+          ),
+          children: (
+            <div
+              style={{
+                padding: "1rem", // Espaciado interno para el contenido
+                backgroundColor: "#ffffff", // Fondo blanco para el contenido
+              }}
+            >
+              {item.content}
+            </div>
+          ),
+        }))}
+      />
     </div>
   );
 };
