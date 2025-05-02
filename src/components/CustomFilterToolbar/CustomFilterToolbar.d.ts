@@ -8,6 +8,7 @@ export type FilterField = {
         label: string;
         value: any;
     }[];
+    mode?: "multiple" | "tags";
 };
 export type ToolbarAction = {
     icon: React.ReactNode;

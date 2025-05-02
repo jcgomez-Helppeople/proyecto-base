@@ -1,12 +1,6 @@
-export interface CustomSelectProps<T> {
+import { SelectProps } from "antd";
+export interface CustomSelectProps<T> extends SelectProps<T> {
     label?: string;
-    options: {
-        value: T;
-        label: string;
-    }[];
-    placeholder?: string;
-    value?: T;
-    onChange?: (value: T) => void;
 }
 declare const CustomSelect: <T>(props: CustomSelectProps<T>) => import("react/jsx-runtime").JSX.Element;
 export default CustomSelect;
