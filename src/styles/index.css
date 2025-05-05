@@ -1,1 +1,9 @@
 @import "./PageLayout.css";
+.custom-select .ant-select-selector {
+    font-size: 12px;
+    height: 32px;          /* el height que quieras */
+    line-height: 32px;     /* mismo valor para centrar */
+  }
+  .custom-select .ant-select-arrow {
+    right: 8px;            /* reajusta posición si es necesario */
+  }

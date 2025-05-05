@@ -8,9 +8,19 @@ export type CustomTooltipProps = AntTooltipProps & {
   content: React.ReactNode;
 };
 
-const CustomTooltip: React.FC<CustomTooltipProps> = ({ content, children, ...rest }) => {
+const CustomTooltip: React.FC<CustomTooltipProps> = ({
+  content,
+  children,
+  ...rest
+}) => {
   return (
-    <AntTooltip title={content} {...rest}>
+    <AntTooltip
+      title={content}
+      {...rest}
+      style={{
+        fontSize: "12px",
+      }}
+    >
       {children}
     </AntTooltip>
   );

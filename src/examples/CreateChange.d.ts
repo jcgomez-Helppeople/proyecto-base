@@ -1,2 +1,3 @@
-declare const RFCCreate: () => import("react/jsx-runtime").JSX.Element;
-export default RFCCreate;
+import React from 'react';
+declare const ChangeRequestForm: React.FC;
+export default ChangeRequestForm;

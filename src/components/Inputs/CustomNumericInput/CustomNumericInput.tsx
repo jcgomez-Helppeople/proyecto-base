@@ -1,5 +1,8 @@
 import React from "react";
-import { InputNumber as AntInputNumber, InputNumberProps as AntInputNumberProps } from "antd";
+import {
+  InputNumber as AntInputNumber,
+  InputNumberProps as AntInputNumberProps,
+} from "antd";
 
 export interface CustomNumericInputProps extends AntInputNumberProps {}
 
@@ -12,7 +15,18 @@ const CustomNumericInput: React.FC<CustomNumericInputProps> = (props) => {
     }
   };
 
-  return <AntInputNumber {...props} onKeyPress={handleKeyPress} />;
+  return (
+    <AntInputNumber
+      {...props}
+      onKeyPress={handleKeyPress}
+      style={{
+        ...props.style,
+        fontSize: "12px",
+        appearance: "textfield", // Ocultar flechas en navegadores modernos
+      }}
+      className="custom-numeric-input"
+    />
+  );
 };
 
 export default CustomNumericInput;

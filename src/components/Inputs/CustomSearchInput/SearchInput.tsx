@@ -1,10 +1,19 @@
 import React from "react";
 import { Input as AntInput } from "antd";
 
-export interface CustomSearchInputProps extends React.ComponentProps<typeof AntInput.Search> {}
+export interface CustomSearchInputProps
+  extends React.ComponentProps<typeof AntInput.Search> {}
 
 const CustomSearchInput: React.FC<CustomSearchInputProps> = (props) => {
-  return <AntInput.Search {...props} />;
+  return (
+    <AntInput.Search
+      {...props}
+      style={{
+        ...props.style,
+        fontSize: "12px",
+      }}
+    />
+  );
 };
 
 export default CustomSearchInput;

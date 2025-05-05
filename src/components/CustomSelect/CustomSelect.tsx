@@ -5,7 +5,7 @@ export interface CustomSelectProps<T> extends SelectProps<T> {
 }
 
 const CustomSelect = <T,>(props: CustomSelectProps<T>) => {
-  return <AntSelect {...props} />;
+  return <AntSelect {...props} style={{fontSize: "12px"}} />;
 };
 
 export default CustomSelect;

@@ -1,111 +1,206 @@
-import React from "react";
-import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
-import CustomTabs from "../components/CustomTabs/CustomTabs";
-import CustomSelect from "../components/CustomSelect/CustomSelect";
-import CustomForm from "../components/CustomForm/CustomForm";
-import CustomButton from "../components/CustomButton/CustomButton";
-import { CustomInput } from "../components/Inputs";
-import {CustomTextArea} from "../components/Inputs";
+import React from 'react';
+import { Tabs, Card, Form, Row, Col, Select, Input, Checkbox, Button } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
-const RFCCreate = () => {
+const { TabPane } = Tabs;
+const { TextArea } = Input;
 
-  const [form] = CustomForm.useForm();
+const ChangeRequestForm: React.FC = () => {
+  const [form] = Form.useForm();
 
-  const handleSubmit = (values: any) => {
-    console.log("Formulario enviado:", values);
+  const onFinish = (values: any) => {
+    console.log('Form values:', values);
   };
 
-  const tabs = [
-    { key: "general", label: "Datos Generales", content: renderGeneralData() },
-    { key: "rfc", label: "RFC", content: <div>Contenido de RFC</div> },
-    { key: "authorization", label: "Autorización", content: <div>Contenido de Autorización</div> },
-    { key: "relations", label: "Relaciones", content: <div>Contenido de Relaciones</div> },
-    { key: "cab", label: "Reuniones CAB", content: <div>Contenido de Reuniones CAB</div> },
-    { key: "post", label: "Post Implementación", content: <div>Contenido de Post Implementación</div> },
-    { key: "audit", label: "Traza de Auditoría", content: <div>Contenido de Traza de Auditoría</div> },
-  ];
-
-  function renderGeneralData() {
-    return (
-      <CustomForm
-        form={form}
-        layout="vertical"
-        onFinish={handleSubmit}
-        style={{ padding: "1rem", backgroundColor: "#ffffff", borderRadius: "8px" }}
-      >
-        <h3 style={{ fontFamily: "'Open Sans', sans-serif", fontSize: "16px", marginBottom: "1rem" }}>
-          Datos Generales
-        </h3>
-
-        {/* A nombre de */}
-        <CustomForm.Item
-          name="aNombreDe"
-          label="A nombre de"
-          rules={[{ required: true, message: "Este campo es obligatorio" }]}
-        >
-          <CustomSelect
-            placeholder="Selecciona una opción"
-            options={[
-              { label: "Pablo Manolo De La Roca", value: "pablo" },
-              { label: "María Fernanda López", value: "maria" },
-            ]}
-          />
-        </CustomForm.Item>
-
-        {/* Líder de Cambio */}
-        <CustomForm.Item
-          name="liderDeCambio"
-          label="Líder de Cambio"
-          rules={[{ required: true, message: "Este campo es obligatorio" }]}
-        >
-          <CustomInput placeholder="Ingresa el nombre del líder" />
-        </CustomForm.Item>
-
-        {/* Descripción */}
-        <CustomForm.Item
-          name="descripcion"
-          label="Descripción"
-          rules={[{ required: true, message: "Este campo es obligatorio" }]}
-        >
-          <CustomTextArea placeholder="Ingresa una descripción" rows={4} />
-        </CustomForm.Item>
-
-        {/* Asunto del servicio */}
-        <CustomForm.Item
-          name="asuntoDelServicio"
-          label="Asunto del servicio"
-          rules={[{ required: true, message: "Este campo es obligatorio" }]}
-        >
-          <CustomInput placeholder="Ingresa el asunto del servicio" />
-        </CustomForm.Item>
-
-        {/* Vía */}
-        <CustomForm.Item
-          name="via"
-          label="Vía"
-          rules={[{ required: true, message: "Este campo es obligatorio" }]}
-        >
-          <CustomSelect
-            placeholder="Selecciona una opción"
-            options={[
-              { label: "helppeople", value: "helppeople" },
-              { label: "email", value: "email" },
-            ]}
-          />
-        </CustomForm.Item>
-
-        {/* Botón de enviar */}
-        <CustomButton text="Guardar" onClick={()=>{}} type="primary"/>
-      </CustomForm>
-    );
-  }
-
   return (
-    <>
-      <CustomToolbar title="Crear Cambio" backButtonText="Volver" onBack={() => {}} />
-      <CustomTabs items={tabs} defaultActiveKey="general" type="card" />
-    </>
+    <Tabs defaultActiveKey="1" type="card">
+      <TabPane tab="Datos Generales" key="1">
+        <Card bordered={false} style={{ marginBottom: 24 }}>
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            initialValues={{
+              impacto: 'Media',
+              urgencia: 'Media',
+              prioridad: 'Media',
+              sla: 'Por defecto',
+            }}
+          >
+            <Row gutter={16}>
+              <Col xs={24} sm={12}>
+                <Form.Item
+                  name="aNombreDe"
+                  label="A nombre de"
+                  rules={[{ required: true, message: 'Selecciona un solicitante' }]}
+                >
+                  <Select
+                    placeholder="Selecciona usuario"
+                    suffixIcon={<DownOutlined style={{ fontSize: 12, color: '#999' }} />}
+                    options={[{ value: 'pablo', label: 'Pablo…' }]}
+                  />
+                </Form.Item>
+              </Col>
+
+              <Col xs={24} sm={12}>
+                <Form.Item
+                  name="liderDeCambio"
+                  label="Líder de Cambio"
+                  rules={[{ required: true, message: 'Ingresa el líder' }]}
+                >
+                  <Input placeholder="Nombre del líder" />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col xs={24} sm={12}>
+                <Form.Item
+                  name="descripcion"
+                  label="Descripción"
+                  rules={[{ required: true, message: 'Escribe una descripción' }]}
+                >
+                  <TextArea rows={4} placeholder="Describe el cambio solicitado" />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col xs={24} sm={12}>
+                <Form.Item
+                  name="asuntoServicio"
+                  label="Asunto del servicio"
+                  rules={[{ required: true, message: 'Ingresa el asunto' }]}
+                >
+                  <Input placeholder="Asunto específico del servicio" />
+                </Form.Item>
+              </Col>
+
+              <Col xs={24} sm={12}>
+                <Form.Item
+                  name="via"
+                  label="Vía"
+                  rules={[{ required: true, message: 'Selecciona una vía' }]}
+                >
+                  <Select placeholder="helppeople">
+                    <Select.Option value="helppeople">helppeople</Select.Option>
+                    {/* Otras vías... */}
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Form.Item name="guardarPlantilla" valuePropName="checked">
+              <Checkbox>Seleccionar plantilla</Checkbox>
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Guardar Plantilla
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+
+        <Card title="Datos Orden de Servicio" bordered={false}>
+          <Form layout="vertical">
+            <Row gutter={16}>
+              <Col xs={24} sm={12} md={8}>
+                <Form.Item name="areaServicio" label="Área de Servicio">
+                  <Select placeholder="Selecciona área">
+                    <Select.Option value="area1">Área Servicio</Select.Option>
+                    {/* … */}
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={8}>
+                <Form.Item name="servicio" label="Servicio">
+                  <Select placeholder="Selecciona servicio">
+                    <Select.Option value="serv1">Servicio 1</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={8}>
+                <Form.Item name="categoria" label="Categoría">
+                  <Select placeholder="Selecciona categoría">
+                    <Select.Option value="cat1">Categoría 1</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col xs={24} sm={12} md={8}>
+                <Form.Item name="actividad" label="Actividad">
+                  <Select placeholder="Selecciona actividad">
+                    <Select.Option value="act1">Actividad 1</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={8}>
+                <Form.Item name="grupo" label="Grupo">
+                  <Select placeholder="Selecciona grupo">
+                    <Select.Option value="grp1">Grupo 1</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={8}>
+                <Form.Item name="responsable" label="Responsable">
+                  <Select placeholder="Selecciona responsable">
+                    <Select.Option value="res1">Responsable 1</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col xs={24} sm={12} md={6}>
+                <Form.Item name="impacto" label="Impacto">
+                  <Select>
+                    <Select.Option value="Alta">Alta</Select.Option>
+                    <Select.Option value="Media">Media</Select.Option>
+                    <Select.Option value="Baja">Baja</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={6}>
+                <Form.Item name="urgencia" label="Urgencia">
+                  <Select>
+                    <Select.Option value="Alta">Alta</Select.Option>
+                    <Select.Option value="Media">Media</Select.Option>
+                    <Select.Option value="Baja">Baja</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={6}>
+                <Form.Item name="prioridad" label="Prioridad">
+                  <Select>
+                    <Select.Option value="Alta">Alta</Select.Option>
+                    <Select.Option value="Media">Media</Select.Option>
+                    <Select.Option value="Baja">Baja</Select.Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12} md={6}>
+                <Form.Item name="sla" label="SLA">
+                  <Select>
+                    <Select.Option value="Por defecto">Por defecto</Select.Option>
+                    {/* … */}
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Form.Item>
+              <Button type="primary">Enviar Solicitud</Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </TabPane>
+
+      {/* Podrías agregar más TabPane aquí para otras pestañas como RFC, Autorización… */}
+    </Tabs>
   );
 };
 
-export default RFCCreate;
+export default ChangeRequestForm;
