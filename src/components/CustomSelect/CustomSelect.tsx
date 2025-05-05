@@ -5,7 +5,29 @@ export interface CustomSelectProps<T> extends SelectProps<T> {
 }
 
 const CustomSelect = <T,>(props: CustomSelectProps<T>) => {
-  return <AntSelect {...props} />;
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {
+        props.label &&
+          <label
+          style={{
+            marginBottom: 4,
+            fontSize: 12,
+            fontWeight: 600,
+            fontFamily: "'Open Sans', sans-serif",
+          }}
+        >
+          {props.label}
+        </label>
+      }
+      <AntSelect {...props} />
+    </div>
+  );
 };
 
 export default CustomSelect;

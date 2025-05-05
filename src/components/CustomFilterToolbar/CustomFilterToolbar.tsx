@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button, Select, InputNumber, Tooltip } from "antd";
 import { ClearOutlined, FilterOutlined } from "@ant-design/icons";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
@@ -16,10 +16,12 @@ export type ToolbarAction = {
   icon: React.ReactNode;
   tooltip?: string;
   onClick: () => void;
+  hide?: boolean;
 };
 
 export interface CustomFilterToolbarProps {
   fields: FilterField[];
+  filters?: Record<string, any>;
   onFilter: (filters: Record<string, any>) => void;
   onClearFilters?: () => void;
   localeCode?: "es" | "en" | "pt";
@@ -29,16 +31,38 @@ export interface CustomFilterToolbarProps {
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   fields,
+  filters: externalFilters,
   onFilter,
   onClearFilters,
   localeCode = "es",
   actions = [],
   onAdvancedFilters,
 }) => {
-  const [filters, setFilters] = useState<Record<string, any>>({});
+  // Estado para los filtros temporales (no aplicados aún)
+  const [tempFilters, setTempFilters] = useState<Record<string, any>>(externalFilters || {});
+
+  // Sincronizar con los filtros externos cuando cambian
+  useEffect(() => {
+    if (externalFilters) {
+      setTempFilters(externalFilters);
+    }
+  }, [externalFilters]);
 
   const handleChange = (key: string, val: any) => {
-    setFilters((prev) => ({ ...prev, [key]: val }));
+    // Solo actualizamos los filtros temporales, no llamamos a onFilter
+    setTempFilters(prev => ({ ...prev, [key]: val }));
+  };
+
+  const handleApplyFilters = () => {
+    // Solo aquí llamamos a onFilter con los filtros temporales
+    onFilter(tempFilters);
+  };
+
+  const handleClear = () => {
+    // Limpiar los filtros temporales
+    setTempFilters({});
+    // Llamar al callback de limpieza
+    onClearFilters?.();
   };
 
   return (
@@ -83,7 +107,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                 <Input
                   size="small"
                   placeholder={f.placeholder}
-                  value={filters[f.key]}
+                  value={tempFilters[f.key]}
                   onChange={(e) => handleChange(f.key, e.target.value)}
                   style={{ width: 150 }}
                 />
@@ -92,7 +116,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                 <InputNumber
                   size="small"
                   placeholder={f.placeholder}
-                  value={filters[f.key]}
+                  value={tempFilters[f.key]}
                   onChange={(val) => handleChange(f.key, val)}
                   style={{ width: 150 }}
                 />
@@ -118,7 +142,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                   size="small"
                   placeholder={f.placeholder}
                   options={f.options}
-                  value={filters[f.key]}
+                  value={tempFilters[f.key]}
                   mode={f.mode} // Soporte para selección múltiple
                   onChange={(val) => handleChange(f.key, val)}
                   style={{ width: 200 }}
@@ -132,7 +156,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         <Button
           type="primary"
           size="small"
-          onClick={() => onFilter(filters)}
+          onClick={handleApplyFilters}
           style={{ marginTop: "18px" }}
         >
           Aplicar filtros
@@ -140,10 +164,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         <Button
           size="small"
           icon={<ClearOutlined />}
-          onClick={() => {
-            setFilters({});
-            onClearFilters?.();
-          }}
+          onClick={handleClear}
           style={{ marginTop: "18px" }}
         />
       </div>
@@ -151,14 +172,16 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
       {/* === DERECHA: Acciones y filtros avanzados === */}
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
         {actions.map((action, i) => (
-          <Tooltip key={i} title={action.tooltip}>
-            <Button
-              size="small"
-              icon={action.icon}
-              onClick={action.onClick}
-              style={{ border: "none", background: "none" }}
-            />
-          </Tooltip>
+          !action.hide && (
+            <Tooltip key={i} title={action.tooltip}>
+              <Button
+                size="small"
+                icon={action.icon}
+                onClick={action.onClick}
+                style={{ border: "none", background: "none" }}
+              />
+            </Tooltip>
+          )
         ))}
         {onAdvancedFilters && (
           <Button

@@ -25,4 +25,5 @@ export { default as Password } from "./components/Inputs/CustomPasswordInput/Pas
 export { default as Search } from "./components/Inputs/CustomSearchInput/SearchInput";
 export { default as NumericInput } from "./components/Inputs/CustomNumericInput/CustomNumericInput";
 export { default as CustomFilterDrawer } from "./components/CustomFilterDrawer/CustomFilterDrawer";
+export { default as CustomFilterDrawerHp } from "./components/CustomFilterDrawerHp/CustomFilterDrawerHp";
 export * from "./components/Icons/CustomIcon";
