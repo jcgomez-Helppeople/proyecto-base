@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Input, Button, Select, InputNumber, Tooltip } from "antd";
+import { Select } from "antd";
 import { ClearOutlined, FilterOutlined } from "@ant-design/icons";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import CustomTooltip from "../CustomTooltip/CustomTooltip";
+import { CustomButton } from "../CustomButton";
+import { CustomInput } from "../Inputs";
+import CustomNumericInput from "../Inputs/CustomNumericInput/CustomNumericInput";
 
 export type FilterField = {
   key: string;
@@ -102,66 +106,67 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                 {f.label}
               </label>
             )}
-            {{
-              text: (
-                <Input
-                  size="small"
-                  placeholder={f.placeholder}
-                  value={tempFilters[f.key]}
-                  onChange={(e) => handleChange(f.key, e.target.value)}
-                  style={{ width: 150 }}
-                />
-              ),
-              number: (
-                <InputNumber
-                  size="small"
-                  placeholder={f.placeholder}
-                  value={tempFilters[f.key]}
-                  onChange={(val) => handleChange(f.key, val)}
-                  style={{ width: 150 }}
-                />
-              ),
-              date: (
-                <CustomDatePicker
-                  size="small"
-                  localeCode={localeCode}
-                  onChange={(_, dateString) => handleChange(f.key, dateString)}
-                  style={{ width: 200 }}
-                />
-              ),
-              range: (
-                <CustomDatePicker.RangePicker
-                  size="small"
-                  localeCode={localeCode}
-                  onChange={(_, dateStrings) => handleChange(f.key, dateStrings)}
-                  style={{ width: 200 }}
-                />
-              ),
-              select: (
-                <Select
-                  size="small"
-                  placeholder={f.placeholder}
-                  options={f.options}
-                  value={tempFilters[f.key]}
-                  mode={f.mode} // Soporte para selección múltiple
-                  onChange={(val) => handleChange(f.key, val)}
-                  style={{ width: 200 }}
-                />
-              ),
-            }[f.type || "text"]}
+            {
+              {
+                text: (
+                  <CustomInput
+                    size="small"
+                    placeholder={f.placeholder}
+                    value={tempFilters[f.key]}
+                    onChange={(e) => handleChange(f.key, e.target.value)}
+                  />
+                ),
+                number: (
+                  <CustomNumericInput
+                    size="small"
+                    placeholder={f.placeholder}
+                    value={tempFilters[f.key]}
+                    onChange={(val) => handleChange(f.key, val)}
+                  />
+                ),
+                date: (
+                  <CustomDatePicker
+                    size="small"
+                    localeCode={localeCode}
+                    onChange={(_, dateString) =>
+                      handleChange(f.key, dateString)
+                    }
+                  />
+                ),
+                range: (
+                  <CustomDatePicker.RangePicker
+                    size="small"
+                    localeCode={localeCode}
+                    onChange={(_, dateStrings) =>
+                      handleChange(f.key, dateStrings)
+                    }
+                  />
+                ),
+                select: (
+                  <Select
+                    size="small"
+                    placeholder={f.placeholder}
+                    options={f.options}
+                    value={tempFilters[f.key]}
+                    mode={f.mode} // Soporte para selección múltiple
+                    onChange={(val) => handleChange(f.key, val)}
+                  />
+                ),
+              }[f.type || "text"]
+            }
           </div>
         ))}
 
         {/* Botones de aplicar/limpiar */}
-        <Button
+        <CustomButton
           type="primary"
           size="small"
           onClick={handleApplyFilters}
           style={{ marginTop: "18px" }}
+          text="Aplicar"
         >
-          Aplicar filtros
-        </Button>
-        <Button
+        </CustomButton>
+        <CustomButton
           size="small"
           icon={<ClearOutlined />}
           onClick={handleClear}
@@ -173,25 +178,25 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
         {actions.map((action, i) => (
           !action.hide && (
-            <Tooltip key={i} title={action.tooltip}>
-              <Button
+            <CustomTooltip key={i} content={action.tooltip}>
+              <CustomButton
                 size="small"
                 icon={action.icon}
                 onClick={action.onClick}
                 style={{ border: "none", background: "none" }}
               />
-            </Tooltip>
+            </CustomTooltip>
           )
         ))}
         {onAdvancedFilters && (
-          <Button
-            size="small"
-            icon={<FilterOutlined />}
-            onClick={onAdvancedFilters}
-            style={{ border: "none", background: "none" }}
-          >
-            Filtros avanzados
-          </Button>
+          <CustomTooltip content="Filtros avanzados">
+            <CustomButton
+              size="small"
+              icon={<FilterOutlined />}
+              onClick={onAdvancedFilters}
+              style={{ border: "none", background: "none" }}
+            />
+          </CustomTooltip>
         )}
       </div>
     </div>

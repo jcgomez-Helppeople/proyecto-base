@@ -236,14 +236,17 @@
 
 
 /* Tamaño estándar para inputs */
-.ant-input,
-.ant-select-selector,
-.ant-input-number,
-.ant-textarea {
-  width: 100%; /* Asegura que todos los inputs ocupen el espacio disponible */
-  max-width: 300px; /* Define un ancho máximo para mantener consistencia */
-}
+
 
 .ant-form-item {
   flex: 1; /* Asegura que los elementos del formulario se distribuyan uniformemente */
+}
+
+.custom-select .ant-select-selector {
+  font-size: 12px;
+  height: 32px;          /* el height que quieras */
+  line-height: 32px;     /* mismo valor para centrar */
+}
+.custom-select .ant-select-arrow {
+  right: 8px;            /* reajusta posición si es necesario */
 }

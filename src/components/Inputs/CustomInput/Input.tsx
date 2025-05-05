@@ -11,7 +11,15 @@ export interface CustomInputProps extends AntInputProps {
 }
 
 const CustomInput: React.FC<CustomInputProps> = (props) => {
-  return <AntInput {...props} />;
+  return (
+    <AntInput
+      {...props}
+      style={{
+        ...props.style, 
+        fontSize: "12px",
+      }}
+    />
+  );
 };
 
 export default CustomInput;
