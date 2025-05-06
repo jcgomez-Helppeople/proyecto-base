@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio as AntRadio, RadioProps as AntRadioProps, RadioGroupProps } from "antd";
+import { Radio as AntRadio, RadioProps as AntRadioProps } from "antd";
 
 export interface CustomRadioProps extends AntRadioProps {
   /**
@@ -14,12 +14,6 @@ const CustomRadio: React.FC<CustomRadioProps> = ({ label, ...rest }) => {
       {label}
     </AntRadio>
   );
-};
-
-export interface CustomRadioGroupProps extends RadioGroupProps {}
-
-export const CustomRadioGroup: React.FC<CustomRadioGroupProps> = (props) => {
-  return <AntRadio.Group {...props} />;
 };
 
 export default CustomRadio;
