@@ -11,6 +11,7 @@ export { default as InputSwitch } from "./components/CustomInputSwitch/CustomSwi
 export { default as Modal } from "./components/CustomModal/CustomModal";
 export { default as Notification } from "./components/CustomNotification/CustomNotification";
 export { default as Radio } from "./components/CustomRadio/CustomRadio";
+export { default as RadioGroup } from "./components/CustomRadioGroup/CustomRadioGroup";
 export { default as Select } from "./components/CustomSelect/CustomSelect";
 export { default as Skeleton } from "./components/CustomSkeleton/CustomSkeleton";
 export { default as Spin } from "./components/CustomSpin/CustomSpin";

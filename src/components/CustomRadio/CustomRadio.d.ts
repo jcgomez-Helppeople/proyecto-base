@@ -1,5 +1,5 @@
 import React from "react";
-import { RadioProps as AntRadioProps, RadioGroupProps } from "antd";
+import { RadioProps as AntRadioProps } from "antd";
 export interface CustomRadioProps extends AntRadioProps {
     /**
      * Etiqueta para mostrar junto al radio
