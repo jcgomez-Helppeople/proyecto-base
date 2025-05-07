@@ -43,7 +43,9 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   onAdvancedFilters,
 }) => {
   // Estado para los filtros temporales (no aplicados aún)
-  const [tempFilters, setTempFilters] = useState<Record<string, any>>(externalFilters || {});
+  const [tempFilters, setTempFilters] = useState<Record<string, any>>(
+    externalFilters || {}
+  );
 
   // Sincronizar con los filtros externos cuando cambian
   useEffect(() => {
@@ -54,7 +56,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
 
   const handleChange = (key: string, val: any) => {
     // Solo actualizamos los filtros temporales, no llamamos a onFilter
-    setTempFilters(prev => ({ ...prev, [key]: val }));
+    setTempFilters((prev) => ({ ...prev, [key]: val }));
   };
 
   const handleApplyFilters = () => {
@@ -164,8 +166,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
           onClick={handleApplyFilters}
           style={{ marginTop: "18px" }}
           text="Aplicar"
-        >
-        </CustomButton>
+        ></CustomButton>
         <CustomButton
           size="small"
           icon={<ClearOutlined />}
@@ -176,26 +177,31 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
 
       {/* === DERECHA: Acciones y filtros avanzados === */}
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        {actions.map((action, i) => (
-          !action.hide && (
-            <CustomTooltip key={i} content={action.tooltip}>
-              <CustomButton
-                size="small"
-                icon={action.icon}
-                onClick={action.onClick}
-                style={{ border: "none", background: "none" }}
-              />
-            </CustomTooltip>
-          )
-        ))}
+        {actions.map(
+          (action, i) =>
+            !action.hide && (
+              <CustomTooltip key={i} content={action.tooltip}>
+                <span>
+                  <CustomButton
+                    size="small"
+                    icon={action.icon}
+                    onClick={action.onClick}
+                    style={{ border: "none", background: "none" }}
+                  />
+                </span>
+              </CustomTooltip>
+            )
+        )}
         {onAdvancedFilters && (
           <CustomTooltip content="Filtros avanzados">
-            <CustomButton
-              size="small"
-              icon={<FilterOutlined />}
-              onClick={onAdvancedFilters}
-              style={{ border: "none", background: "none" }}
-            />
+            <span>
+              <CustomButton
+                size="small"
+                icon={<FilterOutlined />}
+                onClick={onAdvancedFilters}
+                style={{ border: "none", background: "none" }}
+              />
+            </span>
           </CustomTooltip>
         )}
       </div>

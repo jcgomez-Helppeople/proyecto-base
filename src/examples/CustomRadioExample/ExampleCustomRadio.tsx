@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CustomRadio, { CustomRadioGroup } from "../../components/CustomRadio/CustomRadio";
+import CustomRadio  from "../../components/CustomRadio/CustomRadio";
 
 const ExampleCustomRadio = () => {
   const [selectedValue, setSelectedValue] = useState<string | number | null>(null);
@@ -17,11 +17,11 @@ const ExampleCustomRadio = () => {
       <CustomRadio label="Opción 2" value="2" checked={selectedValue === "2"} onChange={handleChange} />
 
       <h2>Grupo de Radios</h2>
-      <CustomRadioGroup onChange={handleChange} value={selectedValue}>
+      {/* <CustomRadioGroup onChange={handleChange} value={selectedValue}>
         <CustomRadio label="Opción A" value="A" />
         <CustomRadio label="Opción B" value="B" />
         <CustomRadio label="Opción C" value="C" />
-      </CustomRadioGroup>
+      </CustomRadioGroup> */}
     </div>
   );
 };
