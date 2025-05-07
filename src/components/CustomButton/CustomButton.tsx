@@ -12,9 +12,9 @@ interface CustomButtonProps {
   style?: React.CSSProperties;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ text, type, onClick, icon, style }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ text, type, onClick, icon, style, disabled = false, loading = false }) => {
   return (
-    <Button type={type} onClick={onClick} icon={icon} style={style} size="small" disabled={false} loading={false}>
+    <Button type={type} onClick={onClick} icon={icon} style={style} size="small" disabled={disabled} loading={loading}>
       {text}
     </Button>
   );

@@ -6,8 +6,7 @@ export interface CustomRadioProps extends AntRadioProps {
      */
     label?: string;
 }
-declare const CustomRadio: React.FC<CustomRadioProps>;
-export interface CustomRadioGroupProps extends RadioGroupProps {
-}
-export declare const CustomRadioGroup: React.FC<CustomRadioGroupProps>;
+declare const CustomRadio: React.FC<CustomRadioProps> & {
+    Group: React.FC<RadioGroupProps>;
+};
 export default CustomRadio;

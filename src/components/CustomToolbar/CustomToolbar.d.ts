@@ -20,6 +20,14 @@ export interface CustomToolbarProps {
      * Texto personalizado para el botón de "Volver"
      */
     backButtonText?: string;
+    /**
+     * Estado de carga para el botón de acción new
+     */
+    newButtonLoading?: boolean;
+    /**
+     * tipo de página donde se usa el toolbar
+     */
+    pageType?: "list" | "form";
 }
 declare const CustomToolbar: React.FC<CustomToolbarProps>;
 export default CustomToolbar;

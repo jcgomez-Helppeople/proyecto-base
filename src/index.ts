@@ -39,6 +39,9 @@ export { default as Form } from "./components/CustomForm/CustomForm";
 export { default as Row } from "./components/CustomRow/CustomRow";
 export { default as Col } from "./components/CustomCol/CustomCol";
 export { default as Space } from "./components/CustomSpace/CustomSpace";
+export { default as Card } from "./components/CustomCard/CustomCard";
+export { default as Tag } from "./components/CustomTag/CustomTag";
+export type { InputRef } from 'antd';
 
 // Exporta los Iconos personalizados
 export * from "./components/Icons/CustomIcon";

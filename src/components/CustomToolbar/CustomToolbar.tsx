@@ -1,7 +1,7 @@
 import React from "react";
 import { Space } from "antd";
 import CustomButton from "../CustomButton/CustomButton";
-import { ArrowLeftOutlined, PlusOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, PlusOutlined, SaveOutlined } from "@ant-design/icons";
 
 export interface CustomToolbarProps {
   /**
@@ -28,6 +28,16 @@ export interface CustomToolbarProps {
    * Texto personalizado para el botón de "Volver"
    */
   backButtonText?: string;
+
+  /**
+   * Estado de carga para el botón de acción new
+   */
+  newButtonLoading?: boolean;
+
+  /**
+   * tipo de página donde se usa el toolbar
+   */
+  pageType?: "list" | "form";
 }
 
 const CustomToolbar: React.FC<CustomToolbarProps> = ({
@@ -36,6 +46,8 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
   onNew,
   newButtonText = "Nueva",
   backButtonText = "Volver",
+  newButtonLoading = false,
+  pageType = "list",
 }) => {
   return (
     <div
@@ -80,9 +92,10 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
           <CustomButton
             type="primary"
             onClick={onNew}
-            icon={<PlusOutlined />}
+            icon={pageType == "list" ? <PlusOutlined /> : <SaveOutlined />}
             style={{ fontSize: "12px" }}
             text={newButtonText} // Usa la propiedad 'text'
+            loading={newButtonLoading}
           />
         )}
       </Space>
