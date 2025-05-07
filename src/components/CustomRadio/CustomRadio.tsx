@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio as AntRadio, RadioProps as AntRadioProps } from "antd";
+import { Radio as AntRadio, RadioProps as AntRadioProps, RadioGroupProps } from "antd";
 
 export interface CustomRadioProps extends AntRadioProps {
   /**
