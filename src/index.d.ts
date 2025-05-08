@@ -34,4 +34,5 @@ export { default as Space } from "./components/CustomSpace/CustomSpace";
 export { default as Card } from "./components/CustomCard/CustomCard";
 export { default as Tag } from "./components/CustomTag/CustomTag";
 export type { InputRef } from 'antd';
+export { default as RichTextEditor } from "./components/CustomRichTextEditor/CustomRichTextEditor";
 export * from "./components/Icons/CustomIcon";

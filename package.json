@@ -52,6 +52,8 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "antd": "^5.24.6"
+    "antd": "^5.24.6",
+    "quill": "^2.0.3",
+    "react-quill": "^2.0.0"
   }
 }
