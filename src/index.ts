@@ -45,6 +45,10 @@ export { default as Tag } from "./components/CustomTag/CustomTag";
 export type { InputRef } from 'antd';
 export { default as RichTextEditor } from "./components/CustomRichTextEditor/CustomRichTextEditor";
 
+export { default as DragAndDrop } from "./components/CustomDragAndDrop/CustomDragAndDrop";
+export type { DragAndDropItem } from "./components/CustomDragAndDrop/CustomDragAndDrop";
+
+
 // Exporta los Iconos personalizados
 export * from "./components/Icons/CustomIcon";
 

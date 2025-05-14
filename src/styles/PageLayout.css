@@ -259,3 +259,11 @@
 .custom-form .ant-form-item-label > label{
   font-size: 12px;
 }
+
+.ant-card {
+  transition: transform 0.2s !important;
+}
+
+.ant-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
