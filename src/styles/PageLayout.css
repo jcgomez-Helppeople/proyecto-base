@@ -250,3 +250,12 @@
 .custom-select .ant-select-arrow {
   right: 8px;            /* reajusta posición si es necesario */
 }
+
+.custom-modal .ant-modal-title{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.custom-form .ant-form-item-label > label{
+  font-size: 12px;
+}

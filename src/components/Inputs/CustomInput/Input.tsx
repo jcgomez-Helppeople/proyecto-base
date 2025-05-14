@@ -13,14 +13,35 @@ export interface CustomInputProps extends AntInputProps {
 const CustomInput = React.forwardRef<InputRef, CustomInputProps>(
   (props, ref) => {
     return (
-      <AntInput
-        {...props}
-        ref={ref}
+      <div
         style={{
-          ...props.style, 
-          fontSize: "12px",
+          display: "flex",
+          flexDirection: "column",
         }}
-      />
+      >
+        {
+          props.label &&
+          <label
+            style={{
+              marginBottom: 4,
+              fontSize: 12,
+              fontWeight: 600,
+              fontFamily: "'Open Sans', sans-serif",
+            }}
+          >
+            {props.label}
+          </label>
+        }
+        < AntInput
+          size="small"
+          {...props}
+          ref={ref}
+          style={{
+            ...props.style,
+            fontSize: "12px",
+          }}
+        />
+      </div>
     );
   }
 );
