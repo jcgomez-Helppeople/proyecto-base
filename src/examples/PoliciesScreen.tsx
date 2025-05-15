@@ -7,6 +7,7 @@ import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from
 import CustomSelect from "../components/CustomSelect/CustomSelect";
 import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
+import ExampleCustomCalendar from "./CustomCalendar/ExampleCustomCalendar";
 
 type Policy = {
   id: number;
@@ -35,7 +36,7 @@ const PoliciesScreen = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [filters, setFilters] = useState<Record<string, any>>({});
 
-  
+
 
   const handleNewClick = () => {
     navigate("/create-policy");
@@ -162,7 +163,6 @@ const PoliciesScreen = () => {
         padding: "1rem", // Reducir el padding general
         marginTop: "0", // Eliminar cualquier margen superior
         height: "100vh", // Asegurar que ocupe toda la altura de la pantalla
-        overflow: "hidden", // Evitar scroll innecesario
       }}
     >
       <CustomToolbar
@@ -250,15 +250,17 @@ const PoliciesScreen = () => {
         }}
       />
 
-<CustomSelect
-      placeholder="Selecciona una categoría"
-      options={options}
-      mode="multiple" // Selección múltiple
-      allowClear // Permitir limpiar la selección
-      showSearch // Habilitar búsqueda
-      onChange={(value) => console.log("Seleccionado:", value)}
-      style={{ width: 200 }}
-    />
+      <CustomSelect
+        placeholder="Selecciona una categoría"
+        options={options}
+        mode="multiple" // Selección múltiple
+        allowClear // Permitir limpiar la selección
+        showSearch // Habilitar búsqueda
+        onChange={(value) => console.log("Seleccionado:", value)}
+        style={{ width: 200 }}
+      />
+
+      <ExampleCustomCalendar />
 
       <CustomFilterDrawer
         visible={drawerVisible}
