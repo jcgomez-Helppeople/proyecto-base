@@ -8,6 +8,7 @@ interface CustomButtonProps {
     loading?: boolean;
     icon?: React.ReactNode;
     style?: React.CSSProperties;
+    danger?: boolean;
 }
 declare const CustomButton: React.FC<CustomButtonProps>;
 export default CustomButton;

@@ -5,8 +5,9 @@ import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterT
 import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
 import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
 import CustomSelect from "../components/CustomSelect/CustomSelect";
-import { Tag } from "antd";
+import { Button, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
+import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
 import ExampleCustomCalendar from "./CustomCalendar/ExampleCustomCalendar";
 
 type Policy = {
@@ -290,6 +291,11 @@ const PoliciesScreen = () => {
         onClearFilters={handleClearFilters}
         onChange={handleFilterChange}
       />
+      <CustomTooltip content="Este es un tooltip personalizado">
+        <span>
+          <Button type="primary"></Button>
+        </span>
+      </CustomTooltip>
     </div>
   );
 };

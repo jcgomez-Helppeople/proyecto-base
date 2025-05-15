@@ -1,5 +1,5 @@
 import React from "react";
-import { Input as AntInput, InputProps as AntInputProps } from "antd";
+import { Input as AntInput, InputProps as AntInputProps, InputRef } from "antd";
 
 export interface CustomInputProps extends AntInputProps {
   label?: string; // Agrega la propiedad 'label' como opcional
@@ -10,16 +10,42 @@ export interface CustomInputProps extends AntInputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomInput: React.FC<CustomInputProps> = (props) => {
-  return (
-    <AntInput
-      {...props}
-      style={{
-        ...props.style, 
-        fontSize: "12px",
-      }}
-    />
-  );
-};
+const CustomInput = React.forwardRef<InputRef, CustomInputProps>(
+  (props, ref) => {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {
+          props.label &&
+          <label
+            style={{
+              marginBottom: 4,
+              fontSize: 12,
+              fontWeight: 600,
+              fontFamily: "'Open Sans', sans-serif",
+            }}
+          >
+            {props.label}
+          </label>
+        }
+        < AntInput
+          size="small"
+          {...props}
+          ref={ref}
+          style={{
+            ...props.style,
+            fontSize: "12px",
+          }}
+        />
+      </div>
+    );
+  }
+);
+
+CustomInput.displayName = 'CustomInput';
 
 export default CustomInput;
