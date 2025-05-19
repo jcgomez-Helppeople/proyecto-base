@@ -17,7 +17,7 @@ const CustomForm: React.FC<CustomFormProps> & {
   const form = props.form || internalForm;
 
   return (
-    <Form form={form} {...props}>
+    <Form {...props} className={`custom-form ${props.className || ""}`} form={form}>
       {typeof props.children === "function" ? props.children(form) : props.children}
     </Form>
   );

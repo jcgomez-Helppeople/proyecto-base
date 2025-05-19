@@ -15,7 +15,7 @@ export interface CustomModalProps extends AntModalProps {
 
 const CustomModal: React.FC<CustomModalProps> = ({ title, children, ...rest }) => {
   return (
-    <AntModal title={title} {...rest}>
+    <AntModal className="custom-modal" title={title} {...rest}>
       {children}
     </AntModal>
   );

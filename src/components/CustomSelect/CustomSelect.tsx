@@ -14,7 +14,7 @@ const CustomSelect = <T,>(props: CustomSelectProps<T>) => {
     >
       {
         props.label &&
-          <label
+        <label
           style={{
             marginBottom: 4,
             fontSize: 12,
@@ -25,7 +25,7 @@ const CustomSelect = <T,>(props: CustomSelectProps<T>) => {
           {props.label}
         </label>
       }
-      <AntSelect {...props} style={{fontSize: "12px"}} />
+      <AntSelect {...props} style={{ fontSize: "12px", minWidth: "160px" }} />
     </div>
   );
 };
