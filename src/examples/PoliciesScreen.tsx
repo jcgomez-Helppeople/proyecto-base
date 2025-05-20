@@ -4,10 +4,8 @@ import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
 import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
 import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
 import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
-import CustomSelect from "../components/CustomSelect/CustomSelect";
-import { Button, Tag } from "antd";
+import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
-import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
 import ExampleCustomCalendar from "./CustomCalendar/ExampleCustomCalendar";
 import ExampleCustomDropDown from "./CustomDropDownExample/ExampleCustomDropDown";
 
@@ -28,11 +26,6 @@ const PoliciesScreen = () => {
     enabled: index % 2 === 0 ? "Sí" : "No",
   }));
 
-  const options = [
-    { value: "cat1", label: "Categoría 1" },
-    { value: "cat2", label: "Categoría 2" },
-    { value: "cat3", label: "Categoría 3" },
-  ];
 
   const [filteredData, setFilteredData] = useState(data);
   const [drawerVisible, setDrawerVisible] = useState(false);

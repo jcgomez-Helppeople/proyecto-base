@@ -36,6 +36,7 @@ const CreatePolicyScreen = () => {
         onBack={handleBackClick}
         onNew={handleCreateClick}
         newButtonText="Crear"
+        pageType="form"
       />
 
 
