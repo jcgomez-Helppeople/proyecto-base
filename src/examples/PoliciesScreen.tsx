@@ -9,6 +9,7 @@ import { Button, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
 import ExampleCustomCalendar from "./CustomCalendar/ExampleCustomCalendar";
+import ExampleCustomDropDown from "./CustomDropDownExample/ExampleCustomDropDown";
 
 type Policy = {
   id: number;
@@ -92,6 +93,10 @@ const PoliciesScreen = () => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
+  const actionsDropdown = [
+    { key: 'edit', label: 'Editar', onClick: () => console.log('Editar') },
+    { key: 'delete', label: 'Eliminar', onClick: () => console.log('Eliminar') },
+  ]
   const columns = [
     {
       title: "ID",
@@ -262,6 +267,8 @@ const PoliciesScreen = () => {
       />
 
       <ExampleCustomCalendar />
+
+      <ExampleCustomDropDown actions={actionsDropdown} />
 
       <CustomFilterDrawer
         visible={drawerVisible}
