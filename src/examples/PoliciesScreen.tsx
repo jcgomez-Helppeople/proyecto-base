@@ -251,16 +251,6 @@ const PoliciesScreen = () => {
         }}
       />
 
-<CustomSelect
-      placeholder="Selecciona una categoría"
-      options={options}
-      mode="multiple" // Selección múltiple
-      allowClear // Permitir limpiar la selección
-      showSearch // Habilitar búsqueda
-      onChange={(value) => console.log("Seleccionado:", value)}
-      style={{ width: 200 }}
-    />
-
       <CustomFilterDrawer
         visible={drawerVisible}
         title="Filtros"
@@ -289,11 +279,6 @@ const PoliciesScreen = () => {
         onClearFilters={handleClearFilters}
         onChange={handleFilterChange}
       />
-        <CustomTooltip content="Este es un tooltip personalizado">
-    <span>
-      <Button type="primary"></Button>
-    </span>
-  </CustomTooltip>
     </div>
   );
 };

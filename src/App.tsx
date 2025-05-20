@@ -4,18 +4,13 @@ import PoliciesScreen from "./examples/PoliciesScreen";
 import CreatePolicyScreen from "./examples/CreatePolicyScreen";
 // import RFCCreate from "./examples/CreateChange";
 import { ConfigProvider } from "antd";
+import LibraryThemeProvider  from "./theme/LibraryThemeProvider";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
   return (
-    <ConfigProvider theme={{
-      token: {
-        fontSize: 12,
-        controlHeight: 32,      // ajusta la altura de inputs/selects
-        lineHeight: 1.5,
-      },
-    }}>
+    <LibraryThemeProvider>
     <Layout>
       {/* <RegionConfigurationScreen /> */}
       <Router>
@@ -25,7 +20,7 @@ const App = () => {
         </Routes>
       </Router>
     </Layout>
-    </ConfigProvider>
+    </LibraryThemeProvider>
   );
 };
 

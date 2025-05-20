@@ -21,10 +21,8 @@ const CustomNumericInput: React.FC<CustomNumericInputProps> = (props) => {
       onKeyPress={handleKeyPress}
       style={{
         ...props.style,
-        fontSize: "12px",
-        appearance: "textfield", // Ocultar flechas en navegadores modernos
       }}
-      className="custom-numeric-input"
+      controls={false} // Desactivar los controles de incremento/decremento
     />
   );
 };

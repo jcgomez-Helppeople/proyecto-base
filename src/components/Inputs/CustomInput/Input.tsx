@@ -33,12 +33,10 @@ const CustomInput = React.forwardRef<InputRef, CustomInputProps>(
           </label>
         }
         < AntInput
-          size="small"
           {...props}
           ref={ref}
           style={{
             ...props.style,
-            fontSize: "12px",
           }}
         />
       </div>
