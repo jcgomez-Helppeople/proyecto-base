@@ -6,6 +6,8 @@ import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDra
 import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
 import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
+import { CustomFloatButton } from "../components/CustomFloatButton";
+import { PlusOutlined, QuestionOutlined } from '@ant-design/icons';
 
 type Policy = {
   id: number;
@@ -243,6 +245,22 @@ const PoliciesScreen = () => {
           },
         }}
       />
+
+      <CustomFloatButton 
+  icon={<PlusOutlined />} 
+  type="primary"
+  tooltip="Agregar nuevo"
+  onClick={() => console.log('Clic en botón flotante')}
+/>
+
+<CustomFloatButton.Group
+  trigger="click"
+  style={{ right: 24, bottom: 24 }}
+>
+  <CustomFloatButton icon={<PlusOutlined />} tooltip="Agregar" />
+  <CustomFloatButton icon={<QuestionOutlined />} tooltip="Ayuda" />
+</CustomFloatButton.Group>
+
 
       <CustomFilterDrawer
         visible={drawerVisible}

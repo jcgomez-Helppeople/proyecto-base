@@ -1,19 +1,15 @@
 import React from "react";
-import { FloatButtonProps as AntFloatButtonProps } from "antd";
-import { ReactNode } from "react";
-export interface CustomFloatButtonProps extends AntFloatButtonProps {
+import { FloatButton as AntFloatButton, FloatButtonProps, FloatButtonGroupProps } from "antd";
+export interface CustomFloatButtonProps extends FloatButtonProps {
     /**
-     * Ícono a mostrar en el botón flotante
+     * Texto para el tooltip del botón
      */
-    icon?: ReactNode;
-    /**
-     * Texto alternativo para accesibilidad
-     */
-    ariaLabel?: string;
-    /**
-     * Indica si el botón está en estado de carga
-     */
-    loading?: boolean;
+    tooltip?: React.ReactNode;
 }
-declare const CustomFloatButton: React.FC<CustomFloatButtonProps>;
+export interface CustomFloatButtonGroupProps extends FloatButtonGroupProps {
+}
+declare const CustomFloatButton: React.FC<CustomFloatButtonProps> & {
+    Group: React.FC<CustomFloatButtonGroupProps>;
+    BackTop: typeof AntFloatButton.BackTop;
+};
 export default CustomFloatButton;

@@ -1,6 +1,6 @@
 {
   "name": "@jcgomez96/prueba1",
-  "version": "1.0.49",
+  "version": "1.0.54",
   "description": "Librería de componentes frontend para estilos y diseños estándar.",
   "main": "dist/my-library.cjs.js",
   "module": "dist/my-library.es.js",
