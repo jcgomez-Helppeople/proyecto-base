@@ -1,46 +1,44 @@
-import { Calendar, CalendarProps } from "antd"
+import { useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
+import CustomCalendar, { CalendarEvent } from "../../components/CustomCalendar/CustomCalendar";
 
-interface DataType {
-  RFC_COD: number
-  SOL_TITULO: string
-  SOL_FECHA: string
-  SOL_FECHA_VENCI: string
-}
+const initialEvents: CalendarEvent[] = [
+  {
+    date: dayjs("2025-05-21"),
+    title: "Reunión de equipo",
+    description: "Revisar avances del sprint actual",
+    color: "#1890ff",
+  },
+  {
+    date: dayjs("2025-05-23"),
+    title: "Presentación cliente",
+    description: "Demo mensual para el cliente",
+    color: "#52c41a",
+  },
+];
+
+
 
 const ExampleCustomCalendar = () => {
-  const eventsRfc: DataType[] = [
-    {
-      "RFC_COD": 2747,
-      "SOL_TITULO": "Juan mas 2Adjuntos",
-      "SOL_FECHA": "2025-04-02T00:58:37.000Z",
-      "SOL_FECHA_VENCI": "2025-04-05T13:00:00.000Z"
-    },
-    {
-      "RFC_COD": 2752,
-      "SOL_TITULO": "Juan mas 2Adjuntos",
-      "SOL_FECHA": "2025-04-02T07:55:00.000Z",
-      "SOL_FECHA_VENCI": "2025-04-05T13:00:00.000Z"
-    },
-    {
-      "RFC_COD": 2917,
-      "SOL_TITULO": "Juan mas 2Adjuntos",
-      "SOL_FECHA": "2025-04-23T22:06:11.000Z",
-      "SOL_FECHA_VENCI": "2025-04-27T18:00:00.000Z"
-    },
-    {
-      "RFC_COD": 2936,
-      "SOL_TITULO": "Juan mas 2Adjuntos",
-      "SOL_FECHA": "2025-04-24T14:22:40.000Z",
-      "SOL_FECHA_VENCI": "2025-04-27T18:00:00.000Z"
+  const [events, setEvents] = useState<CalendarEvent[]>(initialEvents);
+  const handleAddEvent = (date: Dayjs) => {
+    const title = prompt("Título del evento:");
+    if (title) {
+      setEvents([
+        ...events,
+        {
+          date,
+          title,
+          description: "",
+          color: "#faad14",
+        },
+      ]);
     }
-  ]
-  const onPanelChange = (value: any, mode: CalendarProps<any>['mode']) => {
-    console.log(value.format('YYYY-MM-DD'), mode);
   };
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Prueba de CustomCalendar</h1>
-      <Calendar onPanelChange={onPanelChange} />
+    <div style={{ maxWidth: '100%', margin: "0 auto" }}>
+      <h2>Ejemplo de CustomCalendar con eventos</h2>
+      <CustomCalendar events={events} onAddEvent={handleAddEvent} />
     </div>
   )
 }

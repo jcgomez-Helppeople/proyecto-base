@@ -4,10 +4,13 @@ import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
 import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
 import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
 import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
-import { Tag } from "antd";
+import { Button, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
-import ExampleCustomCalendar from "./CustomCalendar/ExampleCustomCalendar";
 import ExampleCustomDropDown from "./CustomDropDownExample/ExampleCustomDropDown";
+import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
+import CustomSelect from "../components/CustomSelect/CustomSelect";
+import CustomCalendar, { CalendarEvent } from "../components/CustomCalendar/CustomCalendar";
+import dayjs from "dayjs";
 
 type Policy = {
   id: number;
@@ -156,6 +159,28 @@ const PoliciesScreen = () => {
     },
   ];
 
+  const initialEvents: CalendarEvent[] = [
+    {
+      date: dayjs("2025-05-21"),
+      title: "Reunión de equipo",
+      description: "Revisar avances del sprint actual",
+      color: "#1890ff",
+    },
+    {
+      date: dayjs("2025-05-21"),
+      title: "Reunión de equipo",
+      description: "Revisar avances del sprint actual",
+      color: "#1890ff",
+    },
+    {
+      date: dayjs("2025-05-23"),
+      title: "Presentación cliente",
+      description: "Demo mensual para el cliente",
+      color: "#52c41a",
+    },
+  ];
+
+
   return (
     <div
       style={{
@@ -251,7 +276,7 @@ const PoliciesScreen = () => {
 
       <CustomSelect
         placeholder="Selecciona una categoría"
-        options={options}
+        options={[]}
         mode="multiple" // Selección múltiple
         allowClear // Permitir limpiar la selección
         showSearch // Habilitar búsqueda
@@ -259,7 +284,7 @@ const PoliciesScreen = () => {
         style={{ width: 200 }}
       />
 
-      <ExampleCustomCalendar />
+      <CustomCalendar allowAddEvent={false} events={initialEvents} />
 
       <ExampleCustomDropDown actions={actionsDropdown} />
 

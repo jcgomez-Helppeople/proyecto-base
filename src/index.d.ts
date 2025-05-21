@@ -33,6 +33,7 @@ export { default as Col } from "./components/CustomCol/CustomCol";
 export { default as Space } from "./components/CustomSpace/CustomSpace";
 export { default as Card } from "./components/CustomCard/CustomCard";
 export { default as Tag } from "./components/CustomTag/CustomTag";
+export { default as Calendar } from "./components/CustomCalendar/CustomCalendar";
 export type { InputRef } from 'antd';
 export { default as RichTextEditor } from "./components/CustomRichTextEditor/CustomRichTextEditor";
 export { default as DragAndDrop } from "./components/CustomDragAndDrop/CustomDragAndDrop";
