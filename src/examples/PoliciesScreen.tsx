@@ -226,7 +226,6 @@ const PoliciesScreen = () => {
         ]}
         onAdvancedFilters={handleOpenDrawer}
       />
-
       <CustomTable
         rowKey="id"
         columns={columns}
