@@ -21,6 +21,7 @@ export type ToolbarAction = {
   tooltip?: string;
   onClick: () => void;
   hide?: boolean;
+  loading?: boolean;
 };
 
 export interface CustomFilterToolbarProps {
@@ -187,6 +188,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                     icon={action.icon}
                     onClick={action.onClick}
                     style={{ border: "none", background: "none" }}
+                    loading={action.loading}
                   />
                 </span>
               </CustomTooltip>

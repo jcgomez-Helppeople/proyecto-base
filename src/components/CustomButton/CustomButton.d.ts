@@ -9,6 +9,8 @@ interface CustomButtonProps {
     icon?: React.ReactNode;
     style?: React.CSSProperties;
     danger?: boolean;
+    className?: string;
+    onMouseEnter?: () => void;
 }
 declare const CustomButton: React.FC<CustomButtonProps>;
 export default CustomButton;

@@ -1,5 +1,7 @@
 import React from "react";
-import { ModalProps as AntModalProps } from "antd";
+import { Modal as AntModal, ModalProps as AntModalProps } from "antd";
+import { ModalStaticFunctions } from "antd/es/modal/confirm";
+type ModalType = typeof AntModal & ModalStaticFunctions;
 export interface CustomModalProps extends AntModalProps {
     /**
      * Título del Modal
@@ -8,7 +10,7 @@ export interface CustomModalProps extends AntModalProps {
     /**
      * Contenido del Modal
      */
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
-declare const CustomModal: React.FC<CustomModalProps>;
+declare const CustomModal: ModalType;
 export default CustomModal;

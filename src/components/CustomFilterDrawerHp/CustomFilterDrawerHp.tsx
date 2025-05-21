@@ -51,7 +51,7 @@ const CustomFilterDrawerHp: React.FC<CustomFilterDrawerHpProps> = ({
         <div style={{ textAlign: "right" }}>
           <Space>
             <Button type="primary" onClick={onSubmit}>
-              Aplicar filtros
+              Aplicar
             </Button>
             <Tooltip title="Limpiar filtros">
               <Button icon={<ClearOutlined />} onClick={onClear} />

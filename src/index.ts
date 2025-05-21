@@ -47,7 +47,8 @@ export { default as RichTextEditor } from "./components/CustomRichTextEditor/Cus
 
 export { default as DragAndDrop } from "./components/CustomDragAndDrop/CustomDragAndDrop";
 export type { DragAndDropItem } from "./components/CustomDragAndDrop/CustomDragAndDrop";
-
+export { default as Empty } from "./components/CustomEmpty/CustomEmpty";
+export { default as List } from "./components/CustomList/CustomList";
 
 // Exporta los Iconos personalizados
 export * from "./components/Icons/CustomIcon";
