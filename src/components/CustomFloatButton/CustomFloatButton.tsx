@@ -1,37 +1,33 @@
 import React from "react";
-import { FloatButton as AntFloatButton, FloatButtonProps as AntFloatButtonProps } from "antd";
-import { ReactNode } from "react";
+import { FloatButton as AntFloatButton, FloatButtonProps, FloatButtonGroupProps } from "antd";
 
-export interface CustomFloatButtonProps extends AntFloatButtonProps {
+export interface CustomFloatButtonProps extends FloatButtonProps {
   /**
-   * Ícono a mostrar en el botón flotante
+   * Texto para el tooltip del botón
    */
-  icon?: ReactNode;
-
-  /**
-   * Texto alternativo para accesibilidad
-   */
-  ariaLabel?: string;
-
-  /**
-   * Indica si el botón está en estado de carga
-   */
-  loading?: boolean;
+  tooltip?: React.ReactNode;
 }
 
-const CustomFloatButton: React.FC<CustomFloatButtonProps> = ({
-  icon,
-  ariaLabel,
-  loading,
-  ...rest
-}) => {
+export interface CustomFloatButtonGroupProps extends FloatButtonGroupProps {}
+
+const CustomFloatButton: React.FC<CustomFloatButtonProps> & {
+  Group: React.FC<CustomFloatButtonGroupProps>;
+  BackTop: typeof AntFloatButton.BackTop;
+} = ({ className, tooltip, ...props }) => {
   return (
     <AntFloatButton
-      {...rest}
-      icon={loading ? <span className="anticon anticon-loading"></span> : icon}
-      aria-label={ariaLabel}
+      className={`custom-float-button ${className || ""}`}
+      tooltip={tooltip}
+      {...props}
     />
   );
 };
+
+// Exportar los subcomponentes
+CustomFloatButton.Group = (props: CustomFloatButtonGroupProps) => {
+  return <AntFloatButton.Group {...props} className={`custom-float-button-group ${props.className || ""}`} />;
+};
+
+CustomFloatButton.BackTop = AntFloatButton.BackTop;
 
 export default CustomFloatButton;

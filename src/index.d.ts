@@ -36,6 +36,8 @@ export { default as Tag } from "./components/CustomTag/CustomTag";
 export { default as Calendar } from "./components/CustomCalendar/CustomCalendar";
 export type { InputRef } from 'antd';
 export { default as RichTextEditor } from "./components/CustomRichTextEditor/CustomRichTextEditor";
+export { default as Menu } from "./components/CustomMenu/CustomMenu";
+export { default as Dropdown } from "./components/CustomDropdown/CustomDropdown";
 export { default as DragAndDrop } from "./components/CustomDragAndDrop/CustomDragAndDrop";
 export type { DragAndDropItem } from "./components/CustomDragAndDrop/CustomDragAndDrop";
 export * from "./components/Icons/CustomIcon";

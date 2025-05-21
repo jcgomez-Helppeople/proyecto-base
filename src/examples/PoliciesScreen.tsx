@@ -11,6 +11,8 @@ import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
 import CustomSelect from "../components/CustomSelect/CustomSelect";
 import CustomCalendar, { CalendarEvent } from "../components/CustomCalendar/CustomCalendar";
 import dayjs from "dayjs";
+import { CustomFloatButton } from "../components/CustomFloatButton";
+import { PlusOutlined, QuestionOutlined } from '@ant-design/icons';
 
 type Policy = {
   id: number;
@@ -287,6 +289,22 @@ const PoliciesScreen = () => {
       <CustomCalendar allowAddEvent={false} events={initialEvents} />
 
       <ExampleCustomDropDown actions={actionsDropdown} />
+
+      <CustomFloatButton
+        icon={<PlusOutlined />}
+        type="primary"
+        tooltip="Agregar nuevo"
+        onClick={() => console.log('Clic en botón flotante')}
+      />
+
+      <CustomFloatButton.Group
+        trigger="click"
+        style={{ right: 24, bottom: 24 }}
+      >
+        <CustomFloatButton icon={<PlusOutlined />} tooltip="Agregar" />
+        <CustomFloatButton icon={<QuestionOutlined />} tooltip="Ayuda" />
+      </CustomFloatButton.Group>
+
 
       <CustomFilterDrawer
         visible={drawerVisible}
