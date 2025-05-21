@@ -1,0 +1,30 @@
+/* src/theme/libraryStyles.css */
+/* Estilos para garantizar que los inputs tengan 25px de altura */
+
+.library-components-wrapper .ant-input,
+.library-components-wrapper .ant-select-selector,
+.library-components-wrapper .ant-picker {
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+.library-components-wrapper .ant-select-selector .ant-select-selection-search-input {
+  height: 25px !important;
+}
+
+/* Ajustes para el alineamiento interno */
+.library-components-wrapper .ant-select-selector .ant-select-selection-item,
+.library-components-wrapper .ant-select-selector .ant-select-selection-placeholder {
+  line-height: 25px !important;
+}
+
+.library-components-wrapper .ant-input-number-input {
+  height: 25px !important;
+}
+
+/* Ajustes para DatePicker */
+.library-components-wrapper .ant-picker-input > input {
+  height: 25px !important;
+}

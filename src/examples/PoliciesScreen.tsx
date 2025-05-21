@@ -4,10 +4,10 @@ import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
 import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
 import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
 import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
-import CustomSelect from "../components/CustomSelect/CustomSelect";
-import { Button, Tag } from "antd";
+import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
-import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
+import { CustomFloatButton } from "../components/CustomFloatButton";
+import { PlusOutlined, QuestionOutlined } from '@ant-design/icons';
 
 type Policy = {
   id: number;
@@ -26,11 +26,6 @@ const PoliciesScreen = () => {
     enabled: index % 2 === 0 ? "Sí" : "No",
   }));
 
-  const options = [
-    { value: "cat1", label: "Categoría 1" },
-    { value: "cat2", label: "Categoría 2" },
-    { value: "cat3", label: "Categoría 3" },
-  ];
 
   const [filteredData, setFilteredData] = useState(data);
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -231,7 +226,6 @@ const PoliciesScreen = () => {
         ]}
         onAdvancedFilters={handleOpenDrawer}
       />
-
       <CustomTable
         rowKey="id"
         columns={columns}
@@ -251,15 +245,21 @@ const PoliciesScreen = () => {
         }}
       />
 
-<CustomSelect
-      placeholder="Selecciona una categoría"
-      options={options}
-      mode="multiple" // Selección múltiple
-      allowClear // Permitir limpiar la selección
-      showSearch // Habilitar búsqueda
-      onChange={(value) => console.log("Seleccionado:", value)}
-      style={{ width: 200 }}
-    />
+      <CustomFloatButton 
+  icon={<PlusOutlined />} 
+  type="primary"
+  tooltip="Agregar nuevo"
+  onClick={() => console.log('Clic en botón flotante')}
+/>
+
+<CustomFloatButton.Group
+  trigger="click"
+  style={{ right: 24, bottom: 24 }}
+>
+  <CustomFloatButton icon={<PlusOutlined />} tooltip="Agregar" />
+  <CustomFloatButton icon={<QuestionOutlined />} tooltip="Ayuda" />
+</CustomFloatButton.Group>
+
 
       <CustomFilterDrawer
         visible={drawerVisible}
@@ -289,11 +289,6 @@ const PoliciesScreen = () => {
         onClearFilters={handleClearFilters}
         onChange={handleFilterChange}
       />
-        <CustomTooltip content="Este es un tooltip personalizado">
-    <span>
-      <Button type="primary"></Button>
-    </span>
-  </CustomTooltip>
     </div>
   );
 };

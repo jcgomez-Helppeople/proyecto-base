@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Select } from "antd";
 import { ClearOutlined, FilterOutlined } from "@ant-design/icons";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import CustomTooltip from "../CustomTooltip/CustomTooltip";
 import { CustomButton } from "../CustomButton";
 import { CustomInput } from "../Inputs";
 import CustomNumericInput from "../Inputs/CustomNumericInput/CustomNumericInput";
+import CustomSelect from "../CustomSelect/CustomSelect"; // Añadir esta importación
 
 export type FilterField = {
   key: string;
@@ -96,7 +96,14 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         }}
       >
         {fields.map((f) => (
-          <div key={f.key} style={{ display: "flex", flexDirection: "column" }}>
+          <div 
+            key={f.key} 
+            style={{ 
+              display: "flex", 
+              flexDirection: "column",
+              width: "200px", // Ancho fijo para todos los campos
+            }}
+          >
             {f.label && (
               <label
                 style={{
@@ -113,46 +120,42 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
               {
                 text: (
                   <CustomInput
-                    size="small"
                     placeholder={f.placeholder}
                     value={tempFilters[f.key]}
                     onChange={(e) => handleChange(f.key, e.target.value)}
+                    style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />
                 ),
                 number: (
                   <CustomNumericInput
-                    size="small"
                     placeholder={f.placeholder}
                     value={tempFilters[f.key]}
                     onChange={(val) => handleChange(f.key, val)}
+                    style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />
                 ),
                 date: (
                   <CustomDatePicker
-                    size="small"
                     localeCode={localeCode}
-                    onChange={(_, dateString) =>
-                      handleChange(f.key, dateString)
-                    }
+                    onChange={(_, dateString) => handleChange(f.key, dateString)}
+                    style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />
                 ),
                 range: (
                   <CustomDatePicker.RangePicker
-                    size="small"
                     localeCode={localeCode}
-                    onChange={(_, dateStrings) =>
-                      handleChange(f.key, dateStrings)
-                    }
+                    onChange={(_, dateStrings) => handleChange(f.key, dateStrings)}
+                    style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />
                 ),
                 select: (
-                  <Select
-                    size="small"
+                  <CustomSelect
                     placeholder={f.placeholder}
                     options={f.options}
                     value={tempFilters[f.key]}
-                    mode={f.mode} // Soporte para selección múltiple
+                    mode={f.mode}
                     onChange={(val) => handleChange(f.key, val)}
+                    style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />
                 ),
               }[f.type || "text"]
