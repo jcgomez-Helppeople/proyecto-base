@@ -27,7 +27,7 @@ export interface CustomToolbarProps {
     /**
      * tipo de página donde se usa el toolbar
      */
-    pageType?: "list" | "form";
+    pageType?: "list" | "form" | "detail";
 }
 declare const CustomToolbar: React.FC<CustomToolbarProps>;
 export default CustomToolbar;

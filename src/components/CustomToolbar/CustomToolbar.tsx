@@ -1,7 +1,7 @@
 import React from "react";
 import { Space } from "antd";
 import CustomButton from "../CustomButton/CustomButton";
-import { ArrowLeftOutlined, PlusOutlined, SaveOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, EditOutlined, PlusOutlined, SaveOutlined } from "@ant-design/icons";
 
 export interface CustomToolbarProps {
   /**
@@ -37,7 +37,7 @@ export interface CustomToolbarProps {
   /**
    * tipo de página donde se usa el toolbar
    */
-  pageType?: "list" | "form";
+  pageType?: "list" | "form" | "detail";
 }
 
 const CustomToolbar: React.FC<CustomToolbarProps> = ({
@@ -49,6 +49,17 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
   newButtonLoading = false,
   pageType = "list",
 }) => {
+
+  const handleOnNewIcon = () => {
+    if (pageType === "form") {
+      return <SaveOutlined />;
+    }
+    if (pageType === "detail") {
+      return <EditOutlined />;
+    }
+    return <PlusOutlined />;
+  }
+
   return (
     <div
       style={{
@@ -92,7 +103,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
           <CustomButton
             type="primary"
             onClick={onNew}
-            icon={pageType == "list" ? <PlusOutlined /> : <SaveOutlined />}
+            icon={handleOnNewIcon()}
             style={{ fontSize: "12px" }}
             text={newButtonText} // Usa la propiedad 'text'
             loading={newButtonLoading}

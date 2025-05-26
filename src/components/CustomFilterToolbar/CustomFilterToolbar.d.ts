@@ -15,6 +15,7 @@ export type ToolbarAction = {
     tooltip?: string;
     onClick: () => void;
     hide?: boolean;
+    loading?: boolean;
 };
 export interface CustomFilterToolbarProps {
     fields: FilterField[];
