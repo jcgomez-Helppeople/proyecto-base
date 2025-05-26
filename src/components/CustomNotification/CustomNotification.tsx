@@ -6,15 +6,32 @@ interface CustomNotificationProps {
   description?: string;
   duration?: number; // Duración en segundos antes de que desaparezca automáticamente
   placement?: "topLeft" | "topRight" | "bottomLeft" | "bottomRight"; // Posición de la notificación
+  width?: number | string; // nuevo prop opcional
+  padding?: string; // nuevo prop opcional
+  height?: number | string; // nuevo prop opcional
 }
 
 const CustomNotification = {
-  open: ({ type, message, description, duration = 3, placement = "topRight" }: CustomNotificationProps) => {
+  open: ({
+    type,
+    message,
+    description,
+    duration = 3,
+    placement = "topRight",
+    width = 300, // valor por defecto en px
+    height = 60, // valor por defecto
+
+  }: CustomNotificationProps) => {
     notification[type]({
-      message,
-      description,
+      message: <div style={{ fontSize: 12 }}>{message}</div>,
+      description: description && <div style={{ fontSize: 12 }}>{description}</div>,
       duration,
       placement,
+      style: {
+        fontSize: 12,
+        width,
+        height
+      },
     });
   },
 };
