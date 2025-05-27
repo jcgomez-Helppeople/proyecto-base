@@ -2,12 +2,17 @@ import { useState } from "react";
 import CustomTable from "../components/CustomTable/CustomTable";
 import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
 import CustomFilterToolbar from "../components/CustomFilterToolbar/CustomFilterToolbar";
-import CustomFilterDrawer from "../components/CustomFilterDrawer/CustomFilterDrawer";
-import { EditOutlined, DeleteOutlined, FileExcelOutlined, FilePdfOutlined } from "@ant-design/icons";
+import CustomFilterDrawerHp from "../components/CustomFilterDrawerHp/CustomFilterDrawerHp";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  FileExcelOutlined,
+  FilePdfOutlined,
+} from "@ant-design/icons";
 import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CustomFloatButton } from "../components/CustomFloatButton";
-import { PlusOutlined, QuestionOutlined } from '@ant-design/icons';
+import { PlusOutlined, QuestionOutlined } from "@ant-design/icons";
 
 type Policy = {
   id: number;
@@ -26,12 +31,10 @@ const PoliciesScreen = () => {
     enabled: index % 2 === 0 ? "Sí" : "No",
   }));
 
-
   const [filteredData, setFilteredData] = useState(data);
-  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [hpDrawerVisible, setHpDrawerVisible] = useState(false);
   const [filters, setFilters] = useState<Record<string, any>>({});
-
-  
+  const [filterLoading, setFilterLoading] = useState(false);
 
   const handleNewClick = () => {
     navigate("/create-policy");
@@ -54,6 +57,7 @@ const PoliciesScreen = () => {
    * y devuelve una promesa para que el botón se ponga en loading.
    */
   const handleFilter = (filters: Partial<Record<keyof Policy, string>>) => {
+    setFilterLoading(true);
     return new Promise<void>((resolve) => {
       // Simulamos un delay de 2 segundos
       setTimeout(() => {
@@ -66,6 +70,7 @@ const PoliciesScreen = () => {
           )
         );
         setFilteredData(result);
+        setFilterLoading(false);
         resolve();
       }, 2000);
     });
@@ -84,13 +89,10 @@ const PoliciesScreen = () => {
     console.log("Exportar a PDF");
   };
 
-  const handleOpenDrawer = () => setDrawerVisible(true);
-  const handleCloseDrawer = () => setDrawerVisible(false);
 
-  const handleApplyFilters = () => {
-    console.log("Aplicar filtros:", filters);
-    setDrawerVisible(false);
-  };
+  const handleOpenHpDrawer = () => setHpDrawerVisible(true);
+  const handleCloseHpDrawer = () => setHpDrawerVisible(false);
+
 
   const handleFilterChange = (key: string, value: any) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -220,6 +222,7 @@ const PoliciesScreen = () => {
             ],
           },
         ]}
+        loading={filterLoading} // ← pasamos loading
         onFilter={handleFilter}
         onClearFilters={handleClearFilters}
         actions={[
@@ -234,7 +237,7 @@ const PoliciesScreen = () => {
             onClick: handleExportPdf,
           },
         ]}
-        onAdvancedFilters={handleOpenDrawer}
+        onAdvancedFilters={handleOpenHpDrawer} // ← abrimos HP drawer
       />
       <CustomTable
         rowKey="id"
@@ -255,50 +258,41 @@ const PoliciesScreen = () => {
         }}
       />
 
-      <CustomFloatButton 
-  icon={<PlusOutlined />} 
-  type="primary"
-  tooltip="Agregar nuevo"
-  onClick={() => console.log('Clic en botón flotante')}
-/>
-
-<CustomFloatButton.Group
-  trigger="click"
-  style={{ right: 24, bottom: 24 }}
->
-  <CustomFloatButton icon={<PlusOutlined />} tooltip="Agregar" />
-  <CustomFloatButton icon={<QuestionOutlined />} tooltip="Ayuda" />
-</CustomFloatButton.Group>
-
-
-      <CustomFilterDrawer
-        visible={drawerVisible}
-        title="Filtros"
-        fields={[
-          { key: "startDate", label: "Fecha Inicio", type: "text", placeholder: "Fecha Inicio" },
-          { key: "endDate", label: "Fecha Final", type: "text", placeholder: "Fecha Final" },
-          { key: "rfcCode", label: "Código RFC", type: "text", placeholder: "Código RFC" },
-          { key: "order", label: "Orden S.", type: "number", placeholder: "Orden S." },
-          {
-            key: "status",
-            label: "Estado",
-            type: "select",
-            options: [
-              { label: "Por Verificar", value: "verificar" },
-              { label: "Por Aprobar", value: "aprobar" },
-              { label: "En Pruebas", value: "pruebas" },
-              { label: "Realizado", value: "realizado" },
-              { label: "Atrasado", value: "atrasado" },
-              { label: "No Aprobado", value: "no_aprobado" },
-            ],
-          },
-        ]}
-        filters={filters}
-        onClose={handleCloseDrawer}
-        onApplyFilters={handleApplyFilters}
-        onClearFilters={handleClearFilters}
-        onChange={handleFilterChange}
+      <CustomFloatButton
+        icon={<PlusOutlined />}
+        type="primary"
+        tooltip="Agregar nuevo"
+        onClick={() => console.log("Clic en botón flotante")}
       />
+
+      <CustomFloatButton.Group
+        trigger="click"
+        style={{ right: 24, bottom: 24 }}
+      >
+        <CustomFloatButton icon={<PlusOutlined />} tooltip="Agregar" />
+        <CustomFloatButton icon={<QuestionOutlined />} tooltip="Ayuda" />
+      </CustomFloatButton.Group>
+
+      {/* === Ejemplo de CustomFilterDrawerHp === */}
+      <CustomFilterDrawerHp
+        visible={hpDrawerVisible}
+        title="Filtros Avanzados HP"
+        filters={filters}
+        onClose={handleCloseHpDrawer}
+        onSubmit={async () => {
+          await handleFilter(filters);
+          handleCloseHpDrawer();
+        }}
+        onClear={() => {
+          setFilters({});
+          handleClearFilters();
+        }}
+        onChange={handleFilterChange}
+        loading={filterLoading}
+      >
+        {/* You can add filter fields here if needed */}
+        {() => null}
+      </CustomFilterDrawerHp>
     </div>
   );
 };

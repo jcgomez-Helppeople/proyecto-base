@@ -32,6 +32,7 @@ export interface CustomFilterToolbarProps {
   localeCode?: "es" | "en" | "pt";
   actions?: ToolbarAction[];
   onAdvancedFilters?: () => void;
+  loading?: boolean;
 }
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
@@ -42,34 +43,35 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   localeCode = "es",
   actions = [],
   onAdvancedFilters,
+  loading = false,
 }) => {
+  // Estado para los filtros temporales (no aplicados aún)
   const [tempFilters, setTempFilters] = useState<Record<string, any>>(
     externalFilters || {}
   );
-  const [loading, setLoading] = useState(false);
 
+  // Sincronizar con los filtros externos cuando cambian
   useEffect(() => {
-    setTempFilters(externalFilters || {});
+    if (externalFilters) {
+      setTempFilters(externalFilters);
+    }
   }, [externalFilters]);
 
-  const handleChange = (key: string, value: any) => {
-    setTempFilters((prev) => ({ ...prev, [key]: value }));
+  const handleChange = (key: string, val: any) => {
+    // Solo actualizamos los filtros temporales, no llamamos a onFilter
+    setTempFilters((prev) => ({ ...prev, [key]: val }));
   };
 
-  const handleApplyFilters = async () => {
-    if (!onFilter) return;
-    setLoading(true);
-    try {
-      // Si onFilter retorna promesa o valor síncrono
-      await Promise.resolve(onFilter(tempFilters));
-    } finally {
-      setLoading(false);
-    }
+  const handleApplyFilters = () => {
+    // Solo aquí llamamos a onFilter con los filtros temporales
+    onFilter(tempFilters);
   };
 
   const handleClear = () => {
-    onClearFilters?.();
+    // Limpiar los filtros temporales
     setTempFilters({});
+    // Llamar al callback de limpieza
+    onClearFilters?.();
   };
 
   return (
@@ -169,15 +171,16 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
           size="small"
           onClick={handleApplyFilters}
           loading={loading}
-          style={{ marginTop: 18 }}
+          disabled={loading}
+          style={{ marginTop: "18px" }}
           text="Aplicar"
         />
         <CustomButton
           size="small"
           icon={<ClearOutlined />}
           onClick={handleClear}
+          style={{ marginTop: "18px" }}
           disabled={loading}
-          style={{ marginTop: 18 }}
         />
       </div>
 
