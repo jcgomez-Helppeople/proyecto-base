@@ -2,7 +2,11 @@ import React from "react";
 import { Tabs } from "antd";
 
 export interface CustomTabsProps {
-  items: { key: string; label: string; content: React.ReactNode }[];
+  items: {
+    key: string;
+    label: React.ReactNode;
+    content: React.ReactNode;
+  }[];
   defaultActiveKey?: string;
   activeKey?: string;
   onChange?: (key: string) => void;
@@ -39,9 +43,9 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
         items={items.map((item) => ({
           key: item.key,
           label: (
-            <span style={{ fontSize: "12px" }}> {/* Aplica el tamaño directamente al label */}
+            <div style={{ fontSize: "12px" }}>
               {item.label}
-            </span>
+            </div>
           ),
           children: (
             <div

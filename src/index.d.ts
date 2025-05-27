@@ -42,4 +42,5 @@ export type { DragAndDropItem } from "./components/CustomDragAndDrop/CustomDragA
 export { default as Empty } from "./components/CustomEmpty/CustomEmpty";
 export { default as List } from "./components/CustomList/CustomList";
 export { default as LibraryThemeProvider } from "./theme/LibraryThemeProvider";
+export { default as Message } from "./components/CustomMessage/CustomMessage";
 export * from "./components/Icons/CustomIcon";

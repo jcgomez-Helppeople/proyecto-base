@@ -3,7 +3,7 @@ import { Button } from "antd";
 
 interface CustomButtonProps {
   text?: string;
-  type?: "primary" | "default";
+  type?: "primary" | "default" | "dashed";
   onClick: () => void;
   size?: "small" | "middle" | "large"; 
   disabled?: boolean;
@@ -13,6 +13,7 @@ interface CustomButtonProps {
   danger?: boolean;
   className?: string;
   onMouseEnter?: () => void;
+  htmlType?: "submit" | "button" | "reset";
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -26,6 +27,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   loading = false,
   danger = false,
   onMouseEnter,
+  htmlType = "button",
 }) => {
   return (
     <Button
@@ -39,6 +41,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       loading={loading}
       className={`${className || ""}`}
       onMouseEnter={onMouseEnter}
+      htmlType={htmlType}
     >
       {text}
     </Button>

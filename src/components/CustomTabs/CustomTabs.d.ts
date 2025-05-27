@@ -2,7 +2,7 @@ import React from "react";
 export interface CustomTabsProps {
     items: {
         key: string;
-        label: string;
+        label: React.ReactNode;
         content: React.ReactNode;
     }[];
     defaultActiveKey?: string;
