@@ -40,4 +40,5 @@ export { default as Menu } from "./components/CustomMenu/CustomMenu";
 export { default as Dropdown } from "./components/CustomDropdown/CustomDropdown";
 export { default as DragAndDrop } from "./components/CustomDragAndDrop/CustomDragAndDrop";
 export type { DragAndDropItem } from "./components/CustomDragAndDrop/CustomDragAndDrop";
+export { default as LibraryThemeProvider } from "./theme/LibraryThemeProvider";
 export * from "./components/Icons/CustomIcon";

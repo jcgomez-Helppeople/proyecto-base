@@ -9,10 +9,9 @@ import { useNavigate } from "react-router-dom";
 import ExampleCustomDropDown from "./CustomDropDownExample/ExampleCustomDropDown";
 import CustomTooltip from "../components/CustomTooltip/CustomTooltip";
 import CustomSelect from "../components/CustomSelect/CustomSelect";
-import CustomCalendar, { CalendarEvent } from "../components/CustomCalendar/CustomCalendar";
-import dayjs from "dayjs";
 import { CustomFloatButton } from "../components/CustomFloatButton";
 import { PlusOutlined, QuestionOutlined } from '@ant-design/icons';
+import CustomCalendar, { CustomCalendarEvent } from "../components/CustomCalendar/CustomCalendar";
 
 type Policy = {
   id: number;
@@ -20,6 +19,24 @@ type Policy = {
   instructions: string;
   enabled: string;
 };
+
+
+const initialEvents: CustomCalendarEvent[] = [
+  {
+    id: "1",
+    title: "Reunión de equipo",
+    start: "2025-05-22T10:00:00",
+    end: "2025-05-22T11:00:00",
+    allDay: false,
+  },
+  {
+    id: "2",
+    title: "Entrega de proyecto",
+    start: "2025-05-23",
+    allDay: true,
+  },
+];
+
 
 const PoliciesScreen = () => {
   const navigate = useNavigate();
@@ -35,6 +52,7 @@ const PoliciesScreen = () => {
   const [filteredData, setFilteredData] = useState(data);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [filters, setFilters] = useState<Record<string, any>>({});
+  const [events, setEvents] = useState<CustomCalendarEvent[]>(initialEvents);
 
 
 
@@ -161,27 +179,27 @@ const PoliciesScreen = () => {
     },
   ];
 
-  const initialEvents: CalendarEvent[] = [
-    {
-      date: dayjs("2025-05-21"),
-      title: "Reunión de equipo",
-      description: "Revisar avances del sprint actual",
-      color: "#1890ff",
-    },
-    {
-      date: dayjs("2025-05-21"),
-      title: "Reunión de equipo",
-      description: "Revisar avances del sprint actual",
-      color: "#1890ff",
-    },
-    {
-      date: dayjs("2025-05-23"),
-      title: "Presentación cliente",
-      description: "Demo mensual para el cliente",
-      color: "#52c41a",
-    },
-  ];
+  // Al hacer click en un evento
+  const handleEventClick = (event: CustomCalendarEvent) => {
+    alert(`Evento: ${event.title}\nInicio: ${event.start}`);
+  };
 
+  // Al seleccionar un rango de fecha
+  const handleDateSelect = (info: { start: Date; end: Date; allDay: boolean }) => {
+    const title = prompt("Título del nuevo evento:");
+    if (title) {
+      setEvents([
+        ...events,
+        {
+          id: (events.length + 1).toString(),
+          title,
+          start: info.start,
+          end: info.end,
+          allDay: info.allDay,
+        },
+      ]);
+    }
+  };
 
   return (
     <div
@@ -286,7 +304,16 @@ const PoliciesScreen = () => {
         style={{ width: 200 }}
       />
 
-      <CustomCalendar allowAddEvent={false} events={initialEvents} />
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: 16 }}>
+        <h2>Ejemplo de uso de CustomCalendar</h2>
+        <CustomCalendar
+          events={events}
+          initialView="dayGridMonth"
+          height={650}
+          onEventClick={handleEventClick}
+          onDateSelect={handleDateSelect}
+        />
+      </div>
 
       <ExampleCustomDropDown actions={actionsDropdown} />
 

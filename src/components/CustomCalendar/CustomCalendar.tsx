@@ -1,78 +1,93 @@
 import React from "react";
-import { Calendar as AntCalendar, CalendarProps as AntCalendarProps, Badge } from "antd";
-import { Dayjs } from "dayjs";
+import FullCalendar from "@fullcalendar/react";
+import { EventContentArg, EventClickArg, EventInput, DateSelectArg, } from "@fullcalendar/core";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import "./customCalendarStyles.css";
 
-/**
- * Definición de un evento del calendario usando Date
- */
-export interface CalendarEvent {
-    date: Dayjs;
+// Tipo para los eventos personalizados
+export interface CustomCalendarEvent {
+    id?: string;
     title: string;
-    description?: string;
-    color?: string;
+    start: string | Date; // ISO string o Date
+    end?: string | Date;
+    allDay?: boolean;
+    // Puedes agregar otros campos según tus necesidades
 }
 
-export interface CustomCalendarProps extends Omit<AntCalendarProps<Dayjs>, "dateCellRender" | "onSelect"> {
-    /**
-     * Eventos a mostrar en el calendario
-     */
-    events?: CalendarEvent[];
-
-    /**
-     * Callback opcional para agregar un evento al seleccionar una fecha
-     */
-    onAddEvent?: (date: Dayjs) => void;
-
-    /**
-    * Si es true, permite agregar eventos haciendo click en un día
-    */
-    allowAddEvent?: boolean;
+export interface CustomCalendarProps {
+    events: CustomCalendarEvent[];
+    initialView?: "dayGridMonth" | "timeGridWeek" | "timeGridDay";
+    height?: string | number;
+    selectable?: boolean;
+    editable?: boolean;
+    onEventClick?: (event: CustomCalendarEvent) => void;
+    onDateSelect?: (selectInfo: { start: Date; end: Date; allDay: boolean }) => void;
+    // Otros props personalizados si los necesitas
 }
 
-const isSameDay = (d1: Dayjs, d2: Dayjs) => d1.isSame(d2, "day");
 const CustomCalendar: React.FC<CustomCalendarProps> = ({
-    events = [],
-    onAddEvent,
-    allowAddEvent = false,
-    ...rest
+    events,
+    initialView = "dayGridMonth",
+    height = 600,
+    selectable = true,
+    editable = false,
+    onEventClick,
+    onDateSelect,
 }) => {
-    const dateCellRender = (date: Dayjs) => {
-        const dayEvents = events.filter(event => isSameDay(event.date, date));
-        return (
-            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                {dayEvents.map((event, idx) => (
-                    <li key={idx}>
-                        <Badge color={event.color || "blue"} text={event.title} />
-                    </li>
-                ))}
-            </ul>
-        );
-    };
+    // Adaptar eventos para FullCalendar (no requiere cambios si ya tienes el formato adecuado)
+    const calendarEvents: EventInput[] = events;
 
-    const handleSelect = allowAddEvent && onAddEvent
-        ? (date: Dayjs) => onAddEvent(date)
-        : undefined;
+    function handleEventClick(clickInfo: EventClickArg) {
+        if (onEventClick) {
+            // clickInfo.event contiene todos los datos del evento de FullCalendar
+            onEventClick({
+                id: clickInfo.event.id,
+                title: clickInfo.event.title,
+                start: clickInfo.event.start!,
+                end: clickInfo.event.end ?? undefined,
+                allDay: clickInfo.event.allDay,
+            });
+        }
+    }
+
+    function handleDateSelect(selectInfo: DateSelectArg) {
+        if (onDateSelect) {
+            onDateSelect({
+                start: selectInfo.start,
+                end: selectInfo.end,
+                allDay: selectInfo.allDay,
+            });
+        }
+    }
+
+    // Puedes customizar cómo se muestra cada evento
+    function renderEventContent(eventContent: EventContentArg) {
+        return (
+            <div>
+                <b>{eventContent.timeText}</b> <span>{eventContent.event.title}</span>
+            </div>
+        );
+    }
 
     return (
-        <div
-            style={{
-                display: "flex",
-                flexWrap: "wrap", // Permitir que los elementos se ajusten en pantallas pequeñas
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: "1rem", // Espaciado entre elementos
-                padding: "1rem 1.5rem",
-                backgroundColor: "#ffffff", // Fondo blanco
-                borderBottom: "1px solid #e0e0e0", // Borde inferior sutil
-                marginBottom: "1rem"
+        <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            initialView={initialView}
+            headerToolbar={{
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
-        >
-            <AntCalendar
-                dateCellRender={dateCellRender}
-                onSelect={handleSelect}
-                {...rest}
-            />
-        </div>
+            height={height}
+            selectable={selectable}
+            editable={editable}
+            events={calendarEvents}
+            eventContent={renderEventContent}
+            eventClick={handleEventClick}
+            select={handleDateSelect}
+        />
     );
 };
 
