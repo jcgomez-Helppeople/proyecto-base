@@ -29,6 +29,7 @@ export interface CustomFilterToolbarProps {
     localeCode?: "es" | "en" | "pt";
     actions?: ToolbarAction[];
     onAdvancedFilters?: () => void;
+    loading?: boolean;
 }
 declare const CustomFilterToolbar: React.FC<CustomFilterToolbarProps>;
 export default CustomFilterToolbar;

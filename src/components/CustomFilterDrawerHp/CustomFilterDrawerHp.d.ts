@@ -11,6 +11,7 @@ interface CustomFilterDrawerHpProps {
         filters: Record<string, any>;
         onChange: (key: string, value: any) => void;
     }) => React.ReactNode;
+    loading?: boolean;
 }
 declare const CustomFilterDrawerHp: React.FC<CustomFilterDrawerHpProps>;
 export default CustomFilterDrawerHp;

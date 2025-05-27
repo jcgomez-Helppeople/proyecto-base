@@ -36,6 +36,7 @@ export interface CustomFilterToolbarProps {
   localeCode?: "es" | "en" | "pt";
   actions?: ToolbarAction[];
   onAdvancedFilters?: () => void;
+  loading?: boolean;
 }
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
@@ -46,6 +47,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   localeCode = "es",
   actions = [],
   onAdvancedFilters,
+  loading = false,
 }) => {
   // Estado para los filtros temporales (no aplicados aún)
   const [tempFilters, setTempFilters] = useState<Record<string, any>>(
@@ -100,10 +102,10 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         }}
       >
         {fields.map((f) => (
-          <div 
-            key={f.key} 
-            style={{ 
-              display: "flex", 
+          <div
+            key={f.key}
+            style={{
+              display: "flex",
               flexDirection: "column",
               width: "200px", // Ancho fijo para todos los campos
             }}
@@ -176,14 +178,17 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
           type="primary"
           size="small"
           onClick={handleApplyFilters}
+          loading={loading}
+          disabled={loading}
           style={{ marginTop: "18px" }}
           text="Aplicar"
-        ></CustomButton>
+        />
         <CustomButton
           size="small"
           icon={<ClearOutlined />}
           onClick={handleClear}
           style={{ marginTop: "18px" }}
+          disabled={loading}
         />
       </div>
 
