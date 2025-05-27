@@ -43,33 +43,33 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   actions = [],
   onAdvancedFilters,
 }) => {
-  // Estado para los filtros temporales (no aplicados aún)
   const [tempFilters, setTempFilters] = useState<Record<string, any>>(
     externalFilters || {}
   );
+  const [loading, setLoading] = useState(false);
 
-  // Sincronizar con los filtros externos cuando cambian
   useEffect(() => {
-    if (externalFilters) {
-      setTempFilters(externalFilters);
-    }
+    setTempFilters(externalFilters || {});
   }, [externalFilters]);
 
-  const handleChange = (key: string, val: any) => {
-    // Solo actualizamos los filtros temporales, no llamamos a onFilter
-    setTempFilters((prev) => ({ ...prev, [key]: val }));
+  const handleChange = (key: string, value: any) => {
+    setTempFilters((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleApplyFilters = () => {
-    // Solo aquí llamamos a onFilter con los filtros temporales
-    onFilter(tempFilters);
+  const handleApplyFilters = async () => {
+    if (!onFilter) return;
+    setLoading(true);
+    try {
+      // Si onFilter retorna promesa o valor síncrono
+      await Promise.resolve(onFilter(tempFilters));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClear = () => {
-    // Limpiar los filtros temporales
-    setTempFilters({});
-    // Llamar al callback de limpieza
     onClearFilters?.();
+    setTempFilters({});
   };
 
   return (
@@ -96,10 +96,10 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         }}
       >
         {fields.map((f) => (
-          <div 
-            key={f.key} 
-            style={{ 
-              display: "flex", 
+          <div
+            key={f.key}
+            style={{
+              display: "flex",
               flexDirection: "column",
               width: "200px", // Ancho fijo para todos los campos
             }}
@@ -168,14 +168,16 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
           type="primary"
           size="small"
           onClick={handleApplyFilters}
-          style={{ marginTop: "18px" }}
+          loading={loading}
+          style={{ marginTop: 18 }}
           text="Aplicar"
-        ></CustomButton>
+        />
         <CustomButton
           size="small"
           icon={<ClearOutlined />}
           onClick={handleClear}
-          style={{ marginTop: "18px" }}
+          disabled={loading}
+          style={{ marginTop: 18 }}
         />
       </div>
 

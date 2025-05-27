@@ -49,16 +49,26 @@ const PoliciesScreen = () => {
     console.log("Eliminar:", rowData);
   };
 
+  /**
+   * Simula una llamada al servicio para filtrar datos
+   * y devuelve una promesa para que el botón se ponga en loading.
+   */
   const handleFilter = (filters: Partial<Record<keyof Policy, string>>) => {
-    const filtered = data.filter((item) =>
-      Object.entries(filters).every(([key, value]) =>
-        item[key as keyof Policy]
-          ?.toString()
-          .toLowerCase()
-          .includes(value.toLowerCase())
-      )
-    );
-    setFilteredData(filtered);
+    return new Promise<void>((resolve) => {
+      // Simulamos un delay de 2 segundos
+      setTimeout(() => {
+        const result = data.filter((item) =>
+          Object.entries(filters).every(([key, value]) =>
+            item[key as keyof Policy]
+              ?.toString()
+              .toLowerCase()
+              .includes(value.toLowerCase())
+          )
+        );
+        setFilteredData(result);
+        resolve();
+      }, 2000);
+    });
   };
 
   const handleClearFilters = () => {
