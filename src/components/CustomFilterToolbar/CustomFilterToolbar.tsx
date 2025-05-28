@@ -14,6 +14,10 @@ export type FilterField = {
   type?: "text" | "number" | "date" | "range" | "select"; // Tipos soportados
   options?: { label: string; value: any }[]; // Opciones para select
   mode?: "multiple" | "tags"; // Agregar soporte para modos de selección múltiple
+  allowClear?: boolean;
+  showSearch?: boolean;
+  optionFilterProp?: "label" | "value" | "children"; 
+  filterOption?: boolean | ((inputValue: string, option: any) => boolean);
 };
 
 export type ToolbarAction = {
@@ -156,6 +160,10 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                     options={f.options}
                     value={tempFilters[f.key]}
                     mode={f.mode}
+                    allowClear={f.allowClear}
+                    showSearch={f.showSearch}
+                    optionFilterProp={f.optionFilterProp}
+                    filterOption={f.filterOption}
                     onChange={(val) => handleChange(f.key, val)}
                     style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />

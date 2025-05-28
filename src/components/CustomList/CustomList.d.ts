@@ -1,9 +1,11 @@
-import React, { ForwardedRef } from 'react';
-import { ListProps } from 'antd';
+import React from 'react';
+import { List as AntList, ListProps } from 'antd';
 export type AntdListProps<T> = ListProps<T> & {
     style?: React.CSSProperties;
 };
-declare const CustomList: <T extends object>(props: AntdListProps<T> & {
-    ref?: ForwardedRef<HTMLDivElement>;
-}) => React.ReactElement;
-export default CustomList;
+interface ListWithStaticComponents<T> extends React.FC<AntdListProps<T>> {
+    Item: typeof AntList.Item;
+    ItemMeta: typeof AntList.Item.Meta;
+}
+declare const _default: ListWithStaticComponents<object>;
+export default _default;

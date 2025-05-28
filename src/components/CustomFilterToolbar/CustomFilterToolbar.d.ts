@@ -9,6 +9,10 @@ export type FilterField = {
         value: any;
     }[];
     mode?: "multiple" | "tags";
+    allowClear?: boolean;
+    showSearch?: boolean;
+    optionFilterProp?: "label" | "value" | "children";
+    filterOption?: boolean | ((inputValue: string, option: any) => boolean);
 };
 export type ToolbarAction = {
     icon: React.ReactNode;
