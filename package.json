@@ -1,6 +1,6 @@
 {
   "name": "@jcgomez96/prueba1",
-  "version": "1.0.60",
+  "version": "1.0.63",
   "description": "Librería de componentes frontend para estilos y diseños estándar.",
   "main": "dist/my-library.cjs.js",
   "module": "dist/my-library.es.js",
@@ -34,8 +34,8 @@
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
     "@types/react-beautiful-dnd": "^13.1.8",
+    "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@jcgomez96/prueba1": "^1.0.63",
     "antd": "^5.24.6",
     "quill": "^2.0.3",
     "react-beautiful-dnd": "^13.1.1",

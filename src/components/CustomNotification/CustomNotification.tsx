@@ -18,9 +18,6 @@ const CustomNotification = {
     description,
     duration = 3,
     placement = "topRight",
-    width = 300, // valor por defecto en px
-    height = 60, // valor por defecto
-
   }: CustomNotificationProps) => {
     notification[type]({
       message: <div style={{ fontSize: 12 }}>{message}</div>,
@@ -29,8 +26,6 @@ const CustomNotification = {
       placement,
       style: {
         fontSize: 12,
-        width,
-        height
       },
     });
   },
