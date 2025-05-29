@@ -1,30 +1,70 @@
 /* src/theme/libraryStyles.css */
 /* Estilos para garantizar que los inputs tengan 25px de altura */
 
-.library-components-wrapper .ant-input,
-.library-components-wrapper .ant-select-selector,
-.library-components-wrapper .ant-picker {
+/* 1. Inputs de texto normales (no textareas) */
+.library-components-wrapper input.ant-input[type="text"] {
   height: 25px !important;
   min-height: 25px !important;
   font-size: 12px !important;
   line-height: 1.5 !important;
 }
 
-.library-components-wrapper .ant-select-selector .ant-select-selection-search-input {
+/* 2. Inputs con iconos (affix wrappers) */
+.library-components-wrapper .ant-input-affix-wrapper {
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* 3. Numeric Input */
+.library-components-wrapper .ant-input-number .ant-input-number-input {
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* 4. Select (el dropdown trigger) */
+.library-components-wrapper .ant-select-selector {
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* 4b. Select (versiones outlined, multiple, show-arrow, open, show-search) */
+.library-components-wrapper .ant-select.ant-select-outlined .ant-select-selector,
+.library-components-wrapper .ant-select.ant-select-multiple .ant-select-selector,
+.library-components-wrapper .ant-select.ant-select-show-arrow .ant-select-selector,
+.library-components-wrapper .ant-select.ant-select-open .ant-select-selector,
+.library-components-wrapper .ant-select.ant-select-show-search .ant-select-selector,
+/* si necesitas cubrir la clase generada por CSS-in-JS */
+.library-components-wrapper .ant-select.css-dev-only-do-not-override-peza2n.ant-select-outlined.ant-select-multiple.ant-select-show-arrow.ant-select-open.ant-select-show-search .ant-select-selector {
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* 5. Search dentro del Select */
+.library-components-wrapper .ant-select-selection-search-input {
   height: 25px !important;
 }
 
-/* Ajustes para el alineamiento interno */
-.library-components-wrapper .ant-select-selector .ant-select-selection-item,
-.library-components-wrapper .ant-select-selector .ant-select-selection-placeholder {
-  line-height: 25px !important;
-}
-
-.library-components-wrapper .ant-input-number-input {
-  height: 25px !important;
-}
-
-/* Ajustes para DatePicker */
+/* 6. DatePicker (input interno) */
 .library-components-wrapper .ant-picker-input > input {
   height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
 }
+
+/* 7. RangePicker (ambos inputs) */
+.library-components-wrapper .ant-picker-range input {
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
