@@ -14,6 +14,10 @@ export type FilterField = {
   type?: "text" | "number" | "date" | "range" | "select"; // Tipos soportados
   options?: { label: string; value: any }[]; // Opciones para select
   mode?: "multiple" | "tags"; // Agregar soporte para modos de selección múltiple
+  allowClear?: boolean;
+  showSearch?: boolean;
+  optionFilterProp?: "label" | "value" | "children"; 
+  filterOption?: boolean | ((inputValue: string, option: any) => boolean);
 };
 
 export type ToolbarAction = {
@@ -21,6 +25,7 @@ export type ToolbarAction = {
   tooltip?: string;
   onClick: () => void;
   hide?: boolean;
+  loading?: boolean;
 };
 
 export interface CustomFilterToolbarProps {
@@ -31,6 +36,7 @@ export interface CustomFilterToolbarProps {
   localeCode?: "es" | "en" | "pt";
   actions?: ToolbarAction[];
   onAdvancedFilters?: () => void;
+  loading?: boolean;
 }
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
@@ -41,6 +47,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   localeCode = "es",
   actions = [],
   onAdvancedFilters,
+  loading = false,
 }) => {
   // Estado para los filtros temporales (no aplicados aún)
   const [tempFilters, setTempFilters] = useState<Record<string, any>>(
@@ -95,10 +102,10 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
         }}
       >
         {fields.map((f) => (
-          <div 
-            key={f.key} 
-            style={{ 
-              display: "flex", 
+          <div
+            key={f.key}
+            style={{
+              display: "flex",
               flexDirection: "column",
               width: "200px", // Ancho fijo para todos los campos
             }}
@@ -153,6 +160,10 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                     options={f.options}
                     value={tempFilters[f.key]}
                     mode={f.mode}
+                    allowClear={f.allowClear}
+                    showSearch={f.showSearch}
+                    optionFilterProp={f.optionFilterProp}
+                    filterOption={f.filterOption}
                     onChange={(val) => handleChange(f.key, val)}
                     style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />
@@ -167,14 +178,17 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
           type="primary"
           size="small"
           onClick={handleApplyFilters}
+          loading={loading}
+          disabled={loading}
           style={{ marginTop: "18px" }}
           text="Aplicar"
-        ></CustomButton>
+        />
         <CustomButton
           size="small"
           icon={<ClearOutlined />}
           onClick={handleClear}
           style={{ marginTop: "18px" }}
+          disabled={loading}
         />
       </div>
 
@@ -190,6 +204,7 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                     icon={action.icon}
                     onClick={action.onClick}
                     style={{ border: "none", background: "none" }}
+                    loading={action.loading}
                   />
                 </span>
               </CustomTooltip>

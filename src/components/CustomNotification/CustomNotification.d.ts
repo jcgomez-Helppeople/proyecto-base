@@ -4,8 +4,11 @@ interface CustomNotificationProps {
     description?: string;
     duration?: number;
     placement?: "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
+    width?: number | string;
+    padding?: string;
+    height?: number | string;
 }
 declare const CustomNotification: {
-    open: ({ type, message, description, duration, placement }: CustomNotificationProps) => void;
+    open: ({ type, message, description, duration, placement, }: CustomNotificationProps) => void;
 };
 export default CustomNotification;

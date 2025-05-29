@@ -7,3 +7,23 @@
   .custom-select .ant-select-arrow {
     right: 8px;            /* reajusta posición si es necesario */
   }
+
+.ant-form-item-explain.ant-form-item-explain-connected {
+  font-size: 12px;
+}
+
+.ant-form-item {
+  margin-bottom: 18px;
+}
+
+.ant-select-item.ant-select-item-option {
+  font-size: 12px;
+}
+
+.ant-select.ant-select-outlined.ant-select-in-form-item {
+  height: 30px;
+}
+
+.ant-select-selection-wrap {
+  font-size: 12px;
+}

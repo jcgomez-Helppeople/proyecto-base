@@ -1,12 +1,13 @@
 import CustomToolbar from "../components/CustomToolbar/CustomToolbar";
+import { CustomTextArea } from "../components/Inputs";
 import { Input, Select, Switch, Form, Typography } from "antd";
 import CustomNotification from "../components/CustomNotification/CustomNotification"; // Importa el nuevo componente
+import CustomMessage from "../components/CustomMessage/CustomMessage";
 
 const { Option } = Select;
 const { Title } = Typography;
 
 const CreatePolicyScreen = () => {
-
   const handleBackClick = () => {
     console.log("Volver");
   };
@@ -16,8 +17,8 @@ const CreatePolicyScreen = () => {
     CustomNotification.open({
       type: "success",
       message: "Política creada",
-      description: "La nueva política se ha creado exitosamente.",
     });
+    CustomMessage.success("Política creada exitosamente");
   };
 
   return (
@@ -38,7 +39,6 @@ const CreatePolicyScreen = () => {
         newButtonText="Crear"
         pageType="form"
       />
-
 
       {/* Formulario */}
       <Form
@@ -169,6 +169,23 @@ const CreatePolicyScreen = () => {
                 <Option value="approver2">Aprobador 2</Option>
               </Select>
             </Form.Item>
+            <CustomTextArea>
+              <Form.Item
+                label="Descripción de la política"
+                name="policyDescription"
+                rules={[
+                  { required: true, message: "Este campo es obligatorio" },
+                ]}
+              >
+                <Input.TextArea
+                  placeholder="Ingrese una descripción detallada de la política"
+                  rows={20}
+                  cols={24}
+                  style={{ resize: "none", fontSize: "12px" }}
+                  maxLength={5000}
+                />
+              </Form.Item>
+            </CustomTextArea>
           </div>
         </div>
       </Form>

@@ -9,12 +9,17 @@ export type FilterField = {
         value: any;
     }[];
     mode?: "multiple" | "tags";
+    allowClear?: boolean;
+    showSearch?: boolean;
+    optionFilterProp?: "label" | "value" | "children";
+    filterOption?: boolean | ((inputValue: string, option: any) => boolean);
 };
 export type ToolbarAction = {
     icon: React.ReactNode;
     tooltip?: string;
     onClick: () => void;
     hide?: boolean;
+    loading?: boolean;
 };
 export interface CustomFilterToolbarProps {
     fields: FilterField[];
@@ -24,6 +29,7 @@ export interface CustomFilterToolbarProps {
     localeCode?: "es" | "en" | "pt";
     actions?: ToolbarAction[];
     onAdvancedFilters?: () => void;
+    loading?: boolean;
 }
 declare const CustomFilterToolbar: React.FC<CustomFilterToolbarProps>;
 export default CustomFilterToolbar;

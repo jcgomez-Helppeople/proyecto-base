@@ -14,6 +14,7 @@ interface CustomFilterDrawerHpProps {
     filters: Record<string, any>;
     onChange: (key: string, value: any) => void;
   }) => React.ReactNode;
+  loading?: boolean;
 }
 
 const CustomFilterDrawerHp: React.FC<CustomFilterDrawerHpProps> = ({
@@ -25,6 +26,7 @@ const CustomFilterDrawerHp: React.FC<CustomFilterDrawerHpProps> = ({
   onSubmit,
   onClear,
   children,
+  loading = false,
 }) => {
   return (
     <Drawer
@@ -50,11 +52,20 @@ const CustomFilterDrawerHp: React.FC<CustomFilterDrawerHpProps> = ({
       footer={
         <div style={{ textAlign: "right" }}>
           <Space>
-            <Button type="primary" onClick={onSubmit}>
-              Aplicar filtros
+            <Button
+              type="primary"
+              onClick={onSubmit}
+              loading={loading}
+              disabled={loading}
+            >
+              Aplicar
             </Button>
             <Tooltip title="Limpiar filtros">
-              <Button icon={<ClearOutlined />} onClick={onClear} />
+              <Button
+                icon={<ClearOutlined />}
+                onClick={onClear}
+                disabled={loading}
+              />
             </Tooltip>
           </Space>
         </div>
