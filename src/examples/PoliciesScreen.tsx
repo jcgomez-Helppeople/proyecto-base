@@ -288,6 +288,7 @@ const PoliciesScreen = () => {
           },
         ]}
         onAdvancedFilters={handleOpenHpDrawer} // ← abrimos HP drawer
+        defaultValues={{ dateRange: ["2025-05-01", "2025-05-15"] }}
       />
       <CustomTable
         rowKey="id"

@@ -1,4 +1,5 @@
 import React from "react";
+import { EventContentArg } from "@fullcalendar/core";
 import "./customCalendarStyles.css";
 export interface CustomCalendarEvent {
     id?: string;
@@ -19,6 +20,8 @@ export interface CustomCalendarProps {
         end: Date;
         allDay: boolean;
     }) => void;
+    renderEventContent?: (eventContent: EventContentArg) => React.ReactNode;
+    localeCode?: "es" | "en" | "pt";
 }
 declare const CustomCalendar: React.FC<CustomCalendarProps>;
 export default CustomCalendar;

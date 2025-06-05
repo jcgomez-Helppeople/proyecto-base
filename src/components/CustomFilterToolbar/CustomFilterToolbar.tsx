@@ -6,6 +6,7 @@ import { CustomButton } from "../CustomButton";
 import { CustomInput } from "../Inputs";
 import CustomNumericInput from "../Inputs/CustomNumericInput/CustomNumericInput";
 import CustomSelect from "../CustomSelect/CustomSelect"; // Añadir esta importación
+import dayjs from "dayjs";
 
 export type FilterField = {
   key: string;
@@ -16,7 +17,7 @@ export type FilterField = {
   mode?: "multiple" | "tags"; // Agregar soporte para modos de selección múltiple
   allowClear?: boolean;
   showSearch?: boolean;
-  optionFilterProp?: "label" | "value" | "children"; 
+  optionFilterProp?: "label" | "value" | "children";
   filterOption?: boolean | ((inputValue: string, option: any) => boolean);
 };
 
@@ -37,6 +38,7 @@ export interface CustomFilterToolbarProps {
   actions?: ToolbarAction[];
   onAdvancedFilters?: () => void;
   loading?: boolean;
+  defaultValues?: Record<string, any>;
 }
 
 const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
@@ -48,10 +50,11 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
   actions = [],
   onAdvancedFilters,
   loading = false,
+  defaultValues = {}
 }) => {
   // Estado para los filtros temporales (no aplicados aún)
   const [tempFilters, setTempFilters] = useState<Record<string, any>>(
-    externalFilters || {}
+    () => externalFilters || defaultValues || {}
   );
 
   // Sincronizar con los filtros externos cuando cambian
@@ -150,6 +153,11 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
                 range: (
                   <CustomDatePicker.RangePicker
                     localeCode={localeCode}
+                    value={
+                      tempFilters[f.key] && tempFilters[f.key][0]
+                        ? [dayjs(tempFilters[f.key][0]), dayjs(tempFilters[f.key][1])]
+                        : undefined
+                    }
                     onChange={(_, dateStrings) => handleChange(f.key, dateStrings)}
                     style={{ width: "100%" }} // Usar 100% para llenar el contenedor padre
                   />

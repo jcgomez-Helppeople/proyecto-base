@@ -30,6 +30,7 @@ export interface CustomFilterToolbarProps {
     actions?: ToolbarAction[];
     onAdvancedFilters?: () => void;
     loading?: boolean;
+    defaultValues?: Record<string, any>;
 }
 declare const CustomFilterToolbar: React.FC<CustomFilterToolbarProps>;
 export default CustomFilterToolbar;

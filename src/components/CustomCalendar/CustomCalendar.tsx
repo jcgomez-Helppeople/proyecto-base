@@ -5,6 +5,16 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./customCalendarStyles.css";
+import esLocale from '@fullcalendar/core/locales/es';
+import enLocale from '@fullcalendar/core/locales/en-gb';
+import ptLocale from '@fullcalendar/core/locales/pt-br';
+
+const localeMap = {
+    es: esLocale,
+    en: enLocale,
+    pt: ptLocale,
+};
+
 
 // Tipo para los eventos personalizados
 export interface CustomCalendarEvent {
@@ -24,7 +34,8 @@ export interface CustomCalendarProps {
     editable?: boolean;
     onEventClick?: (event: CustomCalendarEvent) => void;
     onDateSelect?: (selectInfo: { start: Date; end: Date; allDay: boolean }) => void;
-    // Otros props personalizados si los necesitas
+    renderEventContent?: (eventContent: EventContentArg) => React.ReactNode;
+    localeCode?: "es" | "en" | "pt";
 }
 
 const CustomCalendar: React.FC<CustomCalendarProps> = ({
@@ -35,6 +46,8 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     editable = false,
     onEventClick,
     onDateSelect,
+    renderEventContent,
+    localeCode = "es"
 }) => {
     // Adaptar eventos para FullCalendar (no requiere cambios si ya tienes el formato adecuado)
     const calendarEvents: EventInput[] = events;
@@ -63,7 +76,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     }
 
     // Puedes customizar cómo se muestra cada evento
-    function renderEventContent(eventContent: EventContentArg) {
+    function defaultRenderEventContent(eventContent: EventContentArg) {
         return (
             <div>
                 <b>{eventContent.timeText}</b> <span>{eventContent.event.title}</span>
@@ -72,22 +85,41 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
     }
 
     return (
-        <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView={initialView}
-            headerToolbar={{
-                left: "prev,next today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay",
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                flexWrap: "nowrap",
+                padding: "8px 12px",
+                background: "#fff",
+                border: "1px solid #e0e0e0",
+                borderRadius: 6,
+                marginBottom: 12,
+                width: "100%",
+                minHeight: "100vh",
+                boxSizing: "border-box",
             }}
-            height={height}
-            selectable={selectable}
-            editable={editable}
-            events={calendarEvents}
-            eventContent={renderEventContent}
-            eventClick={handleEventClick}
-            select={handleDateSelect}
-        />
+        >
+            <FullCalendar
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                initialView={initialView}
+                headerToolbar={{
+                    left: "prev,next today",
+                    center: "title",
+                    right: "dayGridMonth,timeGridWeek,timeGridDay",
+                }}
+                height={height}
+                selectable={selectable}
+                editable={editable}
+                events={calendarEvents}
+                eventContent={renderEventContent ?? defaultRenderEventContent}
+                eventClick={handleEventClick}
+                select={handleDateSelect}
+                locale={localeMap[localeCode || "es"]}
+            />
+        </div>
     );
 };
 
