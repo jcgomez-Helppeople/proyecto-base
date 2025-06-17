@@ -35,6 +35,11 @@ export interface CustomToolbarProps {
   newButtonLoading?: boolean;
 
   /**
+   * Estado disabled para el botón de acción new
+   */
+  newButtonDisabled?: boolean;
+
+  /**
    * tipo de página donde se usa el toolbar
    */
   pageType?: "list" | "form" | "detail";
@@ -47,6 +52,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
   newButtonText = "Nueva",
   backButtonText = "Volver",
   newButtonLoading = false,
+  newButtonDisabled = false,
   pageType = "list",
 }) => {
 
@@ -107,6 +113,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
             style={{ fontSize: "12px" }}
             text={newButtonText} // Usa la propiedad 'text'
             loading={newButtonLoading}
+            disabled={newButtonDisabled}
           />
         )}
       </Space>
