@@ -25,6 +25,10 @@ export interface CustomToolbarProps {
      */
     newButtonLoading?: boolean;
     /**
+     * Estado disabled para el botón de acción new
+     */
+    newButtonDisabled?: boolean;
+    /**
      * tipo de página donde se usa el toolbar
      */
     pageType?: "list" | "form" | "detail";
