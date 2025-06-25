@@ -84,10 +84,10 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
       <h2
         style={{
           margin: 0,
-          fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
-          fontWeight: 600, // Seminegrita
-          fontSize: "14px", // Tamaño de 14px
-          color: "#333333", // Color oscuro
+          fontFamily: "var(--toolbar-title-font-family)",
+          fontWeight: "var(--toolbar-title-font-weight)",
+          fontSize: "var(--toolbar-title-font-size)",
+          color: "var(--toolbar-title-color)",
           flex: "1 1 auto", // Permitir que el título ocupe espacio disponible
         }}
       >
@@ -101,7 +101,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
             type="default"
             onClick={onBack}
             icon={<ArrowLeftOutlined />}
-            style={{ fontSize: "12px" }}
+            style={{ fontSize: "var(--toolbar-labels-font-size)" }}
             text={backButtonText} // Usa la propiedad 'text'
           />
         )}
@@ -110,7 +110,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
             type="primary"
             onClick={onNew}
             icon={handleOnNewIcon()}
-            style={{ fontSize: "12px" }}
+            style={{ fontSize: "var(--toolbar-labels-font-size)" }}
             text={newButtonText} // Usa la propiedad 'text'
             loading={newButtonLoading}
             disabled={newButtonDisabled}

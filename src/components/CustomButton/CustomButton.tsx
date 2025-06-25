@@ -5,7 +5,7 @@ interface CustomButtonProps {
   text?: string;
   type?: "primary" | "default" | "dashed";
   onClick: () => void;
-  size?: "small" | "middle" | "large"; 
+  size?: "small" | "middle" | "large";
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
@@ -35,7 +35,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       type={type}
       onClick={onClick}
       icon={icon}
-      style={style}
+      style={{ ...style, fontSize: "var(--toolbar-labels-font-size)", fontWeight: "var(--toolbar-title-font-weight", fontFamily: "var(--toolbar-title-font-family)" }}
       size="small"
       disabled={disabled}
       loading={loading}

@@ -1,11 +1,10 @@
 /* src/theme/libraryStyles.css */
 /* Estilos para garantizar que los inputs tengan 25px de altura */
-
 /* 1. Inputs de texto normales (no textareas) */
 .library-components-wrapper input.ant-input[type="text"] {
   height: 25px !important;
   min-height: 25px !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
   line-height: 1.5 !important;
 }
 
@@ -13,7 +12,7 @@
 .library-components-wrapper .ant-input-affix-wrapper {
   height: 25px !important;
   min-height: 25px !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
   line-height: 1.5 !important;
 }
 
@@ -21,42 +20,98 @@
 .library-components-wrapper .ant-input-number .ant-input-number-input {
   height: 25px !important;
   min-height: 25px !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
   line-height: 1.5 !important;
 }
 
-/* 4. Select (el dropdown trigger) */
-.library-components-wrapper .ant-select-selector {
-  height: 25px !important;
+/* ====== SELECTOR MÚLTIPLE MEJORADO ====== */
+/* Contenedor principal del select múltiple */
+.library-components-wrapper .ant-select-multiple,
+.ant-select-multiple {
+  height: auto !important;
+  /* Permitir que crezca automáticamente */
   min-height: 25px !important;
-  font-size: 12px !important;
-  line-height: 1.5 !important;
+  /* Altura mínima cuando está vacío */
+  width: 100% !important;
 }
 
-/* 4b. Select (versiones outlined, multiple, show-arrow, open, show-search) */
-.library-components-wrapper .ant-select.ant-select-outlined .ant-select-selector,
-.library-components-wrapper .ant-select.ant-select-multiple .ant-select-selector,
-.library-components-wrapper .ant-select.ant-select-show-arrow .ant-select-selector,
-.library-components-wrapper .ant-select.ant-select-open .ant-select-selector,
-.library-components-wrapper .ant-select.ant-select-show-search .ant-select-selector,
-/* si necesitas cubrir la clase generada por CSS-in-JS */
-.library-components-wrapper .ant-select.css-dev-only-do-not-override-peza2n.ant-select-outlined.ant-select-multiple.ant-select-show-arrow.ant-select-open.ant-select-show-search .ant-select-selector {
-  height: 25px !important;
+/* Selector interno - contenedor de las opciones */
+.library-components-wrapper .ant-select-multiple .ant-select-selector,
+.ant-select-multiple .ant-select-selector {
+  height: auto !important;
+  /* Permitir que crezca */
   min-height: 25px !important;
-  font-size: 12px !important;
-  line-height: 1.5 !important;
+  padding: 2px 24px 2px 4px !important;
+  /* Espacio para tags y flecha */
+  width: 100% !important;
 }
 
-/* 5. Search dentro del Select */
-.library-components-wrapper .ant-select-selection-search-input {
-  height: 25px !important;
+/* El contenedor de overflow que maneja los tags/chips */
+.library-components-wrapper .ant-select-multiple .ant-select-selection-overflow,
+.ant-select-multiple .ant-select-selection-overflow {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  /* Importante: envolver las opciones en nuevas líneas */
+  width: 100% !important;
+  overflow: hidden !important;
+  /* Ocultar desbordamiento */
+  position: relative !important;
+}
+
+/* Cada elemento de overflow */
+.library-components-wrapper .ant-select-multiple .ant-select-selection-overflow-item,
+.ant-select-multiple .ant-select-selection-overflow-item {
+  flex: none !important;
+  /* No permitir que se estire */
+  max-width: 100% !important;
+  margin: 1px !important;
+  /* Pequeño margen entre tags */
+  display: inline-flex !important;
+}
+
+/* Los tags/chips seleccionados */
+.library-components-wrapper .ant-select-multiple .ant-select-selection-item,
+.ant-select-multiple .ant-select-selection-item {
+  height: 20px !important;
+  line-height: 18px !important;
+  /* Para centrado vertical */
+  margin: 1px !important;
+  padding: 0 4px !important;
+  font-size: 10px !important;
+}
+
+/* El input de búsqueda dentro del select */
+.library-components-wrapper .ant-select-multiple .ant-select-selection-search,
+.ant-select-multiple .ant-select-selection-search {
+  position: relative !important;
+  max-width: 100% !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Posición correcta de la flecha */
+.library-components-wrapper .ant-select-multiple .ant-select-arrow,
+.ant-select-multiple .ant-select-arrow {
+  position: absolute !important;
+  top: 12px !important;
+  /* Posicionar en la parte superior */
+  right: 11px !important;
+  pointer-events: none !important;
+  transform: none !important;
+}
+
+/* Estado de foco */
+.library-components-wrapper .ant-select-focused.ant-select-multiple .ant-select-selector,
+.ant-select-focused.ant-select-multiple .ant-select-selector {
+  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
 }
 
 /* 6. DatePicker (input interno) */
-.library-components-wrapper .ant-picker-input > input {
+.library-components-wrapper .ant-picker-input>input {
   height: 25px !important;
   min-height: 25px !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
   line-height: 1.5 !important;
 }
 
@@ -64,7 +119,470 @@
 .library-components-wrapper .ant-picker-range input {
   height: 25px !important;
   min-height: 25px !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
   line-height: 1.5 !important;
 }
 
+/* ====== ESTILOS DE TABLAS ====== */
+/* Cambia tamaño de fuente de los headers y celdas de la tabla */
+.library-components-wrapper .ant-table-thead>tr>th,
+.library-components-wrapper .ant-table-thead>tr>th * {
+  font-size: 10px !important;
+  height: 25px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.library-components-wrapper .ant-table-tbody>tr>td,
+.library-components-wrapper .ant-table-tbody>tr>td * {
+  font-size: 10px !important;
+  height: 25px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.library-components-wrapper .ant-table-tbody>tr>td,
+.library-components-wrapper .ant-table-tbody>tr>td *:not(button, .ant-btn, .anticon) {
+  font-size: 10px !important;
+  height: 25px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Estilos específicos para botones dentro de celdas */
+.library-components-wrapper .ant-table-tbody>tr>td button,
+.library-components-wrapper .ant-table-tbody>tr>td .ant-btn {
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 22px !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+}
+
+/* Estilos para los iconos dentro de los botones */
+.library-components-wrapper .ant-table-tbody>tr>td button .anticon,
+.library-components-wrapper .ant-table-tbody>tr>td .ant-btn .anticon {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  width: 100% !important;
+  line-height: 1 !important;
+}
+
+/* Contenedor de botones de acción en la celda */
+.library-components-wrapper .ant-table-tbody>tr>td:last-child>div,
+.library-components-wrapper .ant-table-tbody>tr>td:last-child>span {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 100% !important;
+}
+
+/* Reset del padding específicamente para botones con contorno rojo (danger) */
+.library-components-wrapper .ant-btn-dangerous {
+  padding: 0 !important;
+}
+
+/* ====== RESETEO COMPLETO PARA CHECKBOXES EN TABLAS ====== */
+
+/* 1. Restablecer completamente el estilo de las celdas de selección */
+.library-components-wrapper .ant-table-selection-column,
+.ant-table-selection-column {
+  vertical-align: middle !important;
+  text-align: center !important;
+  padding: 0 !important;
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  height: 25px !important;
+  line-height: normal !important;
+}
+
+/* 2. Resetear completamente el wrapper del checkbox */
+.library-components-wrapper .ant-table-wrapper .ant-checkbox-wrapper,
+.ant-table-wrapper .ant-checkbox-wrapper {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  transform: none !important;
+  position: relative !important;
+}
+
+/* 3. Resetear el componente checkbox */
+.library-components-wrapper .ant-table-wrapper .ant-checkbox,
+.ant-table-wrapper .ant-checkbox {
+  position: relative !important;
+  top: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 16px !important;
+  width: 16px !important;
+  min-height: 16px !important;
+  min-width: 16px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  transform: none !important;
+}
+
+/* 4. Resetear el cuadro del checkbox */
+.library-components-wrapper .ant-table-wrapper .ant-checkbox-inner,
+.ant-table-wrapper .ant-checkbox-inner {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  background-color: #fff !important;
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 2px !important;
+  transition: all 0.2s !important;
+  box-sizing: border-box !important;
+}
+
+/* 5. Corregir la marca de verificación */
+.library-components-wrapper .ant-table-wrapper .ant-checkbox-checked .ant-checkbox-inner::after,
+.ant-table-wrapper .ant-checkbox-checked .ant-checkbox-inner::after {
+  position: absolute !important;
+  display: table !important;
+  border: 2px solid #fff !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  transform: rotate(45deg) scale(1) !important;
+  opacity: 1 !important;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+  content: " " !important;
+  top: 46% !important;
+  left: 21.5% !important;
+  width: 5.71428571px !important;
+  height: 9.14285714px !important;
+}
+
+/* 6. Checkbox checked (fondo azul) */
+.library-components-wrapper .ant-table-wrapper .ant-checkbox-checked .ant-checkbox-inner,
+.ant-table-wrapper .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #1890ff !important;
+  border-color: #1890ff !important;
+}
+
+/* 7. Contenedor de la fila que tiene el checkbox */
+.library-components-wrapper .ant-table-row,
+.ant-table-row,
+.library-components-wrapper .ant-table-row-selected,
+.ant-table-row-selected {
+  height: 25px !important;
+  min-height: 25px !important;
+}
+
+/* 8. Centrado adicional usando flexbox para toda la celda */
+.library-components-wrapper .ant-table-selection-column>*,
+.ant-table-selection-column>* {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 25px !important;
+}
+
+/* ====== ESTILOS ESPECÍFICOS PARA COMPONENTES DE FECHA ====== */
+/* Contenedor principal del DatePicker y RangePicker */
+.library-components-wrapper .ant-picker,
+.ant-picker {
+  height: 25px !important;
+  min-height: 25px !important;
+  line-height: 25px !important;
+  padding: 0 8px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Inputs internos */
+.library-components-wrapper .ant-picker-input,
+.ant-picker-input,
+.library-components-wrapper .ant-picker-input>input,
+.ant-picker-input>input {
+  height: 23px !important;
+  min-height: 23px !important;
+  line-height: 23px !important;
+  font-size: 10px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Iconos del DatePicker */
+.library-components-wrapper .ant-picker-suffix,
+.ant-picker-suffix,
+.library-components-wrapper .ant-picker-clear,
+.ant-picker-clear {
+  height: 23px !important;
+  line-height: 23px !important;
+  font-size: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Ajustar el separador en RangePicker */
+.library-components-wrapper .ant-picker-range-separator,
+.ant-picker-range-separator {
+  height: 23px !important;
+  line-height: 23px !important;
+  padding: 0 4px !important;
+}
+
+/* ====== DROPDOWN ====== */
+
+/* Ajustar el contenedor del select para permitir posicionamiento absoluto */
+.library-components-wrapper .ant-select-multiple,
+.library-components-wrapper .css-dev-only-do-not-override-peza2n.ant-select-multiple,
+.library-components-wrapper [class*="css-"].ant-select-multiple {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 25px !important;
+}
+
+/* Aumenta el z-index del dropdown para que no quede detrás de otros elementos */
+.library-components-wrapper .ant-select-dropdown {
+  z-index: 1050 !important;
+}
+
+.table-action-buttons {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 20px !important;
+}
+
+/* Eliminar restricción de altura en los menús desplegables de tablas */
+.library-components-wrapper .ant-dropdown .ant-dropdown-menu,
+.ant-dropdown .ant-dropdown-menu,
+.ant-dropdown-menu-root,
+.ant-dropdown-menu-vertical {
+  max-height: none !important;
+  /* Eliminar altura máxima */
+  overflow: visible !important;
+  /* Quitar scroll */
+  padding: 4px !important;
+  /* Padding consistente */
+}
+
+/* Asegurar que las clases generadas por CSS-in-JS también se afecten */
+[class*="ant-dropdown"] [class*="menu"],
+[class*="css-"] .ant-dropdown-menu {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Mejorar el espaciado de los items del menú */
+.ant-dropdown-menu-item {
+  padding: 5px 12px !important;
+  height: 28px !important;
+  line-height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Ajustar tamaño de texto para consistency con la tabla */
+.ant-dropdown-menu-item,
+.ant-dropdown-menu-item .anticon,
+.ant-dropdown-menu-item-icon,
+.ant-dropdown-menu-title-content {
+  font-size: 12px !important;
+}
+
+/* Alinear los iconos con el texto */
+.ant-dropdown-menu-item .anticon,
+.ant-dropdown-menu-item-icon {
+  margin-right: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.table-dropdown-menu .ant-dropdown-menu {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Asegurar que el contenedor del dropdown abarque todas las opciones */
+.ant-dropdown,
+.ant-dropdown-menu-root,
+.ant-dropdown-content,
+div[class*="ant-dropdown-menu"],
+div[class*="css-"] .ant-dropdown-menu {
+  height: auto !important;
+  min-height: fit-content !important;
+  max-height: none !important;
+  box-sizing: content-box !important;
+  padding-bottom: 4px !important;
+  /* Asegurar que hay espacio al final */
+}
+
+/* Garantizar que el div/panel que contiene el menú tenga el fondo completo */
+.ant-dropdown .ant-dropdown-menu,
+div[class*="ant-dropdown-menu"],
+.ant-dropdown-menu-submenu .ant-dropdown-menu {
+  background-color: #ffffff !important;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08) !important;
+  padding: 4px 0 !important;
+  width: auto !important;
+  min-width: 120px !important;
+  height: auto !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  border-radius: 2px !important;
+}
+
+/* Estilos para los elementos individuales */
+.ant-dropdown-menu-item {
+  margin: 0 !important;
+  padding: 5px 12px !important;
+  clear: both !important;
+  /* Asegura que cada ítem comience en una nueva línea */
+  width: 100% !important;
+  /* Hace que cada ítem ocupe el ancho completo */
+  box-sizing: border-box !important;
+}
+
+/* Asegurarse que los ítems con iconos tengan espacio adecuado */
+.ant-dropdown-menu-item-icon+.ant-dropdown-menu-title-content {
+  padding-left: 8px !important;
+}
+
+/* Corregir posición del dropdown para evitar cortes */
+.ant-dropdown {
+  position: fixed !important;
+  /* Esto puede ser necesario para evitar el recorte */
+}
+
+/* ====== REEMPLAZO TOTAL DE ESTILOS PARA CHECKBOXES EN TABLAS ====== */
+
+/* 1. Selector ultra específico para asegurar que nuestros estilos tengan prioridad */
+html body .library-components-wrapper .ant-table-wrapper .ant-table table .ant-table-tbody tr td.ant-table-selection-column .ant-checkbox-wrapper,
+html body .library-components-wrapper .ant-table-wrapper .ant-table table .ant-table-thead tr th.ant-table-selection-column .ant-checkbox-wrapper,
+html body .ant-table-wrapper .ant-table table .ant-table-tbody tr td.ant-table-selection-column .ant-checkbox-wrapper,
+html body .ant-table-wrapper .ant-table table .ant-table-thead tr th.ant-table-selection-column .ant-checkbox-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+}
+
+/* 2. Estilo para el checkbox mismo */
+html body .library-components-wrapper .ant-checkbox,
+html body .ant-checkbox {
+  position: relative !important;
+  display: inline-block !important;
+  height: 16px !important;
+  width: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+  flex: none !important;
+}
+
+/* 3. Cuadro del checkbox */
+html body .library-components-wrapper .ant-checkbox .ant-checkbox-inner,
+html body .ant-checkbox .ant-checkbox-inner {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  background-color: #fff !important;
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 2px !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+}
+
+/* 4. Estado checked del checkbox */
+html body .library-components-wrapper .ant-checkbox-checked .ant-checkbox-inner,
+html body .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #1890ff !important;
+  border-color: #1890ff !important;
+}
+
+/* 5. Marca de verificación */
+html body .library-components-wrapper .ant-checkbox-checked .ant-checkbox-inner::after,
+html body .ant-checkbox-checked .ant-checkbox-inner::after {
+  position: absolute !important;
+  display: table !important;
+  border: 2px solid #fff !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  transform: rotate(45deg) scale(1) !important;
+  opacity: 1 !important;
+  content: " " !important;
+  top: 47% !important;
+  left: 22% !important;
+  width: 5.5px !important;
+  height: 9px !important;
+  margin-top: -5px !important;
+}
+
+/* 6. Celda de la tabla que contiene el checkbox */
+html body .library-components-wrapper .ant-table-cell.ant-table-selection-column,
+html body .ant-table-cell.ant-table-selection-column {
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+  padding: 0 !important;
+  display: table-cell !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+  height: 25px !important;
+  background-clip: padding-box !important;
+}
+
+/* 7. Fila seleccionada */
+html body .library-components-wrapper .ant-table-row-selected>td,
+html body .ant-table-row-selected>td {
+  background: #e6f7ff !important;
+  border-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* 8. Estados adicionales (hover, focus) */
+html body .library-components-wrapper .ant-checkbox:hover .ant-checkbox-inner,
+html body .ant-checkbox:hover .ant-checkbox-inner {
+  border-color: #1890ff !important;
+}
+
+/* ====== VARIABLES GLOBALES ====== */
+:root {
+  --toolbar-title-font-size: 12px !important;
+  --toolbar-labels-font-size: 10px !important;
+  --toolbar-title-font-family: 'Open Sans', sans-serif !important;
+  --toolbar-title-font-weight: 600 !important;
+  --toolbar-title-color: #333333 !important;
+}

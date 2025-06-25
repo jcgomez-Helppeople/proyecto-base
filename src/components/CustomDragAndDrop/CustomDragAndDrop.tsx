@@ -115,7 +115,7 @@ const CustomDragAndDrop: React.FC<CustomDragAndDropProps> = ({
                                                     boxShadow: snapshot.isDragging
                                                         ? '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                                                         : 'none',
-                                                    fontSize: 12,
+                                                    fontSize: "var(--toolbar-labels-font-size)",
                                                 }}
                                             >
                                                 {item.content}

@@ -36,7 +36,7 @@ const ChangeRequestForm: React.FC = () => {
                 >
                   <Select
                     placeholder="Selecciona usuario"
-                    suffixIcon={<DownOutlined style={{ fontSize: 12, color: '#999' }} />}
+                    suffixIcon={<DownOutlined style={{ fontSize: "var(--toolbar-labels-font-size)", color: '#999' }} />}
                     options={[{ value: 'pablo', label: 'Pablo…' }]}
                   />
                 </Form.Item>

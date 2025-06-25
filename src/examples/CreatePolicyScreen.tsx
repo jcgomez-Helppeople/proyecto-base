@@ -181,7 +181,7 @@ const CreatePolicyScreen = () => {
                   placeholder="Ingrese una descripción detallada de la política"
                   rows={20}
                   cols={24}
-                  style={{ resize: "none", fontSize: "12px" }}
+                  style={{ resize: "none", fontSize: "var(--toolbar-labels-font-size)" }}
                   maxLength={5000}
                 />
               </Form.Item>

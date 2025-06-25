@@ -6,8 +6,8 @@ export interface CustomMenuProps extends MenuProps {
   // Propiedades personalizadas adicionales si las necesitas
 }
 
-export interface CustomMenuItemProps extends MenuItemProps {}
-export interface CustomSubMenuProps extends SubMenuProps {}
+export interface CustomMenuItemProps extends MenuItemProps { }
+export interface CustomSubMenuProps extends SubMenuProps { }
 
 const CustomMenu: React.FC<CustomMenuProps> & {
   Item: React.FC<CustomMenuItemProps>;
@@ -19,7 +19,7 @@ const CustomMenu: React.FC<CustomMenuProps> & {
     <AntMenu
       className={`custom-menu ${props.className || ""}`}
       style={{
-        fontSize: "12px",
+        fontSize: "var(--toolbar-labels-font-size)",
         ...props.style,
       }}
       {...props}

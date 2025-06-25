@@ -1,0 +1,207 @@
+/* ====== INPUTS Y CONTROLES GENERALES ====== */
+.ant-input,
+.ant-picker-input>input,
+.ant-select-selector:not(.ant-select-multiple .ant-select-selector),
+.ant-select-selection-search-input:not(.ant-select-multiple .ant-select-selection-search-input) {
+    height: 25px !important;
+    min-height: 25px !important;
+    font-size: 10px !important;
+    line-height: 25px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* ====== ESTILOS ESPECÍFICOS PARA COMPONENTES DE FECHA ====== */
+/* Inputs de fecha y rangos de fecha */
+.ant-picker,
+.ant-picker-range,
+.ant-picker-input,
+.ant-picker-input>input,
+.ant-picker-range-separator,
+.ant-picker-suffix,
+.ant-picker-clear,
+.ant-picker-focused,
+.ant-picker-dropdown,
+.ant-picker-cell-inner,
+.ant-picker-input>input::placeholder,
+.ant-picker-range-wrapper,
+.ant-picker-panel-container,
+.ant-picker-content th,
+.ant-picker-content td {
+    font-size: 10px !important;
+    line-height: 18px !important;
+}
+
+/* Contenedor principal de pickers */
+.ant-picker {
+    height: 25px !important;
+    font-size: 10px !important;
+    padding: 0 8px !important;
+}
+
+/* Texto de fecha dentro del input */
+.ant-picker-input>input {
+    font-size: 10px !important;
+    height: 100% !important;
+}
+
+/* Separador de rangos de fecha */
+.ant-picker-range-separator {
+    font-size: 10px !important;
+    line-height: 18px !important;
+}
+
+/* Iconos dentro del date picker */
+.ant-picker-suffix .anticon,
+.ant-picker-clear .anticon {
+    font-size: 10px !important;
+    line-height: 18px !important;
+}
+
+/* Panel del calendario desplegable */
+.ant-picker-dropdown {
+    font-size: 10px !important;
+}
+
+/* Header del calendario con años/meses */
+.ant-picker-header {
+    padding: 0 8px !important;
+    height: 25px !important;
+    line-height: 25px !important;
+    font-size: 10px !important;
+}
+
+/* Celdas del calendario */
+.ant-picker-content th,
+.ant-picker-content td,
+.ant-picker-cell-inner {
+    height: 18px !important;
+    width: 18px !important;
+    min-width: 18px !important;
+    line-height: 18px !important;
+    font-size: 10px !important;
+}
+
+/* Selectores simples (no múltiples) */
+.ant-select:not(.ant-select-multiple) .ant-select-selector {
+    min-height: 25px !important;
+    font-size: 10px !important;
+}
+
+/* ====== ESTILOS DE TABLAS ====== */
+/* Cambia tamaño de fuente de los headers y celdas de la tabla */
+.ant-table-thead>tr>th,
+.ant-table-thead>tr>th * {
+    font-size: 10px !important;
+    height: 25px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+.ant-table-tbody>tr>td,
+.ant-table-tbody>tr>td * {
+    font-size: 10px !important;
+    height: 25px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+/* ====== CORRECCIÓN PARA CHECKBOXES EN TABLAS ====== */
+/* Asegura que los checkboxes en tablas mantengan su forma */
+.ant-table-cell .ant-checkbox-wrapper,
+.ant-table-cell .ant-checkbox,
+.ant-table-cell .ant-checkbox-inner {
+    font-size: 12px !important;
+    transform: scale(1) !important;
+    height: 14px !important;
+    width: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+    line-height: 14px !important;
+}
+
+/* ====== SELECTOR MÚLTIPLE - SOLUCIÓN RADICAL ====== */
+/* === SOLUCIÓN PARA QUE EL INPUT CREZCA CON LOS CHIPS === */
+
+/* 1. Eliminar cualquier restricción de altura en TODOS los contenedores */
+.ant-select-multiple,
+.ant-select.ant-select-multiple,
+.ant-select-multiple .ant-select-selector,
+.ant-select.ant-select-multiple .ant-select-selector,
+.css-dev-only-do-not-override-peza2n.ant-select-multiple,
+.css-dev-only-do-not-override-peza2n.ant-select-multiple .ant-select-selector,
+[class*="css-"].ant-select-multiple,
+[class*="css-"].ant-select-multiple .ant-select-selector,
+/* Contenedores padre */
+.ant-select-dropdown-placement-bottomLeft,
+.ant-form-item,
+.ant-form-item-control,
+.ant-form-item-control-input,
+.ant-form-item-control-input-content {
+    height: auto !important;
+    min-height: 25px !important;
+    max-height: none !important;
+    position: static !important;
+    /* Esto es importante para romper restricciones de posicionamiento */
+}
+
+/* 2. Forzar que los chips se muestren en múltiples líneas */
+.ant-select-multiple .ant-select-selection-overflow,
+.css-dev-only-do-not-override-peza2n.ant-select-multiple .ant-select-selection-overflow {
+    position: static !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 3. Eliminar cualquier restricción en el contenedor del selector */
+.ant-select-multiple .ant-select-selector,
+.css-dev-only-do-not-override-peza2n.ant-select-multiple .ant-select-selector {
+    box-sizing: border-box !important;
+    display: block !important;
+    /* Cambiado a display: block para forzar comportamiento natural */
+    width: 100% !important;
+    height: auto !important;
+    padding: 1px 4px !important;
+    overflow: visible !important;
+    position: static !important;
+}
+
+/* 4. Forzar que los contenedores de chips sean inline */
+.ant-select-multiple .ant-select-selection-overflow-item,
+.css-dev-only-do-not-override-peza2n.ant-select-multiple .ant-select-selection-overflow-item {
+    display: inline-block !important;
+    margin: 2px !important;
+    float: left !important;
+    /* Esto a veces funciona mejor que flex para forzar líneas múltiples */
+}
+
+/* 5. Hacer que los chips tengan las dimensiones correctas */
+.ant-select-multiple .ant-select-selection-item,
+.css-dev-only-do-not-override-peza2n.ant-select-multiple .ant-select-selection-item {
+    height: 16px !important;
+    line-height: 14px !important;
+    font-size: 10px !important;
+    padding: 0 4px !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    float: none !important;
+}
+
+/* Aumenta el z-index del dropdown para que no quede detrás de otros elementos */
+.ant-select-dropdown {
+    z-index: 1050 !important;
+}
+
+/* ====== VARIABLES GLOBALES ====== */
+:root {
+    --toolbar-title-font-size: 12px !important;
+    --toolbar-labels-font-size: 10px !important;
+    --toolbar-title-font-family: 'Open Sans', sans-serif !important;
+    --toolbar-title-font-weight: 600 !important;
+    --toolbar-title-color: #333333 !important;
+}
