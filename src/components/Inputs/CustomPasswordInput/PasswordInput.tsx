@@ -1,7 +1,7 @@
 import React from "react";
 import { Input as AntInput, InputProps as AntInputProps } from "antd";
 
-export interface CustomPasswordInputProps extends AntInputProps {}
+export interface CustomPasswordInputProps extends AntInputProps { }
 
 const CustomPasswordInput: React.FC<CustomPasswordInputProps> = (props) => {
   return (
@@ -9,7 +9,7 @@ const CustomPasswordInput: React.FC<CustomPasswordInputProps> = (props) => {
       {...props}
       style={{
         ...props.style,
-        fontSize: "12px",
+        fontSize: "var(--toolbar-labels-font-size)",
       }}
     />
   );

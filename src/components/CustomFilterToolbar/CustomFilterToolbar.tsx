@@ -117,9 +117,9 @@ const CustomFilterToolbar: React.FC<CustomFilterToolbarProps> = ({
               <label
                 style={{
                   marginBottom: 4,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  fontFamily: "'Open Sans', sans-serif",
+                  fontFamily: "var(--toolbar-title-font-family)",
+                  fontWeight: "var(--toolbar-title-font-weight)",
+                  fontSize: "var(--toolbar-labels-font-size)",
                 }}
               >
                 {f.label}

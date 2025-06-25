@@ -20,12 +20,12 @@ const CustomNotification = {
     placement = "topRight",
   }: CustomNotificationProps) => {
     notification[type]({
-      message: <div style={{ fontSize: 12 }}>{message}</div>,
-      description: description && <div style={{ fontSize: 12 }}>{description}</div>,
+      message: <div style={{ fontSize: "var(--toolbar-labels-font-size)" }}>{message}</div>,
+      description: description && <div style={{ fontSize: "var(--toolbar-labels-font-size)" }}>{description}</div>,
       duration,
       placement,
       style: {
-        fontSize: 12,
+        fontSize: "var(--toolbar-labels-font-size)",
       },
     });
   },

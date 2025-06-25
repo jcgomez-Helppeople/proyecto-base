@@ -42,7 +42,7 @@ const CustomFilterDrawer: React.FC<CustomFilterDrawerProps> = ({
       footer={
         <div style={{ textAlign: "right" }}>
           <Space>
-          <Button type="primary" onClick={onApplyFilters}>
+            <Button type="primary" onClick={onApplyFilters}>
               Aplicar filtros
             </Button>
             <Tooltip title="Limpiar filtros">
@@ -73,9 +73,9 @@ const CustomFilterDrawer: React.FC<CustomFilterDrawerProps> = ({
             <label
               style={{
                 marginBottom: 4,
-                fontSize: 12,
-                fontWeight: 600,
-                fontFamily: "'Open Sans', sans-serif",
+                fontFamily: "var(--toolbar-title-font-family)",
+                fontWeight: "var(--toolbar-title-font-weight)",
+                fontSize: "var(--toolbar-labels-font-size)",
               }}
             >
               {field.label}

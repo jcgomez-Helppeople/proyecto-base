@@ -14,19 +14,20 @@ export interface LibraryThemeProviderProps {
   customTokens?: Partial<typeof DESIGN_TOKENS>;
 }
 
-const LibraryThemeProvider: React.FC<LibraryThemeProviderProps> = ({ 
-  children, 
-  customTokens = {} 
+const LibraryThemeProvider: React.FC<LibraryThemeProviderProps> = ({
+  children,
+  customTokens = {}
 }) => {
   // Combina los tokens por defecto con los personalizados
   const tokens = { ...DESIGN_TOKENS, ...customTokens };
-  
+  /*helppeople ppc #1b1464 */
   return (
     <ConfigProvider
       theme={{
         token: {
           controlHeight: tokens.INPUT_HEIGHT,
           fontSize: tokens.FONT_SIZE,
+          colorPrimary: '#1677ff',
         },
         components: {
           Input: {
@@ -39,13 +40,18 @@ const LibraryThemeProvider: React.FC<LibraryThemeProviderProps> = ({
           DatePicker: {
             controlHeight: tokens.INPUT_HEIGHT,
           },
-          // Otros componentes según necesidad
+          Form: {
+            labelFontSize: 10,  // Tamaño específico para labels de formulario
+          },
+          Table: {
+            cellFontSize: 10
+          },
         }
       }}
     >
-      <div className="library-components-wrapper" 
-           data-input-height={tokens.INPUT_HEIGHT}
-           data-font-size={tokens.FONT_SIZE}>
+      <div className="library-components-wrapper"
+        data-input-height={tokens.INPUT_HEIGHT}
+        data-font-size={tokens.FONT_SIZE}>
         {children}
       </div>
     </ConfigProvider>

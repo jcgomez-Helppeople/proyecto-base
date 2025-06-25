@@ -2,7 +2,7 @@ import React from "react";
 import { Input as AntInput } from "antd";
 
 export interface CustomTextAreaProps
-  extends React.ComponentProps<typeof AntInput.TextArea> {}
+  extends React.ComponentProps<typeof AntInput.TextArea> { }
 
 const CustomTextArea: React.FC<CustomTextAreaProps> = (props) => {
   return (
@@ -10,7 +10,7 @@ const CustomTextArea: React.FC<CustomTextAreaProps> = (props) => {
       {...props}
       style={{
         ...props.style,
-        fontSize: "12px",
+        fontSize: "var(--toolbar-labels-font-size)",
       }}
     />
   );

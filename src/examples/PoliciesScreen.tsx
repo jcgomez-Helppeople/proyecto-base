@@ -8,6 +8,10 @@ import {
   DeleteOutlined,
   FileExcelOutlined,
   FilePdfOutlined,
+  EllipsisOutlined,
+  PoweroffOutlined,
+  ReloadOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { Button, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +21,8 @@ import CustomSelect from "../components/CustomSelect/CustomSelect";
 import { CustomFloatButton } from "../components/CustomFloatButton";
 import { PlusOutlined, QuestionOutlined } from "@ant-design/icons";
 import CustomCalendar, { CustomCalendarEvent } from "../components/CustomCalendar/CustomCalendar";
+import DropdownButton from "antd/es/dropdown/dropdown-button";
+import { CustomInput } from "../components/Inputs";
 
 type Policy = {
   id: number;
@@ -151,8 +157,8 @@ const PoliciesScreen = () => {
         <Tag
           color={enabled === "Sí" ? "green" : "red"}
           style={{
-            fontSize: "12px", // Tamaño de fuente 12px
-            fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
+            fontSize: "var(--toolbar-labels-font-size)", // Tamaño de fuente 12px
+            fontFamily: "var(--toolbar-title-font-family)", // Fuente Open Sans
             width: "30px", // Ancho fijo para ambos valores
             textAlign: "center", // Centrar el texto
           }}
@@ -214,6 +220,371 @@ const PoliciesScreen = () => {
       ]);
     }
   };
+
+  const columnsPolicies = [
+    { title: "ID", dataIndex: "polCod", key: "polCod" },
+    { title: 'polNom', dataIndex: "polNom", key: "polNom" },
+    { title: 'instrucciones', dataIndex: "instrucciones", key: "instrucciones" },
+    { title: 'habilitado', dataIndex: "habilitado", key: "habilitado" },
+    {
+      title: '',
+      key: 'actions',
+      render: (_: string, record: any) => {
+        console.log("record", record);
+        const handleMenuClick = ({ key }: { key: string }) => {
+          switch (key) {
+            case "on":
+              /* encender */ break;
+            case "off":
+              /* apagar */ break;
+            case "reload":
+              /* reiniciar*/ break;
+            case "delete": {
+              break;
+            };
+          }
+        };
+
+        const menuItems = [
+          {
+            key: "on",
+            icon: <PoweroffOutlined style={{ color: "#21c121" }} />,
+            label: "Encender",
+          },
+          {
+            key: "off",
+            icon: <PoweroffOutlined style={{ color: "#d32f2f" }} />,
+            label: "Apagar",
+          },
+          {
+            key: "reload",
+            icon: <ReloadOutlined style={{ color: "#fa8c16" }} />,
+            label: "Reiniciar",
+          },
+          { key: "delete", icon: <CloseOutlined />, label: "Eliminar" },
+        ];
+
+        return (
+          <div className="table-action-buttons">
+            <Button
+              danger
+              icon={<EditOutlined />}
+              onClick={() => { }}
+            />
+            <Button
+              danger
+              icon={<DeleteOutlined />}
+              onClick={() => { }}
+            />
+            {/*   <Button
+                onClick={() => { }}
+                icon={<EllipsisOutlined />}
+                size="small"
+                /> */}
+            <DropdownButton
+              menu={{ items: menuItems, onClick: handleMenuClick }}
+              trigger={["click"]}
+              getPopupContainer={(trigger) => trigger.parentElement!}
+              icon={<EllipsisOutlined />}
+            />
+          </div>
+        )
+      },
+    },
+  ]
+
+  const policiesList = [
+    {
+      "polCod": 1,
+      "polNom": "Política general",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "Cualquiera",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 1,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "Se usa por defecto",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": true,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 3,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 2,
+      "polNom": "Politica general de Emergencia",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "Cualquiera",
+      "cTipo": "1",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 1,
+      "habilitado": "no",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "",
+      "tipo": "Uno Solo",
+      "emergencia": "si",
+      "comite": 1111,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": false,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 3,
+      "polNom": "Politica Tecnologia General",
+      "cUsuario": "Cualquiera",
+      "cArea": "1",
+      "cCas": "Cualquiera",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 15,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": true,
+      "polAprobar": true,
+      "polPostimplementar": true,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 4,
+      "polNom": "Aprobaccion Backups",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "12",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 1,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 9,
+      "instrucciones": "",
+      "tipo": "Simultaneo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": true,
+      "polAprobar": true,
+      "polPostimplementar": true,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 5,
+      "polNom": "Aprobacion Compra",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "14",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 0,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 20,
+      "instrucciones": "Compra de insumos",
+      "tipo": "Simultaneo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": true,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 6,
+      "polNom": "daño de hardware",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "Cualquiera",
+      "cTipo": "Cualquiera",
+      "cProblema": "327",
+      "tSolucionDia": 0,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 8,
+      "instrucciones": "daño de hardware",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": true,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 7,
+      "polNom": "Inteligencia y desarrollo",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "51",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 2,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": true,
+      "polAprobar": true,
+      "polPostimplementar": true,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": true,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 8,
+      "polNom": "Base de datos",
+      "cUsuario": "Cualquiera",
+      "cArea": "Cualquiera",
+      "cCas": "Cualquiera",
+      "cTipo": "Cualquiera",
+      "cProblema": "1",
+      "tSolucionDia": 1,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "Autorizar ingreso a servidores",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": true,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": true,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 9,
+      "polNom": "Politica de TH",
+      "cUsuario": "Cualquiera",
+      "cArea": "220",
+      "cCas": "Cualquiera",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 5,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "Aturizaciones del area TH",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "12",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": true,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    },
+    {
+      "polCod": 10,
+      "polNom": "Politica I+D",
+      "cUsuario": "Cualquiera",
+      "cArea": "220",
+      "cCas": "Cualquiera",
+      "cTipo": "Cualquiera",
+      "cProblema": "Cualquiera",
+      "tSolucionDia": 5,
+      "habilitado": "si",
+      "cPrioridad": "Cualquiera",
+      "tSolucionHora": 0,
+      "instrucciones": "Aturizaciones del area I+D",
+      "tipo": "Uno Solo",
+      "emergencia": "no",
+      "comite": 0,
+      "cDepartamento": "Cualquiera",
+      "naturaleza": null,
+      "preaprobado": "no",
+      "polVerificar": false,
+      "polAprobar": true,
+      "polPostimplementar": false,
+      "polHabilitaInterrupcion": false,
+      "polTipoCategorizacion": 2,
+      "polMaximoAprobadores": 0,
+      "polMaximoNoAprobadores": 0,
+      "reabrir": false,
+      "anularRfcCompleta": false
+    }
+  ]
 
   return (
     <div
@@ -306,6 +677,19 @@ const PoliciesScreen = () => {
             console.log("Selected Row Keys:", selectedRowKeys);
             console.log("Selected Rows:", selectedRows);
           },
+
+        }}
+      />
+
+      <CustomTable
+        size='small'
+        dataSource={policiesList}
+        rowKey='polCod'
+        columns={columnsPolicies}
+        pagination={{
+          pageSize: 10,
+          pageSizeOptions: ["10", "25", "50"],
+          showSizeChanger: true,
         }}
       />
 
@@ -364,8 +748,82 @@ const PoliciesScreen = () => {
         onChange={handleFilterChange}
         loading={filterLoading}
       >
-        {/* You can add filter fields here if needed */}
-        {() => null}
+        {({ filters, onChange }) => (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+              width: "100%",
+            }}
+          >
+            <div style={{ display: "flex", gap: 24 }}>
+              <div style={{ flex: 1 }}>
+                <label>Ubicación</label>
+                <CustomSelect
+                  showSearch
+                  optionFilterProp="label"
+                  onChange={(value) => onChange("location", value)}
+                  options={[]}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label>Departamento</label>
+                <CustomSelect
+                  showSearch
+                  optionFilterProp="label"
+                  options={[]}
+                />
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: 24 }}>
+              <div style={{ flex: 1 }}>
+                <label>Marca</label>
+                <CustomSelect
+                  showSearch
+                  placeholder="Selecciona marca"
+                  options={[]}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label>Modelo</label>
+                <CustomSelect
+                  placeholder="Selecciona modelo"
+                  options={[]}
+                />
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: 24 }}>
+              <div style={{ flex: 1 }}>
+                <label>Último Scan</label>
+                <CustomInput
+                  placeholder="Filtrar por IP"
+                  value={filters.ip}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label>Empresa</label>
+                <CustomSelect
+                  showSearch
+                  placeholder="Selecciona empresa"
+                  options={[]}
+                />
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: 24 }}>
+              <div style={{ flex: 1 }}>
+                <label>IP</label>
+                <CustomInput
+                  placeholder="Filtrar por IP"
+                  value={filters.ip}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                {/* Columna vacía para ocupar el otro 50% */}
+              </div>
+            </div>
+          </div>
+        )}
       </CustomFilterDrawerHp>
       <CustomTooltip content="Este es un tooltip personalizado">
         <span>

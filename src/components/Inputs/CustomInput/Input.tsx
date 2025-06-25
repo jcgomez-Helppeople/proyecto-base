@@ -23,10 +23,10 @@ const CustomInput = React.forwardRef<InputRef, CustomInputProps>(
           props.label &&
           <label
             style={{
+              fontFamily: "var(--toolbar-title-font-family)",
+              fontWeight: "var(--toolbar-title-font-weight)",
+              fontSize: "var(--toolbar-labels-font-size)",
               marginBottom: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              fontFamily: "'Open Sans', sans-serif",
             }}
           >
             {props.label}
@@ -37,6 +37,8 @@ const CustomInput = React.forwardRef<InputRef, CustomInputProps>(
           ref={ref}
           style={{
             ...props.style,
+            fontSize: "var(--toolbar-labels-font-size)",
+            fontFamily: "var(--toolbar-title-font-family)",
           }}
         />
       </div>

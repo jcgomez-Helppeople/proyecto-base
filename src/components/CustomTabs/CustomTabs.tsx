@@ -36,14 +36,14 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
         onChange={onChange}
         type={type}
         tabBarStyle={{
-          fontFamily: "'Open Sans', sans-serif", // Fuente Open Sans
-          fontSize: "12px", // Tamaño de fuente 12px
+          fontFamily: "var(--toolbar-title-font-family)", // Fuente Open Sans
+          fontSize: "var(--toolbar-labels-font-size)", // Tamaño de fuente 12px
           lineHeight: "1.5", // Asegúrate de ajustar el line-height si es necesario
         }}
         items={items.map((item) => ({
           key: item.key,
           label: (
-            <div style={{ fontSize: "12px" }}>
+            <div style={{ fontSize: "var(--toolbar-labels-font-size)" }}>
               {item.label}
             </div>
           ),

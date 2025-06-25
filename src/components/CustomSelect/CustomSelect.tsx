@@ -17,15 +17,15 @@ const CustomSelect = <T,>(props: CustomSelectProps<T>) => {
         <label
           style={{
             marginBottom: 4,
-            fontSize: 12,
-            fontWeight: 600,
-            fontFamily: "'Open Sans', sans-serif",
+            fontWeight: "var(--toolbar-title-font-weight)",
+            fontSize: "var(--toolbar-labels-font-size)",
+            fontFamily: "var(--toolbar-title-font-family)",
           }}
         >
           {props.label}
         </label>
       }
-      <AntSelect {...props} style={{ fontSize: "12px", minWidth: "160px" }} />
+      <AntSelect {...props} style={{ fontSize: "var(--toolbar-labels-font-size)", minWidth: "160px" }} />
     </div>
   );
 };

@@ -1,15 +1,20 @@
 @import "./PageLayout.css";
+
 .custom-select .ant-select-selector {
-    font-size: 12px;
-    height: 32px;          /* el height que quieras */
-    line-height: 32px;     /* mismo valor para centrar */
-  }
-  .custom-select .ant-select-arrow {
-    right: 8px;            /* reajusta posición si es necesario */
-  }
+  font-size: 12px;
+  height: 25px;
+  /* el height que quieras */
+  line-height: 25px;
+  /* mismo valor para centrar */
+}
+
+.custom-select .ant-select-arrow {
+  right: 8px;
+  /* reajusta posición si es necesario */
+}
 
 .ant-form-item-explain.ant-form-item-explain-connected {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .ant-form-item {
@@ -17,7 +22,7 @@
 }
 
 .ant-select-item.ant-select-item-option {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .ant-select.ant-select-outlined.ant-select-in-form-item {
@@ -25,5 +30,5 @@
 }
 
 .ant-select-selection-wrap {
-  font-size: 12px;
+  font-size: 10px;
 }

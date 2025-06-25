@@ -18,7 +18,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
       title={content}
       {...rest}
       style={{
-        fontSize: "12px",
+        fontSize: "var(--toolbar-labels-font-size)",
       }}
     >
       {children}

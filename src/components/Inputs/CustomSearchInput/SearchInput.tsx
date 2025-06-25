@@ -2,7 +2,7 @@ import React from "react";
 import { Input as AntInput } from "antd";
 
 export interface CustomSearchInputProps
-  extends React.ComponentProps<typeof AntInput.Search> {}
+  extends React.ComponentProps<typeof AntInput.Search> { }
 
 const CustomSearchInput: React.FC<CustomSearchInputProps> = (props) => {
   return (
@@ -10,7 +10,7 @@ const CustomSearchInput: React.FC<CustomSearchInputProps> = (props) => {
       {...props}
       style={{
         ...props.style,
-        fontSize: "12px",
+        fontSize: "var(--toolbar-labels-font-size)",
       }}
     />
   );
