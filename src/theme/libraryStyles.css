@@ -578,6 +578,10 @@ html body .ant-checkbox:hover .ant-checkbox-inner {
   border-color: #1890ff !important;
 }
 
+.library-components-wrapper .ant-form-item {
+  margin-bottom: 5px !important;
+}
+
 /* ====== VARIABLES GLOBALES ====== */
 :root {
   --toolbar-title-font-size: 12px !important;

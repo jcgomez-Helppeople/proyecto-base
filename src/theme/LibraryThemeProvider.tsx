@@ -6,7 +6,7 @@ import './libraryStyles.css'; // Importamos estilos globales
 // Tokens por defecto de tu librería
 export const DESIGN_TOKENS = {
   INPUT_HEIGHT: 25,
-  FONT_SIZE: 12,
+  FONT_SIZE: 10,
 };
 
 export interface LibraryThemeProviderProps {
@@ -27,7 +27,7 @@ const LibraryThemeProvider: React.FC<LibraryThemeProviderProps> = ({
         token: {
           controlHeight: tokens.INPUT_HEIGHT,
           fontSize: tokens.FONT_SIZE,
-          colorPrimary: '#1677ff',
+          colorPrimary: '#1b1464',
         },
         components: {
           Input: {
@@ -42,6 +42,7 @@ const LibraryThemeProvider: React.FC<LibraryThemeProviderProps> = ({
           },
           Form: {
             labelFontSize: 10,  // Tamaño específico para labels de formulario
+            itemMarginBottom: 5
           },
           Table: {
             cellFontSize: 10
